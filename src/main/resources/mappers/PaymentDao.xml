@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lime.limetest.dao.PaymentDao" >
+    <insert id="insertPayment" parameterType="paymentDto">
+        INSERT INTO PAYMENT VALUES (NULL, #{p_anum}, #{p_bid}, #{p_pid}, DEFAULT, #{p_price})
+    </insert>
+
+    <select id="selectBuyPaymentcount" resultType="java.lang.Integer" parameterType="searchDto">
+        SELECT count(*) FROM PAYMENT WHERE P_BID = #{keyword}
+    </select>
+    <select id="selectBuyPayment" resultType="com.lime.limetest.dto.PaymentDto" parameterType="searchDto">
+        SELECT * FROM PINFO WHERE P_BID = #{keyword} ORDER BY P_DATE DESC LIMIT #{pageNum}, #{listCnt}
+    </select>
+    <select id="countPayment" resultType="java.lang.Integer" parameterType="integer">
+        SELECT COUNT(*) FROM PAYMENT WHERE P_ANUM = #{a_num}
+    </select>
+    <select id="confirmbuy" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM PAYMENT WHERE P_ANUM = #{a_num} AND P_BID = #{mid}
+    </select>
+    <select id="selectSalePayment" resultType="com.lime.limetest.dto.PaymentDto" parameterType="searchDto">
+        SELECT * FROM PINFO WHERE P_PID = #{keyword} ORDER BY P_DATE DESC LIMIT #{pageNum}, #{listCnt}
+    </select>
+    <select id="selectSalePaymentcount" resultType="java.lang.Integer" parameterType="searchDto">
+        SELECT COUNT(*) FROM PAYMENT WHERE P_PID = #{keyword}
+    </select>
+</mapper>

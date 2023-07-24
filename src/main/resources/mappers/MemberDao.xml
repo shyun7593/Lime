@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lime.limetest.dao.MemberDao" >
+    <insert id="memberRegister" parameterType="memberDto">
+        INSERT INTO member VALUES (#{mid},#{mpwd},#{mname},#{mkakao}, #{mnick},DEFAULT,#{mtext},#{msecret})
+    </insert>
+    <update id="updateMemberPoint" parameterType="String">
+        UPDATE member SET MPOINT = MPOINT + 1 WHERE MID = #{mid}
+    </update>
+    <update id="memberUpdate" parameterType="memberDto">
+        UPDATE MEMBER SET MNAME = #{mname}, MKAKAO = #{mkakao}, MNICK = #{mnick}, MPWD = #{mpwd},MTEXT=#{mtext}, MSECRET=#{msecret} WHERE MID = #{mid}
+    </update>
+    <update id="updatePw" parameterType="String">
+        UPDATE MEMBER SET MPWD = #{encpwd} WHERE MID = #{mid}
+    </update>
+    <update id="disupdateMemberPoint" parameterType="memberDto">
+        UPDATE MEMBER SET MPOINT = #{mpoint} WHERE MID = #{mid}
+    </update>
+    <select id="selectMember" resultType="com.lime.limetest.dto.MemberDto" parameterType="String">
+        SELECT * FROM minfo WHERE MID = #{mid}
+    </select>
+
+    <select id="selectPwd" resultType="java.lang.String" parameterType="String">
+        SELECT MPWD FROM member WHERE MID = #{mid}
+    </select>
+    <select id="idCheck" resultType="java.lang.Integer" parameterType="String">
+        SELECT count(*) FROM member WHERE mid = #{mid}
+    </select>
+    <select id="existMember" resultType="com.lime.limetest.dto.MemberDto" parameterType="String">
+        SELECT * FROM member WHERE MKAKAO = #{addr}
+    </select>
+    <select id="userInfo" resultType="com.lime.limetest.dto.MemberDto" parameterType="String">
+        SELECT * FROM MEMBER WHERE MID = #{mid}
+    </select>
+    <select id="selectSecret" resultType="java.lang.String" parameterType="String">
+        SELECT MSECRET FROM MEMBER WHERE MID = #{mid}
+    </select>
+    <select id="nickCheck" resultType="java.lang.Integer" parameterType="String">
+        SELECT COUNT(*) FROM MEMBER WHERE MNICK = #{mnick}
+    </select>
+    <select id="searchId" resultType="com.lime.limetest.dto.MemberDto" parameterType="String">
+        SELECT * FROM MEMBER WHERE MNAME = #{mname} AND MSECRET = #{mysecret}
+    </select>
+    <select id="searchPw" resultType="com.lime.limetest.dto.MemberDto" parameterType="String">
+        SELECT * FROM MEMBER WHERE MID = #{mid} AND MSECRET = #{mysecret}
+    </select>
+    <select id="memberexist" resultType="java.lang.Integer" parameterType="String">
+        SELECT COUNT(*) FROM MEMBER WHERE MNAME = #{mname}
+    </select>
+    <select id="selectText" resultType="java.lang.String" parameterType="string">
+        SELECT MTEXT FROM MEMBER WHERE MID = #{a_mid}
+    </select>
+    <select id="selectNick" resultType="java.lang.String" parameterType="string">
+        SELECT MNICK FROM MEMBER WHERE MID=#{a_id}
+    </select>
+    <select id="selectId" resultType="java.lang.String" parameterType="string">
+        SELECT MID FROM MEMBER WHERE MNICK = #{m_rmid}
+    </select>
+</mapper>

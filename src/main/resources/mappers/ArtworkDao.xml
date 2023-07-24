@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lime.limetest.dao.ArtworkDao" >
+    <insert id="insertArtwork" parameterType="artworkDto" useGeneratedKeys="true" keyProperty="a_num">
+        <selectKey keyProperty="a_num" resultType="Integer" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO ARTWORK VALUES (NULL, #{a_title},#{a_category},#{a_genre},#{a_price},#{a_group},#{a_publisher},#{a_agency},#{a_release},#{a_contents},DEFAULT,#{a_id}, DEFAULT, DEFAULT)
+    </insert>
+    <insert id="insertFile" parameterType="artfileDto">
+        INSERT INTO ARTFILE VALUES (NULL,#{af_imgoriname},#{af_imgsysname},#{af_musicoriname},#{af_musicsysname},#{af_anum})
+    </insert>
+    <update id="UpdateArt" parameterType="artworkDto">
+        UPDATE ARTWORK SET A_TITLE=#{a_title}, A_CATEGORY=#{a_category},A_GENRE=#{a_genre},A_PRICE=#{a_price},A_GROUP=#{a_group},A_PUBLISHER=#{a_publisher},A_AGENCY=#{a_agency},A_RELEASE=#{a_release},A_CONTENTS=#{a_contents}, A_DATE = DEFAULT WHERE A_NUM = #{a_num}
+    </update>
+
+    <update id="deleteSingleimgFile">
+        UPDATE ARTFILE SET AF_IMGSYSNAME = NULL, AF_IMGORINAME = NULL WHERE AF_ANUM = #{a_num}
+    </update>
+    <update id="deleteSinglemusicFile">
+        UPDATE ARTFILE SET AF_MUSICSYSNAME = NULL, AF_MUSICORINAME = NULL WHERE AF_ANUM = #{a_num}
+    </update>
+    <update id="updateimgFile" parameterType="artfileDto">
+        UPDATE ARTFILE SET AF_IMGSYSNAME = #{af_imgsysname}, AF_IMGORINAME = #{af_imgoriname} WHERE AF_ANUM = #{af_anum}
+    </update>
+    <update id="updatemusicFile" parameterType="artfileDto">
+        UPDATE ARTFILE SET AF_MUSICSYSNAME = #{af_musicsysname}, AF_MUSICORINAME = #{af_musicoriname} WHERE AF_ANUM = #{af_anum}
+    </update>
+    <update id="updateCnt" parameterType="integer">
+        UPDATE ARTWORK SET A_CNT = A_CNT + 1 WHERE A_NUM = #{a_num}
+    </update>
+    <update id="setdel" parameterType="integer">
+        UPDATE ARTWORK SET A_DEL = true WHERE A_NUM= #{a_num}
+    </update>
+    <delete id="deleteArtwork" parameterType="integer">
+        DELETE FROM ARTWORK WHERE A_NUM = #{a_num}
+    </delete>
+    <delete id="deleteFile" parameterType="integer">
+        DELETE FROM ARTFILE WHERE AF_ANUM = #{a_num}
+    </delete>
+    <delete id="deletedistinctFile" parameterType="artworkDto">
+        DELETE FROM ARTFILE WHERE AF_ORINAME = #{af_oriname} AND AF_ANUM = #{a_num}
+    </delete>
+
+    <select id="selectArtwork" resultType="com.lime.limetest.dto.ArtworkDto" parameterType="searchDto">
+        SELECT * FROM ARTWORK WHERE A_ID = #{keyword}
+                 <choose>
+                     <when test="category != 'all'">
+                         <choose>
+                             <when test="genre != 'all'">
+                                 AND A_CATEGORY = #{category} AND A_GENRE = #{genre}
+                             </when>
+                             <otherwise> /* 장르가 all인 경우 */
+                                 AND A_CATEGORY = #{category}
+                             </otherwise>
+                         </choose>
+                     </when>
+                    <otherwise> /*카테고리가 all인 경우*/
+                         <choose>
+                             <when test="genre != 'all'">
+                                 AND A_GENRE = #{genre}
+                             </when>
+                         <otherwise> /* 장르가 all인 경우*/
+
+                         </otherwise>
+                         </choose>
+
+                    </otherwise>
+                 </choose>
+       AND A_DEL = false ORDER BY A_DATE DESC LIMIT #{pageNum}, #{listCnt}
+    </select>
+    <select id="selectArtworkcount" resultType="java.lang.Integer" parameterType="searchDto">
+        SELECT count(*) FROM ARTWORK WHERE A_ID = #{keyword} AND A_DEL = false
+    </select>
+    <select id="selectArtworked" resultType="java.lang.Integer">
+        SELECT A_NUM FROM ARTWORK WHERE A_DATE = #{aDate}
+    </select>
+    <select id="getArtwork" resultType="com.lime.limetest.dto.ArtworkDto" parameterType="integer">
+        SELECT * FROM ARTWORK WHERE A_NUM = #{a_num}
+    </select>
+    <select id="selectFiles" resultType="com.lime.limetest.dto.ArtfileDto" parameterType="integer">
+        SELECT * FROM ARTFILE WHERE AF_ANUM = #{a_num}
+    </select>
+    <select id="selectArtworks" resultType="com.lime.limetest.dto.ArtworkDto" parameterType="searchDto">
+        SELECT * FROM ARTLIST
+        <choose>
+            <when test="category != 'all'">
+                <choose>
+                    <when test="genre != 'all'">
+                        <choose>
+                            <when test="colname == 'a_title'">
+                                WHERE (A_CATEGORY = #{category} AND A_GENRE = #{genre}) AND ( A_TITLE like CONCAT
+                                ('%',#{keyword},'%'))
+                            </when>
+                            <when test="colname == 'mnick'">
+                                WHERE (A_CATEGORY = #{category} AND A_GENRE = #{genre}) AND ( MNICK like CONCAT
+                                ('%',#{keyword},'%'))
+                            </when>
+                            <when test="colname == 'all'">/* 검색 타입이 all인 경우 */
+                                WHERE (A_CATEGORY = #{category} AND A_GENRE = #{genre}) AND
+                                (A_TITLE like CONCAT ('%',#{keyword},'%') OR MNICK like CONCAT ('%',#{keyword},'%'))
+                            </when>
+                        </choose>
+                    </when>
+                    <otherwise>/* 장르가 all인 경우 */
+                        <choose>
+                            <when test="colname == 'a_title'">
+                                WHERE (A_CATEGORY = #{category}) AND ( A_TITLE like CONCAT('%',#{keyword},'%'))
+                            </when>
+                            <when test="colname == 'mnick'">
+                                WHERE (A_CATEGORY = #{category}) AND ( MNICK like CONCAT('%',#{keyword},'%'))
+                            </when>
+                            <when test="colname == 'all'">
+                                WHERE (A_CATEGORY = #{category}) AND
+                                (A_TITLE like CONCAT('%',#{keyword},'%') OR MNICK like CONCAT('%',#{keyword},'%'))
+                            </when>
+                        </choose>
+                    </otherwise>
+                </choose>
+            </when>
+            <otherwise>/* 카테고리가 all인 경우 */
+                <choose>
+                    <when test="genre != 'all'">
+                        <choose>
+                            <when test="colname == 'a_title'">
+                                WHERE (A_GENRE = #{genre}) AND
+                                (A_TITLE like CONCAT ('%',#{keyword},'%'))
+                            </when>
+                            <when test="colname == 'mnick'">
+                                WHERE (A_GENRE = #{genre}) AND
+                                (MNICK like CONCAT ('%',#{keyword},'%'))
+                            </when>
+                            <when test="colname == 'all'">
+                                WHERE (A_GENRE = #{genre}) AND (A_TITLE like CONCAT('%',#{keyword},'%') OR MNICK like
+                                CONCAT('%',#{keyword},'%'))
+                            </when>
+                        </choose>
+                    </when>
+                    <otherwise>/* 장르, 카테고리가 all인 경우 */
+                        <choose>
+                            <when test="colname == 'a_title'">
+                                WHERE
+                                (A_TITLE like CONCAT ('%',#{keyword},'%'))
+                            </when>
+                            <when test="colname == 'mnick'">
+                                WHERE
+                                (MNICK like CONCAT ('%',#{keyword},'%'))
+                            </when>
+                            <when test="colname == 'all'">
+                                WHERE  (A_TITLE like CONCAT('%',#{keyword},'%') OR MNICK like
+                                CONCAT('%',#{keyword},'%'))
+                            </when>
+                        </choose>
+                    </otherwise>
+                </choose>
+            </otherwise>
+        </choose>
+       AND A_DEL = false ORDER BY A_DATE DESC LIMIT #{pageNum}, #{listCnt}
+    </select>
+
+    <select id="getArtworkcount" resultType="java.lang.Integer" parameterType="searchDto">
+        SELECT COUNT(*) FROM ARTLIST
+        <choose>
+            <when test="category != 'all'">
+                <choose>
+                    <when test="genre != 'all'">
+                        <choose>
+                            <when test="colname == 'a_title'">
+                                WHERE (A_CATEGORY = #{category} AND A_GENRE = #{genre}) AND ( A_TITLE like CONCAT
+                                ('%',#{keyword},'%'))
+                            </when>
+                            <when test="colname == 'mnick'">
+                                WHERE (A_CATEGORY = #{category} AND A_GENRE = #{genre}) AND ( MNICK like CONCAT
+                                ('%',#{keyword},'%'))
+                            </when>
+                            <when test="colname == 'all'">/* 검색 타입이 all인 경우 */
+                                WHERE (A_CATEGORY = #{category} AND A_GENRE = #{genre}) AND
+                                (A_TITLE like CONCAT ('%',#{keyword},'%') OR MNICK like CONCAT ('%',#{keyword},'%'))
+                            </when>
+                        </choose>
+                    </when>
+                    <otherwise>/* 장르가 all인 경우 */
+                        <choose>
+                            <when test="colname == 'a_title'">
+                                WHERE (A_CATEGORY = #{category}) AND ( A_TITLE like CONCAT('%',#{keyword},'%'))
+                            </when>
+                            <when test="colname == 'mnick'">
+                                WHERE (A_CATEGORY = #{category}) AND ( MNICK like CONCAT('%',#{keyword},'%'))
+                            </when>
+                            <when test="colname == 'all'">
+                                WHERE (A_CATEGORY = #{category}) AND
+                                (A_TITLE like CONCAT('%',#{keyword},'%') OR MNICK like CONCAT('%',#{keyword},'%'))
+                            </when>
+                        </choose>
+                    </otherwise>
+                </choose>
+            </when>
+            <otherwise>/* 카테고리가 all인 경우 */
+                <choose>
+                    <when test="genre != 'all'">
+                        <choose>
+                            <when test="colname == 'a_title'">
+                                WHERE (A_GENRE = #{genre}) AND
+                                (A_TITLE like CONCAT ('%',#{keyword},'%'))
+                            </when>
+                            <when test="colname == 'mnick'">
+                                WHERE (A_GENRE = #{genre}) AND
+                                (MNICK like CONCAT ('%',#{keyword},'%'))
+                            </when>
+                            <when test="colname == 'all'">
+                                WHERE (A_GENRE = #{genre}) AND (A_TITLE like CONCAT('%',#{keyword},'%') OR MNICK like
+                                CONCAT('%',#{keyword},'%'))
+                            </when>
+                        </choose>
+                    </when>
+                    <otherwise>/* 장르, 카테고리가 all인 경우 */
+                        <choose>
+                            <when test="colname == 'a_title'">
+                                WHERE
+                                (A_TITLE like CONCAT ('%',#{keyword},'%'))
+                            </when>
+                            <when test="colname == 'mnick'">
+                                WHERE
+                                (MNICK like CONCAT ('%',#{keyword},'%'))
+                            </when>
+                            <when test="colname == 'all'">
+                                WHERE  (A_TITLE like CONCAT('%',#{keyword},'%') OR MNICK like
+                                CONCAT('%',#{keyword},'%'))
+                            </when>
+                        </choose>
+                    </otherwise>
+                </choose>
+            </otherwise>
+        </choose>
+    </select>
+    <select id="getcountfile" resultType="java.lang.Integer" parameterType="artworkDto">
+        SELECT COUNT(*) FROM ARTFILE WHERE AF_ORINAME = #{af_oriname} AND AF_ANUM = #{a_num}
+    </select>
+    <select id="getfile" resultType="artfileDto" parameterType="integer">
+        SELECT * FROM ARTFILE WHERE AF_ANUM = #{a_num}
+    </select>
+    <select id="selectSysname" resultType="java.lang.String">
+        SELECT AF_MUSICSYSNAME FROM ARTFILE WHERE AF_ANUM = #{a_num}
+    </select>
+    <select id="selectimgSysname" resultType="java.lang.String" parameterType="integer">
+        SELECT AF_IMGSYSNAME FROM ARTFILE WHERE AF_ANUM = #{a_num}
+    </select>
+    <select id="selectBestwork" resultType="com.lime.limetest.dto.ArtworkDto">
+        SELECT * FROM ARTLIST ORDER BY A_CNT DESC LIMIT 6
+    </select>
+    <select id="getId" resultType="java.lang.String" parameterType="integer">
+        SELECT A_ID FROM ARTWORK WHERE A_NUM = #{m_anum}
+    </select>
+</mapper>

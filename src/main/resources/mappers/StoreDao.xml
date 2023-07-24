@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lime.limetest.dao.StoreDao" >
+    <insert id="insertStore">
+        INSERT INTO STORE VALUES (NULL, #{a_num}, #{b_id})
+    </insert>
+
+    <select id="selectStorecount" resultType="java.lang.Integer" parameterType="searchDto">
+        SELECT COUNT(*) FROM STORE WHERE S_ID = #{keyword}
+    </select>
+    <select id="selectStore" resultType="com.lime.limetest.dto.StoreDto" parameterType="searchDto">
+        SELECT * FROM SINFO WHERE S_ID = #{keyword} LIMIT #{pageNum}, #{listCnt}
+    </select>
+</mapper>

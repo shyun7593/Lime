@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lime.limetest.dao.SaleDao" >
+    <insert id="insertSale" parameterType="integer">
+        INSERT INTO SALE VALUES (NULL, #{a_num});
+    </insert>
+
+    <select id="countSale" resultType="java.lang.Integer" parameterType="integer">
+        SELECT COUNT(*) FROM SALE WHERE S_ARTNUM = #{a_num}
+    </select>
+</mapper>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lime.limetest.dao.BoardDao" >
+    <insert id="BoardWrite" parameterType="boardDto" useGeneratedKeys="true" keyProperty="b_num">
+        <selectKey keyProperty="b_num" resultType="Integer" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO BOARD VALUES (NULL, #{b_id}, #{b_title}, #{b_contents}, DEFAULT, #{b_type})
+    </insert>
+    <insert id="insertReply" parameterType="replyDto" useGeneratedKeys="true" keyProperty="r_num">
+        <selectKey keyProperty="r_num" resultType="Integer" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO REPLY VALUES ( NULL, #{r_id}, #{r_contents},#{r_bnum}, DEFAULT)
+    </insert>
+    <update id="updateboard" parameterType="boardDto">
+        UPDATE BOARD SET B_TITLE = #{b_title}, B_CONTENTS = #{b_contents}, B_TYPE = #{b_type} WHERE B_NUM = #{b_num}
+    </update>
+    <delete id="deleteBoard" parameterType="integer">
+        DELETE FROM BOARD WHERE B_NUM = #{bNum}
+    </delete>
+    <delete id="deleteReply" parameterType="integer">
+        DELETE FROM REPLY WHERE R_BNUM = #{b_num}
+    </delete>
+    <delete id="deleteSingleReply" parameterType="int">
+        DELETE FROM REPLY WHERE R_NUM = #{r_num}
+    </delete>
+    <select id="selectBoard" resultType="com.lime.limetest.dto.BoardDto" parameterType="searchDto">
+        SELECT * FROM BOARDLIST
+                 <choose>
+                     <when test="keyword != null and keyword != ''">
+                         WHERE B_ID = #{keyword}
+                     </when>
+                 <otherwise>
+
+                 </otherwise>
+                 </choose>
+             ORDER BY B_DATE DESC LIMIT #{pageNum}, #{listCnt}
+    </select>
+    <select id="selectBoardcount" resultType="java.lang.Integer" parameterType="searchDto">
+        SELECT count(*) FROM board
+        <choose>
+            <when test="keyword != null and keyword != ''">
+                <choose>
+                    <when test="type != 'all'">
+                        WHERE B_ID = #{keyword} AND B_TYPE = #{type}
+                    </when>
+                    <otherwise>
+                        WHERE B_ID = #{keyword}
+                    </otherwise>
+                </choose>
+            </when>
+            <otherwise>
+                <choose>
+                    <when test="type != 'all'">
+                        WHERE B_TYPE = #{type}
+                    </when>
+                </choose>
+            </otherwise>
+        </choose>
+    </select>
+    <select id="selectTypeBoard" resultType="com.lime.limetest.dto.BoardDto" parameterType="searchDto">
+        SELECT * FROM BOARDLIST
+        <choose>
+            <when test="keyword != null and keyword != ''">
+                <choose>
+                    <when test="type != 'all'">
+                        WHERE B_ID = #{keyword} AND B_TYPE = #{type}
+                    </when>
+                    <otherwise>
+                        WHERE B_ID = #{keyword}
+                    </otherwise>
+                </choose>
+            </when>
+            <otherwise>
+                    <choose>
+                        <when test="type != 'all'">
+                            WHERE B_TYPE = #{type}
+                        </when>
+                    </choose>
+            </otherwise>
+        </choose>
+        ORDER BY B_DATE DESC LIMIT #{pageNum}, #{listCnt}
+    </select>
+    <select id="selectTypeboardcount" resultType="java.lang.Integer" parameterType="searchDto">
+        SELECT count(*) FROM board WHERE B_ID = #{keyword} AND B_TYPE = #{type}
+    </select>
+    <select id="selectBoardInfo" resultType="com.lime.limetest.dto.BoardDto" parameterType="Integer">
+        SELECT * FROM BOARDLIST WHERE B_NUM = #{b_num}
+    </select>
+    <select id="selectLastReply" resultType="com.lime.limetest.dto.ReplyDto" parameterType="replyDto">
+        SELECT * FROM RLIST WHERE R_NUM = #{r_num}
+    </select>
+    <select id="selectReplies" resultType="com.lime.limetest.dto.ReplyDto" parameterType="replyDto">
+        SELECT * FROM RLIST WHERE R_BNUM = #{b_num}
+    </select>
+</mapper>
