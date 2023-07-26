@@ -6,19 +6,19 @@
     }
 
     .footer-bar {
-        margin-top : 5%;
         left: 0;
         bottom: 0;
         width: 100%;
-        background-color: #5b5b5b;
-        color: #fff;
+        background-image: url("images/footer.png");
         min-height: 58px;
         line-height: 58px;
         padding: 0px;
         height: 200px;
+        background-size: 100% 100%;
     }
+
 </style>
-<div class="footer-bar" style="background-color: aliceblue;">
+<div class="footer-bar">
 
 </div>
 

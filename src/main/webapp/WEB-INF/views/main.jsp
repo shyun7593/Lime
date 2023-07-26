@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <html>
 <head>
@@ -95,11 +96,11 @@
         }
 
         #m1, #m2, #m3, #m4, #m5, #m6 {
-            width: 22%;
-            height: 33%;
+            width: 20%;
+            height: 38%;
             float: left;
-            margin-top: 2%;
-            margin-left: 8.75%;
+            margin-top: 1.5%;
+            margin-left:10.75%;
             background-color: white;
             border-radius: 5px;
         }
@@ -213,7 +214,7 @@
             text-align: center;
             font-family: a타이틀고딕5;
             font-size: 2rem;
-            padding-top: 3%; /*%로 수정*/
+            padding-top: 0.5%; /*%로 수정*/
             color: white;
         }
 
@@ -227,6 +228,7 @@
         }
 
         #bg {
+            text-align: center;
             width: 95%;
             height: 45%;
             margin-left: 2.5%;
@@ -243,8 +245,7 @@
         #mcon-top {
             width: 90%;
             height: 100%;
-            margin-left: 5%;
-            margin-right: 5%;
+            margin: 0 auto;
         }
 
         /*******************검색분류기능**********************/
@@ -323,12 +324,9 @@
         }
 
         p#bg-banner {
-            position: absolute;
+            margin: 0 auto;
             width: 15%;
-            height: 4%;
-            line-height: 40px;
-            left: 42%;
-            top: 275%;
+            height: 7%;
             font-size: 1.1rem;
             font-family: a타이틀고딕3;
             text-align: center;
@@ -338,6 +336,7 @@
             border-radius: 50px;
             transition: 0.5s color;
             color: #ffffff;
+            margin-bottom: 1%;
             z-index: 10;
         }
 
@@ -349,13 +348,11 @@
         }
 
         #det-btn {
-            position: absolute;
             background-color: rgba(0, 0, 0, 0);
             font-family: a타이틀고딕3;
-            width: 25%;
+            width: 15%;
             height: 3%;
-            left: 36.9%;
-            top: 285%;
+            margin: 0 auto;
             text-align: center;
             color: #ffffff;
             border-style: none;
@@ -483,17 +480,17 @@
         <div id="best">지금, 가장 인기있는 작업물을 들어보세요!</div>
         <div id="mcon-top">
             <c:forEach var="aitem" items="${aList}" varStatus="st">
-                <div id="m${st.count}" onmouseover="showcate(${st.count})" onmouseout="showinfo(${st.count})">
+                <div id="m${st.count}" onclick="goartworkdetail(${aitem.a_num})" onmouseover="showcate(${st.count})" onmouseout="showinfo(${st.count})">
                     <div id="a_${st.count}" style="animation-duration: 0.5s;"><%-- 디스플레이 논 없애기  --%>
                         <c:if test="${aitem.af_imgoriname != 'none.PNG'}">
                             <div class="artbox-img"
                                  style="width: 100%; border-top-left-radius: 5px; border-top-right-radius: 5px;
-                                         height: 80%;margin:0;background-image: url('/upload/image/${aitem.af_imgsysname}'); background-size: 100% 100%"></div>
+                                         height: 80%;margin:0;background-image: url('/upload/image/${aitem.af_imgsysname}'); background-size: cover;background-position: center"></div>
                         </c:if>
                         <c:if test="${aitem.af_imgoriname == 'none.PNG'}">
                             <div class="artbox-img"
                                  style="width: 100%;
-                                 height: 80%;margin:0;background-image: url('/images/Noimage.png'); background-size: 100% 100%"></div>
+                                 height: 80%;margin:0;background-image: url('/images/Noimage.png'); background-size: 100% 100%;background-position: center"></div>
                         </c:if>
                         <div class="artbox-explain" style="width: 100%;">
                             <p style="padding-top: 2%; padding-left: 3%; font-size: large">제목 : ${aitem.a_title}</p>
@@ -501,18 +498,35 @@
                         </div>
                     </div>
                     <div id="ac_${st.count}" style="display: none; background-color: #dddddd; height: 100%;animation-duration: 0.5s;border-radius: 5px; ">
-                        <p style="position: relative; top: 1%;left: 3%;">곡 설명 : </p>
-                        <p style="position:relative; left: 3%; top: 2%;color: black;height: 100%; font-size: large;text-transform: uppercase">${aitem.a_contents}</p>
+                        <div style="display: flex; width: 100%; height: 100%; align-items: center">
+                            <p style="width: 90%;margin: 0 auto;">곡 설명 :<br>
+                                <c:choose>
+                                    <c:when test="${fn:length(aitem.a_contents) gt 310}">
+                                        <c:out value="${fn:substring(aitem.a_contents,0,310)}"></c:out>...
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:out value="${aitem.a_contents}"></c:out>
+                                    </c:otherwise>
+                                </c:choose>
+                                    </p>
+                        </div>
                     </div>
                 </div>
             </c:forEach>
         </div>
     </div>
     <div class="view" style="background-color: black">
-        <h1 id="is">LIME IS...</h1>
-        <p id="pr">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-            industry's <br> standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-            scrambled it to make a type specimen book.</p>
+        <h1 id="is">Lime is...</h1>
+        <p style="text-align: center;margin-top: 2%;color: white;">
+            알려지지 않은 음악인들의 재능을 모두에게 표현할 수 있는 기회로 만들고, 여러 방면의 음악적 재능으로 소통하는 사이트입니다.
+        </p><br>
+        <br>
+        <p id="pr">더 많은 사람들에게 음악이 발견될 수 있도록 서포트 하고 있습니다.<br>
+            작품을 올려 당신의 재능을 모두에게 보여주세요. 사람들이 모이는 곳에 항상 당신의 음악이 있을거에요.<br>
+
+            <br>
+            <br>다양한 음악인들과 연결을 해드려요.
+        <br>게시판, 메시지를 이용하여 여러 사람들과 소통하면서 새로운 작품을 만들거나 재능을 키울 수 있을거에요.</p>
         <div id="bg">
             <p id="bg-banner" onclick="goboard()">게시판 이동하기 > </p>
             <button id="det-btn">이용안내</button>
@@ -636,6 +650,10 @@
         $("#ac_" + num).css("display", "none");
         $("#a_" + num).css("display", "block");
         $("#a_"+num).css("-webkit-animation-name", "duration");
+    }
+    function goartworkdetail(a_num) {
+        console.log(a_num);
+        location.href = '/artworkdetail?a_num=' + a_num;
     }
 </script>
 </html>

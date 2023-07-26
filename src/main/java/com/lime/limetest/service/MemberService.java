@@ -61,20 +61,6 @@ public class MemberService {
     }
 
     // 닉네임 중복체크
-    public String nickCheck(String mnick) {
-        log.info("MemberService.nickCheck()");
-        String result = null;
-
-        int count = mDao.nickCheck(mnick);
-
-        if (count == 0) {
-            result = "ok";
-        } else {
-            result = "fail";
-        }
-
-        return result;
-    }
 
     // 회원가입
     public String memberRegister(MemberDto mDto, RedirectAttributes rttr) {
@@ -222,6 +208,7 @@ public class MemberService {
         MemberDto memDto = (MemberDto) session.getAttribute("mb");
         MessageDto mDto = new MessageDto();
         String owner = null;
+        String saler = null;
         if (a_id !=null){
             String a_nick = mDao.selectNick(a_id);
            session.setAttribute("a_id",a_nick);
@@ -233,6 +220,9 @@ public class MemberService {
                 messageDao.updateisRead(m_num);
             }
             mDto = messageDao.selectMessage(m_num);
+            if (mDto.getM_anum() != null){
+                saler = aDao.getId(mDto.getM_anum());
+            }
         } else{
             if (m_num != null){
                 mDto = messageDao.selectMessage(m_num);
@@ -240,6 +230,7 @@ public class MemberService {
             owner = aDao.getId(mDto.getM_anum());
             log.info("owner : " + owner);
         }
+        session.setAttribute("saler",saler);
         session.setAttribute("mDto",mDto);
         session.setAttribute("a_num",a_num);
         session.setAttribute("owner",owner);

@@ -173,7 +173,7 @@
                 <%--  닉네임 이벤트 함수 처리  --%>
                 <input type="text" class="" id="membernick" name="mnick" placeholder="  Nickname" title="Nickname">
                 <button type="button" id="b2" onclick="nickcheck()">V</button>
-                <p id="question">나의 고등학교는?</p>
+                <p id="question">나만의 비밀</p>
                 <input type="text" class="" name="msecret" placeholder="  답" title="나만의 비밀">
                 <textarea name="mtext" class="mar-bo" placeholder="  자기소개"></textarea>
                 <input type="submit" class="neulleo" value="SIGN IN">

@@ -51,7 +51,7 @@
             padding: 10px 12px;
             font-size: 14px;
             text-align: center;
-            background-color: rgba(0, 0, 0, 0.86);
+            background-color: rgba(30, 30, 30, 0.86);
             color: white;
             opacity: 90%;
         }
@@ -322,6 +322,25 @@
         .paging > a, font {
             color : white;
         }
+
+        .paging > ul {
+            display: flex;
+            justify-content: center;
+        }
+
+        .paging > ul > li {
+            padding: 8px;
+            background: #efefef;
+            border: 1px solid #999;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        .paging > ul > li:hover {
+            background: #333;
+            color: #fff;
+        }
+
         #writeMsg {
             position: absolute;
             text-align: center;
@@ -463,11 +482,11 @@
                             <div id="a_${aitem.a_num}" style="animation-duration: 0.5s;">
                                 <c:if test="${aitem.af_imgoriname != 'none.PNG'}">
                                     <div class="artbox-img"
-                                         style="background-image: url('/upload/image/${aitem.af_imgsysname}'); background-size: 100% 100%"></div>
+                                         style="background-image: url('/upload/image/${aitem.af_imgsysname}'); background-size: cover;background-position: center"></div>
                                 </c:if>
                                 <c:if test="${aitem.af_imgoriname == 'none.PNG'}">
                                     <div class="artbox-img"
-                                         style="background-image: url('/images/Noimage.png'); background-size: 100% 100%"></div>
+                                         style="background-image: url('/images/Noimage.png');  background-size: 100% 100%;background-position: center"></div>
                                 </c:if>
                                 <div class="artbox-explain">
                                     <p style="padding-top:2%; font-size: large">제목 : ${aitem.a_title}</p>
@@ -486,18 +505,18 @@
                 </c:if>
             </div>
             <c:if test="${!empty aList}">
-                <div class="artwork-paging" style="text-align: center;width: 100%">${paging}</div>
+                <div class="paging" style="text-align: center;width: 100%;">${paging}</div>
             </c:if>
         </div>
     </div>
     <div id="btn-area" style="position: fixed; right: 5px; bottom: 10px; width: 10%; height:5%">
         <p id="writeMsg">글 작성하기</p>
         <button id="board-btn" onclick="artwrite('${mb.mnick}')"><img src="images/edit2.png"
-                                                                                     style="height: 45px; width: 43px; position: absolute; bottom: 72%; right: 77%;">
+                                                                      style="height: 45px; width: 43px; position: absolute; bottom: 72%; right: 77%;">
         </button>
         <p id="boardMsg"> 게시판 이동</p>
         <button id="board-btn2" onclick="goboard()"><img src="images/people.png"
-                                                                          style="height: 61px; width: 49px; position: absolute; bottom: 30%; right: 22%;">
+                                                         style="height: 61px; width: 49px; position: absolute; bottom: 30%; right: 22%;">
         </button>
     </div>
 </section>

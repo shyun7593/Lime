@@ -51,14 +51,6 @@ public class HomeController {
         return result;
     }
 
-    @GetMapping("nickCheck")
-    @ResponseBody
-    public String nickCheck(String mnick){
-        log.info("HomeController.nickCheck()");
-        String result = mServ.nickCheck(mnick);
-
-        return result;
-    }
 
     @PostMapping("registerProc")
     public String registerProc(MemberDto mDto, RedirectAttributes rttr){

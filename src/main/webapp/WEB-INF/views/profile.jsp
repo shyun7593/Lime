@@ -975,7 +975,7 @@
                             <p id="pass"><input type="password" id="pwChangeInput" name="mpwd" placeholder="  Password"
                                                 title="Password" value="default"></p>
                             <p><input type="text" class="" id="modify3" name="mname" placeholder="  Name" title="Name"
-                                      value="${userInfo.mname}"></p>
+                                      value="${userInfo.mname}" required></p>
                             <p><input type="email" class="" id="modify4" name="mkakao" placeholder="  Kakao email"
                                       title="email"
                                       value="${userInfo.mkakao}">
@@ -983,12 +983,10 @@
                             <%--  닉네임 이벤트 함수 처리  --%>
                             <p><input id="membernick" type="text" class="" id="modify5" name="mnick"
                                       placeholder="  Nickname"
-                                      title="Nickname" value="${userInfo.mnick}"><span><button type="button"
-                                                                                               id="b2"
-                                                                                               onclick="nickcheck()">V</button></span>
+                                      title="Nickname" value="${userInfo.mnick}" readonly>
                             </p>
-                            <p id="question">나의 고등학교는?</p>
-                            <p><input type="text" class="" id="modify6" name="msecret" placeholder="  답" title="나만의 비밀"
+                            <p id="question">나만의 비밀</p>
+                            <p><input type="text" class="" id="modify6" name="msecret" placeholder="  답" title="나만의 비밀" required
                                       value="${userInfo.msecret}"></p>
                             <p><textarea name="mtext" class="mar-bo" id="modify7"
                                          style="resize : none"
@@ -1497,40 +1495,12 @@
     }
 
     function updatePassword() {
-        $("#pass").css("display", "block");
-    }
-
-    function nickcheck() {
-        let nick = $("#membernick").val();
-        console.log(nick);
-
-        if (nick == "") {
-            alert("닉네임을 입력하세요.");
-            $("#membernick").focus();
-            return;
+        if($("#pass").css("display") == "none"){
+            $("#pass").css("display", "block");
+        } else {
+            $("#pass").css("display", "none");
         }
-        let sendNick = {"mnick": nick};
-        console.log(sendNick);
-        $.ajax({
-            url: "nickCheck",
-            type: "get",
-            data: sendNick,
-            success: function (res) {
-                if (res == "ok") {
-                    alert("사용가능한 별명입니다.");
-                    ck = true;
-                } else {
-                    alert("이미 사용중인 별명입니다.")
-                    $("#membernick").val("");
-                    $("#membernick").focus();
-                    ck = false;
-                }
-            },
-            error: function (err) {
-                console.log(err);
-                alert("관리자에게 문의하세요.");
-            }
-        })
+
     }
 
     function userConfirm() {

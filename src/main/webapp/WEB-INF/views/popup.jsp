@@ -311,7 +311,7 @@
     <div style="width: 100%;height: 35px; line-height: 35px ;background-color: black; text-align: center; color:white">
         메시지
     </div>
-    <p style="  margin-top: 24%; font-family: a타이틀고딕5; font-size: 2rem;">${result}</p>
+    <p style="  margin-top: 24%; font-family: a타이틀고딕5; font-size: 1.8rem;">${result}</p>
     <p style="font-size: 0.8rem; margin-top: 2%;">메시지 탭에서 확인하실 수 있습니다. </p>
     <button style="color: white;
     width: 60px;
@@ -352,13 +352,18 @@
         </c:if>
         <c:if test="${mDto.m_fileoriname != null}">
             <c:if test="${mb.mid != mDto.m_mid}">
-                <c:if test="${mDto.m_ispay == '1'}">
+                <c:if test="${saler == mDto.m_rmid}">
                     <p style="width: 360px; white-space: nowrap; text-overflow: ellipsis;overflow: hidden;" onclick="downloadfile('${mDto.m_fileoriname}','${mDto.m_filesysname}')">파일
                         : ${mDto.m_fileoriname}</p>
                 </c:if>
-                <c:if test="${mDto.m_ispay == '0'}">
-                    <p style="width: 360px; white-space: nowrap; text-overflow: ellipsis;overflow: hidden;float: left;" onclick="showalram()">파일 : ${mDto.m_fileoriname} <span id="adtext" style="font-size: x-small;color: blue;"></span></p>
-
+                <c:if test="${saler != mDto.m_rmid}">
+                    <c:if test="${mDto.m_ispay == '1'}">
+                        <p style="width: 360px; white-space: nowrap; text-overflow: ellipsis;overflow: hidden;" onclick="downloadfile('${mDto.m_fileoriname}','${mDto.m_filesysname}')">파일
+                            : ${mDto.m_fileoriname}</p>
+                    </c:if>
+                    <c:if test="${mDto.m_ispay == '0'}">
+                        <p style="width: 360px; white-space: nowrap; text-overflow: ellipsis;overflow: hidden;float: left;" onclick="showalram()">파일 : ${mDto.m_fileoriname} <span id="adtext" style="font-size: x-small;color: blue;"></span></p>
+                    </c:if>
                 </c:if>
             </c:if>
             <c:if test="${mb.mid == mDto.m_mid}">
