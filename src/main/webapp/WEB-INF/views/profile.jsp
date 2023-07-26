@@ -1311,7 +1311,7 @@
             <div style="margin-left: 13%; width: 100%">
                 <p id="mclassification">
                     <button class="p-artwork" onclick="showreceivemessage()"><span>받은 메시지</span></button>
-                    <button class="p-board" onclick="showsendmessage()"><span>보 낸메시지</span></button>
+                    <button class="p-board" onclick="showsendmessage()"><span>보낸 메시지</span></button>
 
                 </p>
             </div>

@@ -501,8 +501,8 @@
                         </div>
                     </div>
                     <div id="ac_${st.count}" style="display: none; background-color: #dddddd; height: 100%;animation-duration: 0.5s;border-radius: 5px; ">
-                        <p style="padding-left: 3%; color: black;display: flex;height: 100%; flex-direction: column; justify-content: center; font-size: large;text-transform: uppercase">${aitem.a_contents}</p>
-
+                        <p style="position: relative; top: 1%;left: 3%;">곡 설명 : </p>
+                        <p style="position:relative; left: 3%; top: 2%;color: black;height: 100%; font-size: large;text-transform: uppercase">${aitem.a_contents}</p>
                     </div>
                 </div>
             </c:forEach>

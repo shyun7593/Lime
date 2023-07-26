@@ -479,8 +479,7 @@
     color: black;
     flex-direction: column;
     justify-content: center;
-    font-size: large;text-transform: uppercase">${aitem.a_category}>${aitem.a_genre}<br>가격 : <fmt:formatNumber value="${aitem.a_price}" pattern="#,###" />  원 </p>
-
+    font-size: large;text-transform: uppercase">${aitem.a_category}>${aitem.a_genre}<br><br><br>가격 : <fmt:formatNumber value="${aitem.a_price}" pattern="#,###" />  원 </p>
                             </div>
                         </div>
                     </c:forEach>

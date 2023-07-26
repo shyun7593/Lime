@@ -49,16 +49,16 @@ public class MessageService {
                 file.transferTo(filed);
                 mDto.setM_fileoriname(oriname);
                 mDto.setM_filesysname(sysname);
-                res = "메시지 전송에 성공했습니다.";
+                res = "메시지 전송 완료";
                 mesDao.insertMessage(mDto);
             } catch (Exception e){
                 e.printStackTrace();
-                res = "메시지 전송에 실패했습니다.";
+                res = "메시지 전송 실패";
                 return res;
             }
         } else {
             mesDao.insertMessage(mDto);
-            res ="success";
+            res ="메시지 전송 완료";
         }
         session.setAttribute("result",res);
         session.setAttribute("pages","result");

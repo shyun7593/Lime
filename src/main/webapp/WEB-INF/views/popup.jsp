@@ -6,7 +6,7 @@
     <title>Title</title>
     <script src="js/jquery-3.7.0.min.js"></script>
     <style>
-        .login-alert, .register-alert, .delboard-alert, .profile-confirm, .Imessage, .result, .showmessage {
+        .login-alert, .register-alert, .profile-confirm, .Imessage, .result, .showmessage {
             display: none;
         }
 
@@ -19,6 +19,7 @@
         * {
             margin: 0;
             font-family: a타이틀고딕1;
+            overflow-y: hidden;
         }
 
         .login-alert, .register-alert, .profile-confirm {
@@ -165,28 +166,12 @@
             background-color: #e5e4e4;
         }
 
-        #check-guide {
-            width: 21%;
-            height: 6%;
-            font-family: a타이틀고딕1;
-            font-size: 0.7rem;
-            position: absolute;
-            color: black;
-            background-color: rgba(0, 0, 0, 0);
-            top: 42.5%;
-            left: 40%;
-            border: none;
-        }
-
-        #check-guide:hover {
-            font-family: a타이틀고딕3;
-            color: #ff3d02;
-        }
-
         body {
             background-image: url("/images/bg-white2.jpg");
             background-repeat: no-repeat;
         }
+
+
     </style>
     <script>
         $(function () {
@@ -236,10 +221,6 @@
         <button id="register-btn2" onclick="closepop()">돌아가기</button>
     </div>
 </div>
-<div class="delboard-alert">
-    <button onclick="boarddel('${num}')">삭제</button>
-    <button onclick="closepop()">취소</button>
-</div>
 <div class="profile-confirm">
     <div id="profile-head">
         <p id="profile-logo">L&nbsp;&nbsp;I&nbsp;&nbsp;M&nbsp;&nbsp;E</p>
@@ -263,7 +244,7 @@
         메시지 보내기
     </div>
     <form style="width: 90%;
-    margin: 4% auto; background-color: white; min-width: 300px; padding: 3%" action="InquireMessage" method="post" enctype="multipart/form-data"
+    margin: 2% auto; background-color: white; min-width: 300px; padding: 3%" action="InquireMessage" method="post" enctype="multipart/form-data"
           autocomplete="off">
         <input type="hidden" name="m_anum" value="${a_num}">
         <input type="hidden" name="m_mid" value="${mb.mid}">
@@ -292,38 +273,34 @@
         <div style="margin-top: 1%; width: 100%; display: flex; justify-content: center">
             <textarea name="m_text" placeholder="내용" required style="margin-top: 2%; border: none; width: 340px; resize: none; height: 126px;"></textarea>
         </div>
-        <div style="margin-top: 1%; width: 100%; display: flex; justify-content: space-between">
-            <input type="file" name="file">
-            <label id="" style="width: 40px; height: 30px; display: flex; justify-content: center; align-items: flex-start;" for="iSendBtn">
-                <div aria-required="true"><img src="images/sendBtnImage.png" style=" transform: rotate( -45deg ); cursor: pointer; width: 20px; height: 20px"></div>
-            </label>
-            <input id="iSendBtn" style="display:none; cursor: pointer; width: 50px; border-radius: 5px; border: 1px solid black;" type="submit">
+        <div style="margin-top: 1%; width: 100%;display: flex;justify-content: space-between">
+            <input id="msg-file" type="file" name="file" style="width: 280px">
         </div>
-        <div style="margin-top: 4%; width: 100%; display: flex; justify-content: center">
-            <c:if test="${m_num == null || m_num == ''}">
-                <button style="cursor: pointer; width: 100%; height: 30px; border-radius: 5px; background-color: black; color: white" type="button" onclick="closepop()">닫기</button>
-            </c:if>
-            <c:if test="${m_num !=null && m_num != ''}">
-                <button style="cursor: pointer" type="button" onclick="backMessage(${m_num})">뒤로가기</button>
-            </c:if>
-        </div>
-        <c:if test="${mDto.m_anum == null}">
-
-        </c:if>
         <c:if test="${mDto.m_anum != null}">
             <c:if test="${owner == mb.mid}">
 
             </c:if>
             <c:if test="${onwer != mb.mid}">
                 <c:if test="${mDto.m_ispay != '1'}">
-                    <input type='checkbox'
-                           onclick='showpay()'>결제요청</input>
-                    <input id="m_pay" style="display: none" type="number" placeholder="가격" name="m_price">
+                    <input type='checkbox' style="display: inline-block"
+                           onclick='showpay()'><span>결제요청 : <input id="m_pay" style="display: none; width: 100px" type="number" placeholder="가격" name="m_price"></span></input>
                 </c:if>
                 <c:if test="${mDto.m_ispay == '1'}">
 
                 </c:if>
             </c:if>
+        </c:if>
+        <div style="margin-top: 2%; width: 100%; display: flex; justify-content: space-between">
+            <c:if test="${m_num == null || m_num == ''}">
+                <button style="cursor: pointer; width: 100px; height: 30px; border-radius: 5px; background-color: black; color: white" type="button" onclick="closepop()">닫기</button>
+            </c:if>
+            <c:if test="${m_num !=null && m_num != ''}">
+                <button style="cursor: pointer; width: 100px; height: 30px; border-radius: 5px; background-color: black; color: white" type="button" onclick="backMessage(${m_num})">뒤로가기</button>
+            </c:if>
+            <input id="iSendBtn" style="cursor: pointer; width: 100px; height: 30px;border-radius: 5px; border: none; background-color: black; color: white" value="전송" type="submit">
+        </div>
+        <c:if test="${mDto.m_anum == null}">
+
         </c:if>
     </form>
 
@@ -334,21 +311,23 @@
     <div style="width: 100%;height: 35px; line-height: 35px ;background-color: black; text-align: center; color:white">
         메시지
     </div>
-    <p style="  margin-top: 30%;">${result}</p>
+    <p style="  margin-top: 24%; font-family: a타이틀고딕5; font-size: 2rem;">${result}</p>
+    <p style="font-size: 0.8rem; margin-top: 2%;">메시지 탭에서 확인하실 수 있습니다. </p>
     <button style="color: white;
     width: 60px;
-    background-color: #5b5b5b;
-    margin-top: 5%;
+    background-color: #000000;
+    margin-top: 20%;
     border: none;
     border-radius: 8px;
-    height: 25px;" type="button" onclick="closepop()">닫기
+    height: 25px;" onclick="closepop()">닫기
     </button>
 </div>
+
 <div class="showmessage">
     <div style="width: 100%;height: 35px; line-height: 35px ;background-color: black; text-align: center; color:white">
         메시지
     </div>
-    <div style="width: 90%;margin: 1% auto; background-color: white">
+    <div style="width: 90%;margin: 2% auto; background-color: white; padding: 3%">
         <c:if test="${mDto.m_rmid != mb.mid}">
             <p style="width: 70px;float: left">받는 사람 </p>
             <p style="width: 290px; float: left"> : <input style="width: 90%;
@@ -372,16 +351,25 @@
             <p>파일이 없습니다.</p>
         </c:if>
         <c:if test="${mDto.m_fileoriname != null}">
-            <c:if test="${mDto.m_price == null}">
-                <p onclick="downloadfile('${mDto.m_fileoriname}','${mDto.m_filesysname}')">파일
+            <c:if test="${mb.mid != mDto.m_mid}">
+                <c:if test="${mDto.m_ispay == '1'}">
+                    <p style="width: 360px; white-space: nowrap; text-overflow: ellipsis;overflow: hidden;" onclick="downloadfile('${mDto.m_fileoriname}','${mDto.m_filesysname}')">파일
+                        : ${mDto.m_fileoriname}</p>
+                </c:if>
+                <c:if test="${mDto.m_ispay == '0'}">
+                    <p style="width: 360px; white-space: nowrap; text-overflow: ellipsis;overflow: hidden;float: left;" onclick="showalram()">파일 : ${mDto.m_fileoriname} <span id="adtext" style="font-size: x-small;color: blue;"></span></p>
+
+                </c:if>
+            </c:if>
+            <c:if test="${mb.mid == mDto.m_mid}">
+                <p style="width: 360px; white-space: nowrap; text-overflow: ellipsis;overflow: hidden;" onclick="downloadfile('${mDto.m_fileoriname}','${mDto.m_filesysname}')">파일
                     : ${mDto.m_fileoriname}</p>
             </c:if>
-            <c:if test="${mDto.m_price != null}">
-                <p onclick="showalram()">파일 : ${mDto.m_fileoriname} <span id="adtext"></span></p>
-            </c:if>
+
         </c:if>
+        <div style="display: flex;justify-content: space-between; margin-top:2%;width: 100%">
         <c:if test="${mb.mid != mDto.m_mid}">
-            <button type="button" onclick="sendmessage('${mDto.m_mid}',${mDto.m_num}, ${mDto.m_anum})">답장</button>
+            <button style="width:100px;height: 30px; border-radius: 5px; background-color: black; color: white" type="button" onclick="sendmessage('${mDto.m_mid}',${mDto.m_num}, ${mDto.m_anum})">답장</button>
         </c:if>
         <c:if test="${mDto.m_price != null}">
             <c:if test="${mDto.m_rmid != mb.mid}">
@@ -389,15 +377,16 @@
             </c:if>
             <c:if test="${mDto.m_rmid == mb.mid}">
                 <c:if test="${mDto.m_ispay != '1'}">
-                    <button type="button" onclick="buybtn(${mDto.m_price},${mDto.m_anum},${mDto.m_num})">결제</button>
-                    <span> <fmt:formatNumber value="${mDto.m_price}" pattern="#,###"/>  원</span>
+                    <button style="height: 30px; border-radius: 5px; background-color: black; color: white" type="button" onclick="buybtn(${mDto.m_price},${mDto.m_anum},${mDto.m_num})">결제</button>
+                    <span style="line-height: 30px"> <fmt:formatNumber value="${mDto.m_price}" pattern="#,###"/>  원</span>
                 </c:if>
                 <c:if test="${mDto.m_ispay == '1'}">
 
                 </c:if>
             </c:if>
         </c:if>
-        <button type="button" onclick="closepop()">닫기</button>
+        <button style="width:100px;height: 30px; border-radius: 5px; background-color: black; color: white" type="button" onclick="closepop()">닫기</button>
+        </div>
     </div>
 </div>
 </body>
@@ -485,9 +474,13 @@
 
     function showpay() {
         if ($("#m_pay").css("display") == "none") {
-            $("#m_pay").css("display", "block");
+            $("#m_pay").css("display", "inline");
+            $("#m_pay").attr("required","true");
+            $("#msg-file").attr("required","true");
         } else {
             $("#m_pay").css("display", "none");
+            $("#m_pay").attr("required","false");
+            $("#msg-file").attr("required","false");
         }
     }
 
@@ -499,5 +492,6 @@
     function showalram() {
         $("#adtext").html("결제후 다운받을 수 있습니다.");
     }
+
 </script>
 </html>

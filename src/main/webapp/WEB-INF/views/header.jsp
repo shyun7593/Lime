@@ -160,7 +160,7 @@
                         <li onclick="mywrite()"><img src="images/edit2.png" style="position:absolute; width: 20px; height: 20px; top: 25%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;내가 쓴 글</li>
                         <li onclick="mystore()"><img src="images/box.png" style="position:absolute; width: 20px; height: 20px; top: 45%; left: 5.15%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;보관함</li>
                         <li onclick="mypayment()"><img src="images/invoice.png" style="position:absolute; width: 25px; height: 22px; top: 65%; left: 4.16%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;결제 내역</li>
-                        <li onclick="mymessage()"><img src="images/msg.png" style="position:absolute; width: 25px; height: 22px; top: 85%; left: 4.16%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;메시 지</li>
+                        <li onclick="mymessage()"><img src="images/msg.png" style="position:absolute; width: 25px; height: 22px; top: 85%; left: 4.16%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;메시지</li>
                     </ul>
                 </li>
                 <li class="login"><a href="loginForm">Log in</a></li>
