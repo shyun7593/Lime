@@ -502,9 +502,9 @@
                             <p style="padding-left: 3%; font-size: small;">작성자 : ${aitem.mnick}</p>
                         </div>
                     </div>
-                    <div id="ac_${st.count}" style="display: none; background-color: #dddddd; height: 100%;animation-duration: 0.5s;border-radius: 5px; ">
+                    <div id="ac_${st.count}" style="display: none; background: linear-gradient(45deg, rgba(10, 10, 10, 0.9), rgba(0, 0, 0, 0.6)); height: 100%;animation-duration: 0.5s;border-radius: 5px; ">
                         <div style="display: flex; width: 100%; height: 100%; align-items: center">
-                            <p style="width: 90%;margin: 0 auto;">곡 설명 :<br>
+                            <p style="width: 90%;margin: 0 auto;color: white">곡 설명 :<br>
                                 <c:choose>
                                     <c:when test="${fn:length(aitem.a_contents) gt 310}">
                                         <c:out value="${fn:substring(aitem.a_contents,0,310)}"></c:out>...

@@ -354,6 +354,11 @@
             <p>파일이 없습니다.</p>
         </c:if>
         <c:if test="${mDto.m_fileoriname != null}">
+            <c:if test="${mDto.m_anum == null}">
+                <p style="width: 360px; white-space: nowrap; text-overflow: ellipsis;overflow: hidden;" onclick="downloadfile('${mDto.m_fileoriname}','${mDto.m_filesysname}')">파일
+                    : ${mDto.m_fileoriname}</p>
+            </c:if>
+            <c:if test="${mDto.m_anum != null}">
             <c:if test="${mb.mid != mDto.m_mid}">
                 <c:if test="${saler == mDto.m_rmid}">
                     <p style="width: 360px; white-space: nowrap; text-overflow: ellipsis;overflow: hidden;" onclick="downloadfile('${mDto.m_fileoriname}','${mDto.m_filesysname}')">파일
@@ -373,7 +378,7 @@
                 <p style="width: 360px; white-space: nowrap; text-overflow: ellipsis;overflow: hidden;" onclick="downloadfile('${mDto.m_fileoriname}','${mDto.m_filesysname}')">파일
                     : ${mDto.m_fileoriname}</p>
             </c:if>
-
+            </c:if>
         </c:if>
         <div style="display: flex;justify-content: space-between; margin-top:2%;width: 100%">
             <button style="width:100px;height: 30px; border-radius: 5px; background-color: black; color: white" type="button" onclick="closepop()">닫기</button>

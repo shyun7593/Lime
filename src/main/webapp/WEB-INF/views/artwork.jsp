@@ -35,13 +35,14 @@
         /*************************************/
         .search-box {
             margin: 0 auto;
-            position: relative;
+            position: sticky;
             width: 40%;
-            top: 5.83%;
+            top: 11%;
             background-color: rgba(255, 255, 255, 0.5);
             box-sizing: border-box;
             border-radius: 15px;
             border-style: none;
+            z-index: 2;
         }
 
         input {
@@ -185,17 +186,22 @@
         }
 
         #sepSub1 {
+            position: sticky;
+            top:16%;
             font-family: a타이틀고딕2;
             padding: 5px 1% 5px 1%;
             border-radius: 10px;
             border: 1px solid white;
             font-size: 0.8rem;
-            margin-left: 26.4%;
+            margin-left: 23.2%;
             margin-right: 5.95%;
             color: white;
+            z-index: 2;
         }
 
         #sepSub2 {
+            position: sticky;
+            top:16%;
             font-family: a타이틀고딕2;
             padding: 5px 2.2% 5px 2.2%;
             border-radius: 10px;
@@ -203,15 +209,19 @@
             font-size: 0.8rem;
             margin-right: 5.95%;
             color: white;
+            z-index: 2;
         }
 
         #sepSub3 {
+            position: sticky;
+            top:16%;
             font-family: a타이틀고딕2;
             padding: 5px 1% 5px 1%;
             border-radius: 10px;
             border: 1px solid white;
             font-size: 0.8rem;
             color: white;
+            z-index: 2;
         }
 
         #sep-sub1 {
@@ -286,7 +296,7 @@
             background-color: #ffffff;
             float: left;
             border-radius: 5px;
-            box-shadow: 6px 6px 12px 1px white;
+            box-shadow: 2px 2px 10px 1px ghostwhite;
         }
 
         .artbox-img {
@@ -495,12 +505,11 @@
                                     <p style="font-size: small;">작성자 : ${aitem.mnick}</p>
                                 </div>
                             </div>
-                            <div id="ac_${aitem.a_num}" style="display: none;background-color: lightgray; height: 100%;animation-duration: 0.5s;border-radius: 5px">
-                                <p style="display: flex;height: 100%;
-    color: black;
+                            <div id="ac_${aitem.a_num}" style="display: none;background: linear-gradient(45deg, rgba(10, 10, 10, 0.9), rgba(0, 0, 0, 0.6)); height: 100%;animation-duration: 0.5s;border-radius: 5px">
+                                <p style="display: flex;height: 100%; color: white;
     flex-direction: column;
     justify-content: center;
-    font-size: large;text-transform: uppercase">${aitem.a_category}>${aitem.a_genre}<br><br><br>가격 : <fmt:formatNumber value="${aitem.a_price}" pattern="#,###" />  원 </p>
+    font-size: large;text-transform: uppercase">${aitem.a_category} > ${aitem.a_genre}<br><br><br>가격 : <fmt:formatNumber value="${aitem.a_price}" pattern="#,###" />  원 </p>
                             </div>
                         </div>
                     </c:forEach>

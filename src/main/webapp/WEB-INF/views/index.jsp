@@ -64,7 +64,7 @@
            src="video/IndexVideo.mp4"></video>
 </div>
 <div class="video-text">
-    <p onclick="goHome()">시작하기></p>
+    <p style="cursor: pointer" onclick="goHome()">시작하기></p>
 </div>
 </body>
 <script>

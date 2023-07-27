@@ -6,6 +6,7 @@
     }
 
     .footer-bar {
+        cursor: pointer;
         left: 0;
         bottom: 0;
         width: 100%;
@@ -13,15 +14,17 @@
         min-height: 58px;
         line-height: 58px;
         padding: 0px;
-        height: 200px;
+        height: 135px;
         background-size: 100% 100%;
     }
 
 </style>
-<div class="footer-bar">
+<div class="footer-bar" onclick="goinstar()">
 
 </div>
 
 <script>
-
+function goinstar(){
+    location.href = "https://instagram.com/lime_oofficial?igshid=MmIzYWVlNDQ5Yg==";
+}
 </script>
