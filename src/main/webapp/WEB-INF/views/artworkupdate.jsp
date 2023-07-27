@@ -455,7 +455,7 @@
         <div id="albumAndFile">
             <c:if test="${afDto.af_imgoriname == 'none.PNG'}">
                 <div id="album">
-                    <img class="preview" width="auto" height="80%" style="margin-top: 6%" src="/images/Noimage.png">
+                    <img class="preview" width="auto" height="80%" style="margin-top: 6%" src="/images/ArtwriteNoimage.png">
                 </div>
                 <div class="filebox">
                     <label class="aw-filebutton" for="aw-imgfileInput">

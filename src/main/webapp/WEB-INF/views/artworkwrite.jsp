@@ -481,7 +481,7 @@
     <form action="WriteArt" method="POST" enctype="multipart/form-data" name="WForm" autocomplete="off" onsubmit="return check()">
         <div id="albumAndFile">
                 <div id="album">
-                    <img id="preview" width="auto" height="80%" style="margin-top: 6%" src="/images/Muimage.png">
+                    <img id="preview" width="auto" height="80%" style="margin-top: 6%" src="/images/ArtwriteNoimage.png">
                     <p style="color: white; font-size: small;margin-top: 3%;">1:1비율 권장</p>
                 </div>
                 <div class="filebox">
