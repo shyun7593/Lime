@@ -6,6 +6,9 @@
     <title>Title</title>
     <script src="js/jquery-3.7.0.min.js"></script>
     <style>
+        button {
+            cursor: pointer;
+        }
         .login-alert, .register-alert, .profile-confirm, .Imessage, .result, .showmessage {
             display: none;
         }
@@ -373,6 +376,7 @@
 
         </c:if>
         <div style="display: flex;justify-content: space-between; margin-top:2%;width: 100%">
+            <button style="width:100px;height: 30px; border-radius: 5px; background-color: black; color: white" type="button" onclick="closepop()">닫기</button>
         <c:if test="${mb.mid != mDto.m_mid}">
             <button style="width:100px;height: 30px; border-radius: 5px; background-color: black; color: white" type="button" onclick="sendmessage('${mDto.m_mid}',${mDto.m_num}, ${mDto.m_anum})">답장</button>
         </c:if>
@@ -390,7 +394,7 @@
                 </c:if>
             </c:if>
         </c:if>
-        <button style="width:100px;height: 30px; border-radius: 5px; background-color: black; color: white" type="button" onclick="closepop()">닫기</button>
+
         </div>
     </div>
 </div>

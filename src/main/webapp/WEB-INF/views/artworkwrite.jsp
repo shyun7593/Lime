@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 
 <head>
@@ -578,6 +580,9 @@
     }
     $(document).on("change","#aw-imgfileInput",function () {
         let imgname =  $("#aw-imgfileInput")[0].files[0].name;
+        if (imgname.length > 24){
+            imgname = imgname.substring(0,24) + "...";
+        }
         $(".now-photo").html(imgname);
     })
     function readUrl(input) {
@@ -593,8 +598,11 @@
     }
 
     $(document).on("change","#aw-musicfileInput",function () {
-        let imgname =  $("#aw-musicfileInput")[0].files[0].name;
-        $(".now-music").html(imgname);
+        let musicname =  $("#aw-musicfileInput")[0].files[0].name;
+        if (musicname.length > 24){
+            musicname = musicname.substring(0,24) + "...";
+        }
+        $(".now-music").html(musicname);
     })
 
     function check(){

@@ -40,7 +40,8 @@ public class kakaoPayController {
 
     @GetMapping("/kakaoPayCancel")
     public String kakaoPayCancel(){
-        return "KakaoPayCancel";
+        return "kakaoPayCancel";
+
     }
 
 }

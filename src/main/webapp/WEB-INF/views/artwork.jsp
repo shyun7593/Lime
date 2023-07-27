@@ -308,12 +308,14 @@
         }
 
         #board-btn {
+            cursor: pointer;
             height: 60px;
             background-color: rgba(0, 0, 0, 0);
             border: none;
         }
 
         #board-btn2 {
+            cursor: pointer;
             height: 60px;
             background-color: rgba(0, 0, 0, 0);
             border: none;
@@ -441,7 +443,7 @@
         </div>
 
         <div id="sep-search-sub">
-            <span id="sepSub1">카테고리<select id="sep-sub1" onchange="searchArticle()">
+            <span id="sepSub1">카테고리&nbsp;&nbsp;|<select id="sep-sub1" onchange="searchArticle()">
                 <option class="sep-sub-op"
                         value="all" ${sDto.category == 'all' ? 'selected="selected"' : ''}>전체</option>
                 <option class="sep-sub-op"
@@ -451,7 +453,7 @@
                 <option class="sep-sub-op" value="lyricist" ${sDto.category == 'lyricist' ? 'selected="selected"' : ''}>작사</option>
             </select></span>
 
-            <span id="sepSub2">장르<select id="sep-sub2" onchange="searchArticle()">
+            <span id="sepSub2">장르&nbsp;&nbsp;|<select id="sep-sub2" onchange="searchArticle()">
                 <option class="sep-sub-op" value="all" ${sDto.genre == 'all' ? 'selected="selected"' : ''}>전체</option>
                 <option class="sep-sub-op"
                         value="KPOP" ${sDto.genre == 'KPOP' ? 'selected="selected"' : ''}>KPOP</option>
@@ -464,7 +466,7 @@
                 <option class="sep-sub-op" value="POP" ${sDto.genre == 'POP' ? 'selected="selected"' : ''}>POP</option>
             </select></span>
 
-            <span id="sepSub3">기타분류&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<select id="sep-sub3">
+            <span id="sepSub3">기타분류&nbsp;&nbsp;&nbsp;|<select id="sep-sub3">
                 <option class="sep-sub-op" value="all" ${sDto.colname == 'all' ? 'selected="selected"' : ''}>전체</option>
                 <option class="sep-sub-op"
                         value="a_title" ${sDto.colname == 'a_title' ? 'selected="selected"' : ''}>제목</option>

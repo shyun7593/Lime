@@ -58,11 +58,11 @@ public class ArtworkService {
             session.setAttribute("mb", mdto);
 
             view = "redirect:/artworkdetail?a_num=" + aDto.getA_num();
-            msg = "success";
+            msg = "작성 성공";
         } catch (Exception e) {
             e.printStackTrace();
             view = "redirect:artworkwrite";
-            msg = "fail";
+            msg = "작성 실패";
         }
         rttr.addFlashAttribute("msg", msg);
 
@@ -244,10 +244,10 @@ public class ArtworkService {
                 deleteupfiles(img_file, music_file, aDto.getA_num(), session);
             }
             fileUpDate(img_file, music_file, session, aDto);
-            msg = "success";
+            msg = "수정 성공";
         } catch (Exception e) {
             e.printStackTrace();
-            msg = "fail";
+            msg = "수정 실패";
         }
         view = "redirect:/artworkdetail?a_num=" + aDto.getA_num();
 
@@ -328,27 +328,35 @@ public class ArtworkService {
         return "true";
     }
 
-    public String DeleteArtwork(Integer a_num, HttpSession session) {
+    public String DeleteArtwork(Integer a_num, HttpSession session, RedirectAttributes rttr) {
         log.info("ArtworkService.DeleteArtwork()");
         String view = null;
+        String msg = null;
         String page = (String) session.getAttribute("page");
         int pageNum = (int) session.getAttribute("pageNum");
         MemberDto mDto = (MemberDto) session.getAttribute("mb");
         SearchDto sDto = (SearchDto) session.getAttribute("sDto");
-        if (pDao.countPayment(a_num) > 0) {
-            aDao.setdel(a_num);
-        } else {
-            deletefiles(a_num,session);
-            aDao.deleteFile(a_num);
-            aDao.deleteArtwork(a_num);
-            mDao.disupdateMemberPoint(mDto);
-        }
-        if (page.equals("artwork")) {
-            view = "redirect:/mypage?page=" + page + "&category=" + sDto.getCategory() + "&genre=" + sDto.getGenre() + "&pageNum=" + pageNum;
-        } else {
-            view = "redirect:/artwork?category=" + sDto.getCategory() + "&genre=" + sDto.getGenre() + "&colname=" + sDto.getColname() + "&keyword=" + sDto.getKeyword() + "&pageNum=" + pageNum;
-        }
+        try {
+            if (pDao.countPayment(a_num) > 0) {
+                aDao.setdel(a_num);
+            } else {
+                deletefiles(a_num, session);
+                aDao.deleteFile(a_num);
+                aDao.deleteArtwork(a_num);
+                mDao.disupdateMemberPoint(mDto);
+            }
+            msg = "삭제 성공";
+            if (page.equals("artwork")) {
+                view = "redirect:/profile?page=" + page + "&category=" + sDto.getCategory() + "&genre=" + sDto.getGenre() + "&pageNum=" + pageNum;
+            } else {
+                view = "redirect:/artwork?category=" + sDto.getCategory() + "&genre=" + sDto.getGenre() + "&colname=" + sDto.getColname() + "&keyword=" + sDto.getKeyword() + "&pageNum=" + pageNum;
+            }
 
+        } catch (Exception e){
+            msg = "삭제 실패";
+            view = "redirect:/artworkdetail?a_num=" + a_num;
+        }
+        rttr.addFlashAttribute("msg",msg);
 
         return view;
     }

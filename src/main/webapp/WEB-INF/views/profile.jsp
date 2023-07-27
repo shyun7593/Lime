@@ -165,6 +165,7 @@
         }
 
         #modify2 {
+            cursor: pointer;
             margin-top: 5%;
             width: 100%;
             height: 5%;
@@ -234,6 +235,7 @@
         }
 
         #modify8 {
+            cursor: pointer;
             margin-top: 5%;
             width: 100%;
             height: 10%;
@@ -417,6 +419,7 @@
         }
 
         #update1 {
+            cursor: pointer;
             width: 25%;
             height: 7%;
             position: relative;
@@ -661,6 +664,7 @@
         }
 
         .writebtn {
+            cursor: pointer;
             background: #fff;
             color: #000;
             line-height: 42px;
@@ -955,12 +959,6 @@
                     <button id="update1" onclick="updateInfo()">수정하기</button>
                 </div>
             </div>
-            <div id="userconfirm">
-                <p>나만의 비밀 답:</p>
-                <input type="text" id="mysecret" autocomplete="off"><br>
-                <button id="confirmbtn" onclick="userConfirm()">확인</button>
-                <button id="confirmbtn1" onclick="backbtn()">뒤로가기</button>
-            </div>
             <div id="updateprofile">
                 <form action="updateProc" method="post" id="modify" class="register-form" name="jForm"
                       autocomplete="off"
@@ -1078,7 +1076,7 @@
                         <th class="le">닉네임</th>
                         <th>글제목</th>
                         <th><select id="type" onchange="ordertype()"
-                                    style="background-color: black; color: white; border-style: none">
+                                    style="background-color: black; color: white; border-style: none;cursor: pointer">
                             <option value="all" ${test == null || test == 'all' ? 'selected="selected"' : ''}>
                                 전체
                             </option>
@@ -1159,6 +1157,7 @@
                         <c:forEach var="sitem" items="${sList}" varStatus="st">
                             <div id="pd${st.count}"
                                  onclick="downloadfile('${sitem.af_musicoriname}','${sitem.af_musicsysname}')" style="margin-left: 9% ;width: 20%;
+                                 cursor: pointer;
             height: 30%;
             background-color: darkgray;
             float: left;
@@ -1383,7 +1382,7 @@
                 </div>
                 <table class="ptable">
                     <tr class="ptp">
-                        <th class="le" style="width: 10%;"><select id="messagetype" style="background-color: black; color: white; border-style: none; text-align: center"
+                        <th class="le" style="width: 10%;"><select id="messagetype" style="background-color: black; color: white; border-style: none; text-align: center;cursor: pointer"
                                                onchange="readtype()">
                             <option value="all" ${test == null || test == 'all' ? 'selected="selected"' : ''}>전체
                             </option>
@@ -1503,42 +1502,11 @@
 
     }
 
-    function userConfirm() {
-        let answer = $("#mysecret").val();
-        console.log(answer);
-        let sendData = {"mysecret": answer, "mid": '${mb.mid}'};
-        $.ajax({
-            url: "userConfirm",
-            type: "post",
-            data: sendData,
-            success: function (result) {
-                if (result == "true") {
-                    $("#userconfirm").css("display", "none");
-                    $("#updateprofile").css("display", "block");
-
-                } else {
-                    alert("비밀번호가 일치하지 않습니다.");
-                    $("#userconfirm").css("display", "none");
-                    $("#showprofile").css("display", "block");
-                }
-            },
-            error: function (error) {
-                console.log(error);
-                alert("관리자에게 문의하세요.");
-            }
-        })
-    }
-
     function backbtn() {
         location.href = "/profile?page=profile";
     }
 
     function check() {
-        // 중복 체크 먼저
-        if (ck == false) {
-            alert("Please check ID duplicate.");
-            return false;
-        }
 
         // form 태그의 내용 확인 (누락된 부분)
         const jfrm = document.jForm;
@@ -1561,8 +1529,6 @@
 
     function showartwork() {
         location.href = "/mypage?page=artwork&category=all&genre=all&pageNum=1";
-
-
     }
 
     function showboard() {

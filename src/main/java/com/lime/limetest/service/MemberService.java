@@ -98,7 +98,7 @@ public class MemberService {
         String msg = null;
         log.info("dsfd : " +mDto.getMid());
 
-        if (mDto.getMid().equals(null)) {
+        if (mDao.idCheck(mDto.getMid()) == 0) {
             view = "redirect:loginForm";
             msg = "회원정보가 없습니다.";
         } else {
@@ -284,10 +284,10 @@ public class MemberService {
         String encpwd = pEncoder.encode(mpwd);
         try{
             mDao.updatePw(mid, encpwd);
-            res = "success";
+            res = "수정 성공";
         } catch (Exception e){
             e.printStackTrace();
-            res = "false";
+            res = "수정 실패";
         }
 
 

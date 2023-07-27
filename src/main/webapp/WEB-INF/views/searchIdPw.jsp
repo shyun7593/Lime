@@ -4,6 +4,9 @@
     <script src="js/jquery-3.7.0.min.js"></script>
     <title>Title</title>
     <style>
+        button{
+            cursor: pointer;
+        }
         * {
             margin: 0;
             padding: 0;
@@ -408,7 +411,7 @@
                 $("#showid").css("display", "block");
                 $(".userconfirm").css("display", "none");
                 if (result == "No Member") {
-                    $("#showpw").append("<p> 회원정보가 없습니다. </p>");
+                    $("#showpw").append("<p style='margin-top: 15%;'> 회원정보가 없습니다. </p>");
                     $("#showpw").append("<button id='back-btn' onclick='backpw()'>돌아가기</button>");
                 } else if (result == "false") {
                     $("#showpw").append("<p> 비밀이 틀렸습니다. </p>");
@@ -490,7 +493,7 @@
             type: "post",
             data: sendData,
             success: function (res) {
-                if (res == 'success') {
+                if (res == '수정 성공') {
                     $("#showpw").css("display", "none");
                     $("#successpw").css("display", "block");
                 } else {

@@ -37,6 +37,7 @@
     }
 
     #closebtn {
+        cursor: pointer;
         margin: 0 auto;
         background-color: lightgray;
         border-radius: 10px;

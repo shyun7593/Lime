@@ -464,14 +464,22 @@
                     <label class="aw-filebutton" for="aw-musicfileInput">
                         <div class="btn-upload2"></div>
                     </label>
-                    <input style="display: none" id="aw-imgfileInput" type="file" name="img_file" onchange="readUrl(this)">
-                    <input style="display: none" id="aw-musicfileInput" type="file" name="music_file">
+                    <input style="display: none" id="aw-imgfileInput" type="file" name="img_file" onchange="readUrl(this)" accept="image/*">
+                    <input style="display: none" id="aw-musicfileInput" type="file" name="music_file" accept="audio/*">
                     <label id="label1" style="width: 100%;">
                         <p>현재사진 : <span class="now-photo">없음</span></p>
                     </label>
                     <label id="label2" style="width: 100%;"
                     >
-                        <p>현재음원 : <span class="now-music">${afDto.af_musicoriname}</span></p>
+                        <p>현재음원 : <span class="now-music">
+                                <c:choose>
+                                    <c:when test="${fn:length(afDto.af_musicoriname) gt 24}">
+                                        <c:out value="${fn:substring(afDto.af_musicoriname,0,24)}"></c:out>...
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:out value="${afDto.af_musicoriname}"></c:out>
+                                    </c:otherwise>
+                                </c:choose></span></p>
                     </label>
                 </div>
             </c:if>
@@ -486,13 +494,29 @@
                         <label class="aw-filebutton" for="aw-musicfileInput2">
                             <div class="btn-upload2"></div>
                         </label>
-                        <input style="display: none" id="aw-imgfileInput2" type="file" name="img_file" onchange="readUrl(this)">
-                        <input style="display: none" id="aw-musicfileInput2" type="file" name="music_file">
+                        <input style="display: none" id="aw-imgfileInput2" type="file" name="img_file" onchange="readUrl(this)" accept="image/*">
+                        <input style="display: none" id="aw-musicfileInput2" type="file" name="music_file" accept="audio/*">
                         <label id="label3" style="width: 100%;">
-                            <p class="now-photo">${afDto.af_imgoriname}</p>
+                            <p class="now-photo">
+                                <c:choose>
+                                    <c:when test="${fn:length(afDto.af_imgoriname) gt 24}">
+                                        <c:out value="${fn:substring(afDto.af_imgoriname,0,24)}"></c:out>...
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:out value="${afDto.af_imgoriname}"></c:out>
+                                    </c:otherwise>
+                                </c:choose></p>
                         </label>
                         <label id="label4" style="width: 100%;">
-                            <p class="now-music">${afDto.af_musicoriname}</p>
+                            <p class="now-music">
+                                <c:choose>
+                                    <c:when test="${fn:length(afDto.af_musicoriname) gt 24}">
+                                        <c:out value="${fn:substring(afDto.af_musicoriname,0,24)}"></c:out>...
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:out value="${afDto.af_musicoriname}"></c:out>
+                                    </c:otherwise>
+                                </c:choose></p>
                         </label>
                     </div>
                 </c:if>
@@ -568,7 +592,7 @@
 </body>
 <script>
     function aback(a_num) {
-            location.href = '/artworkinfo?page=artworkdetail&a_num=' + a_num;
+            location.href = '/artworkdetail?a_num=' + a_num;
     }
 
     if ('${con}' == "true") {
@@ -577,23 +601,35 @@
 
         $(document).on("change","#aw-imgfileInput",function () {
             let imgname =  $("#aw-imgfileInput")[0].files[0].name;
+            if (imgname.length > 24){
+                imgname = imgname.substring(0,24) + "...";
+            }
             $(".now-photo").html(imgname);
         })
 
 
         $(document).on("change","#aw-musicfileInput",function () {
-            let imgname =  $("#aw-musicfileInput")[0].files[0].name;
-            $(".now-music").html(imgname);
+            let musicname =  $("#aw-musicfileInput")[0].files[0].name;
+            if (musicname.length > 24){
+                musicname = musicname.substring(0,24) + "...";
+            }
+            $(".now-music").html(musicname);
         })
 
         $(document).on("change","#aw-imgfileInput2",function () {
             let imgname =  $("#aw-imgfileInput2")[0].files[0].name;
+            if (imgname.length > 24){
+                imgname = imgname.substring(0,24) + "...";
+            }
             $(".now-photo").html(imgname);
         })
 
         $(document).on("change","#aw-musicfileInput2",function () {
-            let imgname =  $("#aw-musicfileInput2")[0].files[0].name;
-            $(".now-music").html(imgname);
+            let musicname =  $("#aw-musicfileInput2")[0].files[0].name;
+            if (musicname.length > 24){
+                musicname = musicname.substring(0,24) + "...";
+            }
+            $(".now-music").html(musicname);
         })
     function readUrl(input) {
         if (input.files && input.files[0]) {

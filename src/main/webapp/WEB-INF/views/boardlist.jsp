@@ -58,7 +58,9 @@
             border-bottom: 1px solid #ddd;
             text-align: center;
         }
-
+        .in-data {
+            cursor: pointer;
+        }
         .btable .in-data:hover {
 
             background: #eee;
@@ -206,7 +208,7 @@
                     <th class="le" style="width: 15%">번호</th>
                     <th style="width: 15%">아이디</th>
                     <th style="width: 15%">글제목</th>
-                    <th style="width: 15%"><select id="type" onchange="ordertype()">
+                    <th style="width: 15%"><select id="type" onchange="ordertype()" style="cursor: pointer">
                         <option value="all" ${test == null || test == 'all' ? 'selected="selected"' : ''}>
                             전체
                         </option>
@@ -274,10 +276,10 @@
             </c:if>
             <div id="btn-area" style="position: fixed; right: 5px; bottom: 10px; width: 10%; height:5%">
                 <p id="writeMsg">글 작성하기</p>
-                <button id="board-btn" onclick="boardwrite('${mb.mnick}')"><img src="images/edit2.png" style="height: 45px; width: 43px; position: absolute; bottom: 72%; right: 77%;">
+                <button id="board-btn" onclick="boardwrite('${mb.mnick}')"><img src="images/edit2.png" style="height: 45px; width: 43px; position: absolute; bottom: 72%; right: 77%;cursor: pointer">
                 </button>
                 <p id="boardMsg"> 작품 이동</p>
-                <button id="board-btn2" onclick="goArticle()"><img src="images/people.png" style="height: 61px; width: 49px; position: absolute; bottom: 30%; right: 22%;">
+                <button id="board-btn2" onclick="goArticle()"><img src="images/people.png" style="height: 61px; width: 49px; position: absolute; bottom: 30%; right: 22%; cursor: pointer">
                 </button>
             </div>
     </section>

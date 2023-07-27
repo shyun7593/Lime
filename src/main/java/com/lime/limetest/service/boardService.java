@@ -106,11 +106,11 @@ public class boardService {
         try {
             bDao.BoardWrite(bDto);
             view = "redirect:/boarddetail?b_num=" + bDto.getB_num();
-            msg = "success";
+            msg = "작성 성공";
         } catch (Exception e) {
             e.printStackTrace();
             view = "redirect:/boardwrite";
-            msg = "fail";
+            msg = "작성 실패";
         }
         rttr.addFlashAttribute("msg",msg);
         return view;
@@ -146,7 +146,7 @@ public class boardService {
         try {
             bDao.deleteReply(b_num);
             bDao.deleteBoard(b_num);
-            msg = "success";
+            msg = "삭제 성공";
             if (page.equals("board")){
                 view = "redirect:/profile?page="+page+"&type="+type+"&pageNum="+pageNum;
             } else {
@@ -155,7 +155,7 @@ public class boardService {
 
         } catch (Exception e){
             e.printStackTrace();
-            msg = "fail";
+            msg = "삭제 실패";
             view = "redirect:/boarddetail?b_num=" + b_num;
         }
         rttr.addFlashAttribute("msg",msg);
@@ -182,10 +182,10 @@ public class boardService {
 
         try {
             bDao.updateboard(bDto);
-            msg = "success";
+            msg = "수정 성공";
         } catch (Exception e){
             e.printStackTrace();
-            msg = "fail";
+            msg = "수정 실패";
         }
         view = "redirect:/boarddetail?b_num="+bDto.getB_num();
         rttr.addFlashAttribute("msg",msg);

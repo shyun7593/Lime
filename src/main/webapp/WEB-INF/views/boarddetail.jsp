@@ -95,6 +95,7 @@
         }
 
         #bupdate-btn {
+            cursor: pointer;
             visibility: hidden;
             position: relative;
             width: 15%;
@@ -106,6 +107,7 @@
             top: 15%;
         }
         #bback-btn{
+            cursor: pointer;
             position: relative;
             width: 10%;
             color: white;
@@ -123,6 +125,7 @@
         }
 
         #bdelete-btn {
+            cursor: pointer;
             visibility: hidden;
             position: relative;
             width: 15%;
@@ -243,6 +246,7 @@
             border: none;
         }
         #reply-btn {
+            cursor: pointer;
             width: 5%;
             height: 5%;
             color: white;
@@ -265,6 +269,7 @@
         }
 
         .del-reply{
+            cursor: pointer;
             position: relative;
             float: right;
             right: 2%;

@@ -316,6 +316,9 @@
             box-sizing: border-box;
             border: 1px solid white;
         }
+        #bg-banner{
+            cursor: pointer;
+        }
 
         p#bg-banner {
             text-align: center;
@@ -371,7 +374,9 @@
             margin-left: 5%;
             margin-right: 5%;
         }
-
+        select{
+            cursor: pointer;
+        }
         @-webkit-keyframes duration {
             from {
                 display: none;
@@ -480,7 +485,7 @@
         <div id="best">지금, 가장 인기있는 작업물을 들어보세요!</div>
         <div id="mcon-top">
             <c:forEach var="aitem" items="${aList}" varStatus="st">
-                <div id="m${st.count}" onclick="goartworkdetail(${aitem.a_num})" onmouseover="showcate(${st.count})" onmouseout="showinfo(${st.count})">
+                <div id="m${st.count}" style="cursor: pointer" onclick="goartworkdetail(${aitem.a_num})" onmouseover="showcate(${st.count})" onmouseout="showinfo(${st.count})">
                     <div id="a_${st.count}" style="animation-duration: 0.5s;"><%-- 디스플레이 논 없애기  --%>
                         <c:if test="${aitem.af_imgoriname != 'none.PNG'}">
                             <div class="artbox-img"

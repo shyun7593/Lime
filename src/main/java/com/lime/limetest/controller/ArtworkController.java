@@ -76,9 +76,9 @@ public class ArtworkController {
     }
 
     @GetMapping("artworkdelete")
-    public String DeleteArtwork(Integer a_num, HttpSession session){
+    public String DeleteArtwork(Integer a_num, HttpSession session, RedirectAttributes attr){
         log.info("ArtworkController.DeleteArtwork()");
-        String view = aServ.DeleteArtwork(a_num, session);
+        String view = aServ.DeleteArtwork(a_num, session, attr);
 
         return view;
     }

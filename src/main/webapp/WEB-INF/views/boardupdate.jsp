@@ -37,6 +37,7 @@
             background-color: #e9e9e9;
         }
         #bwrtie-btn{
+            cursor: pointer;
             position: relative;
             width: 15%;
             height: 70%;
@@ -134,6 +135,7 @@
             color: rgba(255, 255, 255, .8);
         }
         #bback-btn {
+            cursor: pointer;
             position: relative;
             width: 15%;
             height: 70%;
@@ -180,7 +182,7 @@
             <form action="boardupdateProc" method="post" id="writeForm">
                 <div id="write-top">
                     <div style="height: 7%;width: 100%;display: flex;justify-content: start;align-items: center;background:black;color: white;border-bottom: 3px solid gray;">
-                        <select id="sep-type" style="background-color: black;" name="b_type" required>
+                        <select id="sep-type" style="background-color: black;cursor: pointer;" name="b_type" required>
                             <option value="QnA" ${bDto.b_type == 'QnA' ? 'selected="selected"' : ''}>
                                 Q&A
                             </option>
