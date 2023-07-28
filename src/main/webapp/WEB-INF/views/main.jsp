@@ -11,15 +11,19 @@
         #v1 {
             display: block;
         }
+
         #v2 {
             display: none;
         }
-        #c1:hover  #v1{
+
+        #c1:hover #v1 {
             display: none;
         }
-        #c1:hover #v2{
+
+        #c1:hover #v2 {
             display: block;
         }
+
         html {
             overflow: hidden;
         }
@@ -100,9 +104,9 @@
             height: 38%;
             float: left;
             margin-top: 1.5%;
-            margin-left:10.75%;
-            background-color: white;
+            margin-left: 10.75%;
             border-radius: 5px;
+            background-color: white;
         }
 
         /*************************************/
@@ -316,17 +320,10 @@
             box-sizing: border-box;
             border: 1px solid white;
         }
-        #bg-banner{
+
+
+        p#bg-banner {
             cursor: pointer;
-        }
-
-        p#bg-banner {
-            text-align: center;
-            margin-top: 2%;
-            z-index: 10;
-        }
-
-        p#bg-banner {
             margin: 0 auto;
             width: 15%;
             height: 7%;
@@ -341,6 +338,9 @@
             color: #ffffff;
             margin-bottom: 1%;
             z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         p#bg-banner:hover {
@@ -374,9 +374,11 @@
             margin-left: 5%;
             margin-right: 5%;
         }
-        select{
+
+        select {
             cursor: pointer;
         }
+
         @-webkit-keyframes duration {
             from {
                 display: none;
@@ -398,6 +400,7 @@
                 opacity: 0;
             }
         }
+
         /***************************************************/
     </style>
     <script>
@@ -414,13 +417,14 @@
                 $(".name").css("display", "none");
                 $(".grade").css("display", "none");
                 $(".logout").css("display", "none");
-                $("#messagecount").css("display","none");
+                $("#messagecount").css("display", "none");
             } else {
-                if (count == null || count == "" || count == "0"){
-                    $("#messagecount").css("display","none");
-                } else{
-                    $("#messagecount").css("display","block");
-                };
+                if (count == null || count == "" || count == "0") {
+                    $("#messagecount").css("display", "none");
+                } else {
+                    $("#messagecount").css("display", "block");
+                }
+                ;
                 let spantag = $("#mname");
                 spantag.append("<span>" + loginName + " 님</span>")
                 $(".grade").html("등급 : [" + Grade + "]");
@@ -481,29 +485,49 @@
             </div>
         </div>
     </div>
-    <div class="view" style="background-color: black">
+    <div class="view">
         <div id="best">지금, 가장 인기있는 작업물을 들어보세요!</div>
         <div id="mcon-top">
             <c:forEach var="aitem" items="${aList}" varStatus="st">
-                <div id="m${st.count}" style="cursor: pointer" onclick="goartworkdetail(${aitem.a_num})" onmouseover="showcate(${st.count})" onmouseout="showinfo(${st.count})">
-                    <div id="a_${st.count}" style="animation-duration: 0.5s;"><%-- 디스플레이 논 없애기  --%>
-                        <c:if test="${aitem.af_imgoriname != 'none.PNG'}">
-                            <div class="artbox-img"
-                                 style="width: 100%; border-top-left-radius: 5px; border-top-right-radius: 5px;
-                                         height: 80%;margin:0;background-image: url('/upload/image/${aitem.af_imgsysname}'); background-size: cover;background-position: center"></div>
-                        </c:if>
-                        <c:if test="${aitem.af_imgoriname == 'none.PNG'}">
-                            <div class="artbox-img"
-                                 style="width: 100%;
+            <div id="m${st.count}" style="cursor: pointer" onclick="goartworkdetail(${aitem.a_num})"
+                 onmouseover="showcate(${st.count})" onmouseout="showinfo(${st.count})">
+                <div id="a_${st.count}"><%-- 디스플레이 논 없애기  --%>
+                    <c:if test="${aitem.af_imgoriname != 'none.PNG'}">
+                        <div class="artbox-img"
+                             style="width: 100%; border-top-left-radius: 5px; border-top-right-radius: 5px;
+                                     height: 80%;margin:0;background-image: url('/upload/image/${aitem.af_imgsysname}'); background-size: cover;background-position: center"></div>
+                    </c:if>
+                    <c:if test="${aitem.af_imgoriname == 'none.PNG'}">
+                        <div class="artbox-img"
+                             style="width: 100%;
                                  height: 80%;margin:0;background-image: url('/images/Noimage.png'); background-size: 100% 100%;background-position: center"></div>
-                        </c:if>
-                        <div class="artbox-explain" style="width: 100%;">
-                            <p style="padding-top: 2%; padding-left: 3%; font-size: large">제목 : ${aitem.a_title}</p>
-                            <p style="padding-left: 3%; font-size: small;">작성자 : ${aitem.mnick}</p>
-                        </div>
+                    </c:if>
+                    <div class="artbox-explain" style="width: 100%;">
+                        <p style="padding-top: 2%; padding-left: 3%; font-size: large">제목 : ${aitem.a_title}</p>
+                        <p style="padding-left: 3%; font-size: small;">작성자 : ${aitem.mnick}</p>
                     </div>
-                    <div id="ac_${st.count}" style="display: none; background: linear-gradient(45deg, rgba(10, 10, 10, 0.9), rgba(0, 0, 0, 0.6)); height: 100%;animation-duration: 0.5s;border-radius: 5px; ">
-                        <div style="display: flex; width: 100%; height: 100%; align-items: center">
+                </div>
+                    <%--                    <div id="ac_${st.count}" style="display: none; background: linear-gradient(45deg, rgba(10, 10, 10, 0.9), rgba(0, 0, 0, 0.6)); height: 100%;animation-duration: 0.5s;border-radius: 5px; ">--%>
+                <c:if test="${aitem.af_imgoriname != 'none.PNG'}">
+                <div id="ac_${st.count}"
+                     style="display: none;background-image: linear-gradient(
+                             rgba(0, 0, 0, 0.8),
+                             rgba(0, 0, 0, 0.8)
+                             ), url('/upload/image/${aitem.af_imgsysname}');
+                             background-color: rgba(0, 0, 0, 0.8);
+                             background-size:cover;height: 100%;animation-duration: 0.2s;border-radius: 5px;background-repeat: no-repeat;background-position: center">
+                    </c:if>
+
+                    <c:if test="${aitem.af_imgoriname == 'none.PNG'}">
+                    <div id="ac_${st.count}"
+                         style="display: none;background-image: linear-gradient(
+        rgba(0, 0, 0, 0.8),
+        rgba(0, 0, 0, 0.8)
+      ), url('/images/Noimage.png');
+      background-color: rgba(0, 0, 0, 0.8);
+                          background-size: cover;height: 100%;animation-duration: 0.2s;border-radius: 5px;background-repeat: no-repeat;background-position: center">
+                        </c:if>
+                        <div style="display: flex; width: 100%; height: 100%; align-items: center;">
                             <p style="width: 90%;margin: 0 auto;color: white">곡 설명 :<br>
                                 <c:choose>
                                     <c:when test="${fn:length(aitem.a_contents) gt 310}">
@@ -513,30 +537,30 @@
                                         <c:out value="${aitem.a_contents}"></c:out>
                                     </c:otherwise>
                                 </c:choose>
-                                    </p>
+                            </p>
                         </div>
                     </div>
                 </div>
-            </c:forEach>
+                </c:forEach>
+            </div>
         </div>
-    </div>
-    <div class="view" style="background-color: black">
-        <h1 id="is">Lime is...</h1>
-        <p style="text-align: center;margin-top: 2%;color: white;">
-            알려지지 않은 음악인들의 재능을 모두에게 표현할 수 있는 기회로 만들고, 여러 방면의 음악적 재능으로 소통하는 사이트입니다.
-        </p><br>
-        <br>
-        <p id="pr">더 많은 사람들에게 음악이 발견될 수 있도록 서포트 하고 있습니다.<br>
-            작품을 올려 당신의 재능을 모두에게 보여주세요. 사람들이 모이는 곳에 항상 당신의 음악이 있을거에요.<br>
-
+        <div class="view" style="background-color: black">
+            <h1 id="is">Lime is...</h1>
+            <p style="text-align: center;margin-top: 2%;color: white;">
+                알려지지 않은 음악인들의 재능을 모두에게 표현할 수 있는 기회로 만들고, 여러 방면의 음악적 재능으로 소통하는 사이트입니다.
+            </p><br>
             <br>
-            <br>다양한 음악인들과 연결을 해드려요.
-        <br>게시판, 메시지를 이용하여 여러 사람들과 소통하면서 새로운 작품을 만들거나 재능을 키울 수 있을거에요.</p>
-        <div id="bg">
-            <p id="bg-banner" onclick="goboard()">게시판 이동하기 > </p>
-            <button id="det-btn">이용안내</button>
+            <p id="pr">더 많은 사람들에게 음악이 발견될 수 있도록 서포트 하고 있습니다.<br>
+                작품을 올려 당신의 재능을 모두에게 보여주세요. 사람들이 모이는 곳에 항상 당신의 음악이 있을거에요.<br>
+
+                <br>
+                <br>다양한 음악인들과 연결을 해드려요.
+                <br>게시판, 메시지를 이용하여 여러 사람들과 소통하면서 새로운 작품을 만들거나 재능을 키울 수 있을거에요.</p>
+            <div id="bg">
+                <p id="bg-banner" onclick="goboard()">게시판 이동하기 > </p>
+                <button id="det-btn">이용안내</button>
+            </div>
         </div>
-    </div>
 </section>
 <footer>
     <jsp:include page="footer.jsp"></jsp:include>
@@ -648,14 +672,15 @@
     function showcate(num) {
         $("#ac_" + num).css("display", "block");
         $("#a_" + num).css("display", "none");
-        $("#ac_"+num).css("-webkit-animation-name", "duration");
+        $("#ac_" + num).css("-webkit-animation-name", "duration");
     }
 
     function showinfo(num) {
         $("#ac_" + num).css("display", "none");
         $("#a_" + num).css("display", "block");
-        $("#a_"+num).css("-webkit-animation-name", "duration");
+        $("#a_" + num).css("-webkit-animation-name", "duration");
     }
+
     function goartworkdetail(a_num) {
         console.log(a_num);
         location.href = '/artworkdetail?a_num=' + a_num;

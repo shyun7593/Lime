@@ -60,7 +60,7 @@
 </style>
 <body>
 <div class="video-box">
-    <video id="video" style="object-fit: cover" height="100%" width="100%" muted autoplay
+    <video id="video" style="object-fit: cover" height="100%" width="100%" muted autoplay loop
            src="video/IndexVideo.mp4"></video>
 </div>
 <div class="video-text">
