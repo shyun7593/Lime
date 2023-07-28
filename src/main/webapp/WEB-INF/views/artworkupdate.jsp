@@ -370,21 +370,25 @@
             font-family: a타이틀고딕3;
             color: black;
         }
+
         #label1, #label3 > p {
             position: relative;
             top: 83%;
             color: white;
             margin-left: 14%;
         }
+
         #label2, #label4 > p {
             position: relative;
             top: 85%;
             color: white;
             margin-left: 14%;
         }
-        #label1, #label2, #label3, #label4{
+
+        #label1, #label2, #label3, #label4 {
             left: 3%;
         }
+
         textarea#aw-album-info::placeholder {
             padding-left: 0.6%;
             padding-top: 0.4%;
@@ -431,11 +435,12 @@
                 $(".grade").css("display", "none");
                 $(".logout").css("display", "none");
             } else {
-                if (count == null || count == "" || count == "0"){
-                    $("#messagecount").css("display","none");
-                } else{
-                    $("#messagecount").css("display","block");
-                };
+                if (count == null || count == "" || count == "0") {
+                    $("#messagecount").css("display", "none");
+                } else {
+                    $("#messagecount").css("display", "block");
+                }
+                ;
                 let spantag = $("#mname");
                 spantag.append("<span>" + loginName + " 님</span>")
                 //$(".name").html(loginName + " 님");
@@ -455,7 +460,8 @@
         <div id="albumAndFile">
             <c:if test="${afDto.af_imgoriname == 'none.PNG'}">
                 <div id="album">
-                    <img class="preview" width="auto" height="80%" style="margin-top: 6%" src="/images/ArtwriteNoimage.png">
+                    <img class="preview" width="auto" height="80%" style="margin-top: 6%"
+                         src="/images/ArtwriteNoimage.png">
                 </div>
                 <div class="filebox">
                     <label class="aw-filebutton" for="aw-imgfileInput">
@@ -464,7 +470,8 @@
                     <label class="aw-filebutton" for="aw-musicfileInput">
                         <div class="btn-upload2"></div>
                     </label>
-                    <input style="display: none" id="aw-imgfileInput" type="file" name="img_file" onchange="readUrl(this)" accept="image/*">
+                    <input style="display: none" id="aw-imgfileInput" type="file" name="img_file"
+                           onchange="readUrl(this)" accept="image/*">
                     <input style="display: none" id="aw-musicfileInput" type="file" name="music_file" accept="audio/*">
                     <label id="label1" style="width: 100%;">
                         <p>현재사진 : <span class="now-photo">없음</span></p>
@@ -485,41 +492,43 @@
             </c:if>
             <c:if test="${afDto.af_imgoriname != 'none.PNG'}">
                 <div id="album">
-                    <img class="preview" width="auto" height="80%" style="margin-top: 6%" src="/upload/image/${afDto.af_imgsysname}">
+                    <img class="preview" width="auto" height="80%" style="margin-top: 6%"
+                         src="/upload/image/${afDto.af_imgsysname}">
                 </div>
-                    <div class="filebox">
-                        <label class="aw-filebutton" for="aw-imgfileInput2">
-                            <div class="btn-upload"></div>
-                        </label>
-                        <label class="aw-filebutton" for="aw-musicfileInput2">
-                            <div class="btn-upload2"></div>
-                        </label>
-                        <input style="display: none" id="aw-imgfileInput2" type="file" name="img_file" onchange="readUrl(this)" accept="image/*">
-                        <input style="display: none" id="aw-musicfileInput2" type="file" name="music_file" accept="audio/*">
-                        <label id="label3" style="width: 100%;">
-                            <p class="now-photo">
-                                <c:choose>
-                                    <c:when test="${fn:length(afDto.af_imgoriname) gt 24}">
-                                        <c:out value="${fn:substring(afDto.af_imgoriname,0,24)}"></c:out>...
-                                    </c:when>
-                                    <c:otherwise>
-                                        <c:out value="${afDto.af_imgoriname}"></c:out>
-                                    </c:otherwise>
-                                </c:choose></p>
-                        </label>
-                        <label id="label4" style="width: 100%;">
-                            <p class="now-music">
-                                <c:choose>
-                                    <c:when test="${fn:length(afDto.af_musicoriname) gt 24}">
-                                        <c:out value="${fn:substring(afDto.af_musicoriname,0,24)}"></c:out>...
-                                    </c:when>
-                                    <c:otherwise>
-                                        <c:out value="${afDto.af_musicoriname}"></c:out>
-                                    </c:otherwise>
-                                </c:choose></p>
-                        </label>
-                    </div>
-                </c:if>
+                <div class="filebox">
+                    <label class="aw-filebutton" for="aw-imgfileInput2">
+                        <div class="btn-upload"></div>
+                    </label>
+                    <label class="aw-filebutton" for="aw-musicfileInput2">
+                        <div class="btn-upload2"></div>
+                    </label>
+                    <input style="display: none" id="aw-imgfileInput2" type="file" name="img_file"
+                           onchange="readUrl(this)" accept="image/*">
+                    <input style="display: none" id="aw-musicfileInput2" type="file" name="music_file" accept="audio/*">
+                    <label id="label3" style="width: 100%;">
+                        <p class="now-photo">
+                            <c:choose>
+                                <c:when test="${fn:length(afDto.af_imgoriname) gt 24}">
+                                    <c:out value="${fn:substring(afDto.af_imgoriname,0,24)}"></c:out>...
+                                </c:when>
+                                <c:otherwise>
+                                    <c:out value="${afDto.af_imgoriname}"></c:out>
+                                </c:otherwise>
+                            </c:choose></p>
+                    </label>
+                    <label id="label4" style="width: 100%;">
+                        <p class="now-music">
+                            <c:choose>
+                                <c:when test="${fn:length(afDto.af_musicoriname) gt 24}">
+                                    <c:out value="${fn:substring(afDto.af_musicoriname,0,24)}"></c:out>...
+                                </c:when>
+                                <c:otherwise>
+                                    <c:out value="${afDto.af_musicoriname}"></c:out>
+                                </c:otherwise>
+                            </c:choose></p>
+                    </label>
+                </div>
+            </c:if>
         </div>
 
         <div id="artinfo">
@@ -592,45 +601,42 @@
 </body>
 <script>
     function aback(a_num) {
-            location.href = '/artworkdetail?a_num=' + a_num;
+        location.href = '/artworkdetail?a_num=' + a_num;
     }
 
-    if ('${con}' == "true") {
-        $("#album").css("background-image", "url('/upload/image/${img}')");
-    }
-
-        $(document).on("change","#aw-imgfileInput",function () {
-            let imgname =  $("#aw-imgfileInput")[0].files[0].name;
-            if (imgname.length > 24){
-                imgname = imgname.substring(0,24) + "...";
-            }
-            $(".now-photo").html(imgname);
-        })
+    $(document).on("change", "#aw-imgfileInput", function () {
+        let imgname = $("#aw-imgfileInput")[0].files[0].name;
+        if (imgname.length > 24) {
+            imgname = imgname.substring(0, 24) + "...";
+        }
+        $(".now-photo").html(imgname);
+    })
 
 
-        $(document).on("change","#aw-musicfileInput",function () {
-            let musicname =  $("#aw-musicfileInput")[0].files[0].name;
-            if (musicname.length > 24){
-                musicname = musicname.substring(0,24) + "...";
-            }
-            $(".now-music").html(musicname);
-        })
+    $(document).on("change", "#aw-musicfileInput", function () {
+        let musicname = $("#aw-musicfileInput")[0].files[0].name;
+        if (musicname.length > 24) {
+            musicname = musicname.substring(0, 24) + "...";
+        }
+        $(".now-music").html(musicname);
+    })
 
-        $(document).on("change","#aw-imgfileInput2",function () {
-            let imgname =  $("#aw-imgfileInput2")[0].files[0].name;
-            if (imgname.length > 24){
-                imgname = imgname.substring(0,24) + "...";
-            }
-            $(".now-photo").html(imgname);
-        })
+    $(document).on("change", "#aw-imgfileInput2", function () {
+        let imgname = $("#aw-imgfileInput2")[0].files[0].name;
+        if (imgname.length > 24) {
+            imgname = imgname.substring(0, 24) + "...";
+        }
+        $(".now-photo").html(imgname);
+    })
 
-        $(document).on("change","#aw-musicfileInput2",function () {
-            let musicname =  $("#aw-musicfileInput2")[0].files[0].name;
-            if (musicname.length > 24){
-                musicname = musicname.substring(0,24) + "...";
-            }
-            $(".now-music").html(musicname);
-        })
+    $(document).on("change", "#aw-musicfileInput2", function () {
+        let musicname = $("#aw-musicfileInput2")[0].files[0].name;
+        if (musicname.length > 24) {
+            musicname = musicname.substring(0, 24) + "...";
+        }
+        $(".now-music").html(musicname);
+    })
+
     function readUrl(input) {
         if (input.files && input.files[0]) {
             let reader = new FileReader();

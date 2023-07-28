@@ -46,7 +46,7 @@ public class ArtworkController {
 
     @GetMapping("artworkupdate")
     public ModelAndView artworkupdate(Integer a_num){
-        log.info("ArtworkController.artworkdetail()");
+        log.info("ArtworkController.artworkupdate()");
         mav = aServ.getArtworkInfo(a_num);
 
         return mav;
@@ -57,7 +57,6 @@ public class ArtworkController {
         log.info("ArtworkController.goartwork()");
         mav  = aServ.goartwork(sDto, session);
         mav.setViewName("artwork");
-
         if (session.getAttribute("mb")!=null){
             MemberDto mDto = (MemberDto) session.getAttribute("mb");
             int noreadm = mServ.countmessage(mDto.getMid());

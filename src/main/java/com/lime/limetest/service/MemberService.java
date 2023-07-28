@@ -48,9 +48,7 @@ public class MemberService {
     public String idCheck(String mid) {
         log.info("MemberService.idCheck()");
         String result = null;
-
         int cnt = mDao.idCheck(mid);
-
         if (cnt == 0) {
             result = "ok";
         } else {
@@ -249,14 +247,11 @@ public class MemberService {
             return res;
         }
         MemberDto mDto = mDao.searchId(mname, mysecret);
-
-
         if (mDto == null){
             res = "False Answer";
         } else {
             res = mDto.getMid();
         }
-
         return res;
     }
 
@@ -289,8 +284,6 @@ public class MemberService {
             e.printStackTrace();
             res = "수정 실패";
         }
-
-
         return res;
     }
 
@@ -312,7 +305,7 @@ public class MemberService {
     }
 
     public ModelAndView getMain(HttpSession session) {
-        log.info("MemverService.getMain()");
+        log.info("MemberService.getMain()");
         mav = new ModelAndView();
         if (session.getAttribute("mb")!=null){
             MemberDto mDto = (MemberDto) session.getAttribute("mb");
@@ -325,5 +318,17 @@ public class MemberService {
         mav.setViewName("main");
 
         return mav;
+    }
+
+    public String nickCheck(String mnick) {
+        log.info("MemberService.nickCheck()");
+        String res = null;
+        int check = mDao.nickCheck(mnick);
+        if (check == 0) {
+            res = "ok";
+        } else {
+            res = "fail";
+        }
+        return res;
     }
 }

@@ -31,7 +31,6 @@ public class HomeController {
     public ModelAndView goHome(HttpSession session){
         log.info("HomeController.goHome()");
         mav = mServ.getMain(session);
-
         return mav;
     }
 
@@ -51,6 +50,14 @@ public class HomeController {
         return result;
     }
 
+    @GetMapping("nickCheck")
+    @ResponseBody
+    public String nickCheck(String mnick){
+        log.info("HomeController.nickCheck()");
+        String result = mServ.nickCheck(mnick);
+
+        return result;
+    }
 
     @PostMapping("registerProc")
     public String registerProc(MemberDto mDto, RedirectAttributes rttr){
@@ -97,9 +104,7 @@ public class HomeController {
         } else {
             view = mServ.logout(session);
         }
-
         return view;
-
     }
 
     @PostMapping("loginProc")
@@ -162,9 +167,7 @@ public class HomeController {
     @ResponseBody
     public String searchPw(String mid, String mysecret, HttpSession session){
         log.info("HomeController.searchPw()");
-
         String res = mServ.searchPw(mid, mysecret, session);
-
         return res;
     }
 
@@ -173,7 +176,6 @@ public class HomeController {
     public String updatePw(String mid, String mpwd){
         log.info("HomeController.updatePw()");
         String res = mServ.updatePw(mid, mpwd);
-
         return res;
     }
 
@@ -186,7 +188,6 @@ public class HomeController {
             int noreadm = mServ.countmessage(mDto.getMid());
             session.setAttribute("count",noreadm);
         }
-
         return view;
     }
 }

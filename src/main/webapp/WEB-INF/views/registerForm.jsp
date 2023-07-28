@@ -194,15 +194,12 @@
             alert("Please check ID duplicate.");
             return false;
         }
-
         // form 태그의 내용 확인 (누락된 부분)
         const jfrm = document.jForm;
-        console.log(jfrm);
 
         let length = jfrm.length - 2;
         for (let i = 0; i < length; i++) {
             if (jfrm[i].value == "" || jfrm[i].value == null) {
-                console.log(jfrm[i].tagName);
                 if (jfrm[i].tagName == "BUTTON") {
 
                 } else {
@@ -217,7 +214,6 @@
 
     function nickcheck() {
         let nick = $("#membernick").val();
-        console.log(nick);
 
         if (nick == "") {
             alert("Please enter your Nickname.");
@@ -225,7 +221,6 @@
             return;
         }
         let sendNick = {"mnick": nick};
-        console.log(sendNick);
         $.ajax({
             url: "nickCheck",
             type: "get",
@@ -250,18 +245,15 @@
 
     function idcheck() {
         let id = $("#memberid").val();
-        console.log(id);
 
         if (id == "") {
             // 입력 안했을 경우
             alert("Please enter your ID.");
             $("#memberid").focus();
             return;
-
         }
 
         let sendId = {"mid": id};
-        console.log("sendId : " + sendId);
         // 서버로 id 전송
         $.ajax({
             url: "idCheck",

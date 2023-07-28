@@ -448,7 +448,7 @@
             <img id="glass3" src="/images/split.png">
             <img id="glass" src="/images/glass.png" onclick="searchArticle()">
             <img style="height: 20px" id="separate" src="/images/separate.png"><%-- 검색분류기능 --%>
-            <button id="sep-btn" onclick="showSeparate()">test</button>
+            <button id="sep-btn" onclick="showSeparate()"></button>
         </div>
         <div id="sep-search">
             <span id="sep1">카테고리<select id="sep-s1">
@@ -561,7 +561,8 @@
                 <button id="det-btn">이용안내</button>
             </div>
         </div>
-</section>
+    </div>
+    </section>
 <footer>
     <jsp:include page="footer.jsp"></jsp:include>
 </footer>

@@ -1507,7 +1507,6 @@
     }
 
     function check() {
-
         // form 태그의 내용 확인 (누락된 부분)
         const jfrm = document.jForm;
         console.log(jfrm);

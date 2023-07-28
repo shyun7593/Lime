@@ -370,7 +370,6 @@
     function idsearch() {
         let answer = $("#my-secret").val();
         let mname = $("#m-name").val();
-        console.log(answer + ", " + mname);
         let sendData = {"mysecret": answer, "mname": mname};
         $.ajax({
             url: "searchId",
@@ -485,7 +484,6 @@
             return;
         }
         let mid = $("#my-mid").val();
-        console.log(mid);
         let pw = $("#con-pass").val();
         let sendData = {"mid": mid, "mpwd": pw};
         $.ajax({

@@ -145,9 +145,6 @@
 </header>
 <section>
     <form action="loginProc" method="post" class="">
-        <%--        <input type="text" class="login-input" name="mid" placeholder="ID" autofocus required>--%>
-        <%--        <input type="password" class="login-input" name="mpwd" placeholder="Password" required>--%>
-        <%--        <input type="submit" class="login-btn" value="Login">--%>
         <h1 class="lo-title">L&nbsp;&nbsp;&nbsp;I&nbsp;&nbsp;&nbsp;M&nbsp;&nbsp;&nbsp;E</h1>
         <h6 class="lo-sub-title">─────────────&nbsp;&nbsp;&nbsp;L&nbsp;&nbsp;0&nbsp;&nbsp;G&nbsp;&nbsp;I&nbsp;&nbsp;N&nbsp;&nbsp;&nbsp;──────────────</h6>
         <div class="lo-inputBox">

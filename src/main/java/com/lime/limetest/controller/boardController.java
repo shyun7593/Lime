@@ -63,7 +63,6 @@ public class boardController {
         log.info("boardController.boarddetail()");
         String view = bServ.BoardDetail(b_num, model, session);
 
-
         return view;
     }
 

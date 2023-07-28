@@ -296,7 +296,6 @@
         } else {
             location.href = '/boardwrite';
         }
-
     }
 
     function ordertype() {
