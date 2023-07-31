@@ -186,6 +186,7 @@
         }
 
         #sepSub1 {
+            background: rgba(0,0,0,0.8);
             position: sticky;
             top:16%;
             font-family: a타이틀고딕2;
@@ -200,6 +201,7 @@
         }
 
         #sepSub2 {
+            background: rgba(0,0,0,0.8);
             position: sticky;
             top:16%;
             font-family: a타이틀고딕2;
@@ -213,6 +215,7 @@
         }
 
         #sepSub3 {
+            background: rgba(0,0,0,0.8);
             position: sticky;
             top:16%;
             font-family: a타이틀고딕2;
