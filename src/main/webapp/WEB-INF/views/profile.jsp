@@ -182,7 +182,7 @@
             width: 100%;
             height: 5%;
             padding-left: 3%;
-            background-color: rgba(0,0,0,0);
+            background-color: rgba(0, 0, 0, 0);
             border: none;
             border: 1px solid black;
             border-radius: 5px;
@@ -197,7 +197,7 @@
             border: 1px solid black;
             border-radius: 5px;
             padding-left: 3%;
-            background-color: rgba(0,0,0,0);
+            background-color: rgba(0, 0, 0, 0);
         }
 
         input#membernick {
@@ -207,7 +207,7 @@
             border: none;
             border: 1px solid black;
             border-radius: 5px;
-            background-color: rgba(0,0,0,0);
+            background-color: rgba(0, 0, 0, 0);
             padding-left: 3%;
         }
 
@@ -219,7 +219,7 @@
             border: 1px solid black;
             border-radius: 5px;
             padding-left: 3%;
-            background-color: rgba(0,0,0,0);
+            background-color: rgba(0, 0, 0, 0);
         }
 
         #modify7 {
@@ -257,7 +257,7 @@
             height: 5%;
             padding-left: 3%;
             border: none;
-            background-color: rgba(0,0,0,0);
+            background-color: rgba(0, 0, 0, 0);
             border: 1px solid black;
             border-radius: 10px;
         }
@@ -287,7 +287,7 @@
             display: none;
         }
 
-        #salepayment{
+        #salepayment {
             display: none;
         }
 
@@ -309,7 +309,7 @@
         #store {
             height: 100%;
             width: 85%;
-            margin:0 auto;
+            margin: 0 auto;
             display: none;
         }
 
@@ -398,7 +398,7 @@
             width: 80%;
             margin: 0 auto;
             position: relative;
-            margin-top: 30%;
+            margin-top: 5%;
         }
 
         #myprofile1 {
@@ -479,9 +479,11 @@
         .ptable .in-data:hover {
             background: #eee;
         }
-        .in-data{
+
+        .in-data {
             cursor: pointer;
         }
+
         .no-data {
             border-style: none;
         }
@@ -728,7 +730,8 @@
         .gowrite {
             cursor: pointer;
         }
-        #messagecount{
+
+        #messagecount {
             display: none;
         }
 
@@ -743,7 +746,7 @@
             height: 5%;
             padding-left: 3%;
             border: none;
-            background-color: rgba(0,0,0,0);
+            background-color: rgba(0, 0, 0, 0);
             border: 1px solid black;
             border-radius: 10px;
         }
@@ -755,7 +758,7 @@
             top: 38.2%;
             color: black;
             font-family: a타이틀고딕3;
-            background-color: rgba(0,0,0,0);
+            background-color: rgba(0, 0, 0, 0);
         }
 
         button#b2:hover {
@@ -765,6 +768,12 @@
         .posi {
             margin-top: 2%;
             margin-bottom: 1%;
+        }
+        #about::placeholder{
+            padding: 17px;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
         }
     </style>
     <script>
@@ -827,7 +836,7 @@
                     $("#i3").css("border-radius", "10px 0px 0px 10px");
                     break;
                 case "buypayment":
-                    $("#pclassification").css("display","block");
+                    $("#pclassification").css("display", "block");
                     $("#buypayment").css("display", "block");
                     $(".p-board").css("color", "white");
                     $(".p-board").css("font-size", "large");
@@ -844,7 +853,7 @@
                     $("#i4").css("border-radius", "10px 0px 0px 10px");
                     break;
                 case "salepayment":
-                    $("#pclassification").css("display","block");
+                    $("#pclassification").css("display", "block");
                     $("#salepayment").css("display", "block");
                     $(".p-artwork").css("color", "white");
                     $(".p-board").css("color", "white");
@@ -909,10 +918,10 @@
                 $(".logout").css("display", "none");
             } else {
                 let spantag = $("#mname");
-                if (count == 0){
-                    $("#messagecount").css("display","none");
+                if (count == 0) {
+                    $("#messagecount").css("display", "none");
                 } else {
-                    $("#messagecount").css("display","block");
+                    $("#messagecount").css("display", "block");
                 }
                 spantag.append("<span>" + loginName + " 님</span>")
                 $(".grade").html("등급 : [" + Grade + "]");
@@ -949,9 +958,8 @@
                 </div>
                 <div style="text-align: center; margin-top: 2%">──────────LIME──────────</div>
                 <div id="information">
-                    <p>
-                        ${userInfo.mtext}
-                    </p>
+                    <textarea id="about" disabled
+                              style="resize: none;height: 80%;width: 100%;background: none;font-size: medium; padding: 5px" placeholder="${userInfo.mtext}"></textarea>
                 </div>
             </div>
             <div id="modifybtn">
@@ -984,11 +992,16 @@
                                       title="Nickname" value="${userInfo.mnick}" readonly>
                             </p>
                             <p id="question">나만의 비밀</p>
-                            <p><input type="text" class="" id="modify6" name="msecret" placeholder="  답" title="나만의 비밀" required
+                            <p><input type="text" class="" id="modify6" name="msecret" placeholder="  답" title="나만의 비밀"
+                                      required
                                       value="${userInfo.msecret}"></p>
-                            <p><textarea name="mtext" class="mar-bo" id="modify7"
+                            <p><textarea maxlength="200" name="mtext" class="mar-bo" id="modify7"
                                          style="resize : none"
                                          placeholder="  자기소개">${userInfo.mtext}</textarea></p>
+                            <div style="float: right;margin-bottom: 10px;">
+                                <p class="textCount" style="display: inline-block">0자</p>
+                                <p class="textTotal" style="display: inline-block">/200자</p>
+                            </div>
                             <p><input type="submit" class="neulleo" id="modify8" value="수정하기"></p>
                         </div>
                     </div>
@@ -1112,7 +1125,18 @@
                                 <c:forEach var="bitem" items="${bList}">
                                     <tr class="in-data" onclick="location.href='/boarddetail?b_num=${bitem.b_num}'">
                                         <td class="subject">${bitem.mnick}</td>
-                                        <td>${bitem.b_title}</td>
+                                        <c:choose>
+                                            <c:when test="${fn:length(bitem.b_title) gt 8}">
+                                                <td>
+                                                    <c:out value="${fn:substring(bitem.b_title,0,8)}"></c:out>...
+                                                </td>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <td>
+                                                    <c:out value="${bitem.b_title}"></c:out>
+                                                </td>
+                                            </c:otherwise>
+                                        </c:choose>
                                         <td>${bitem.b_type}</td>
                                         <td><fmt:formatDate value="${bitem.b_date}"
                                                             pattern="yyyy-MM-dd HH:mm"></fmt:formatDate></td>
@@ -1123,7 +1147,18 @@
                                 <c:forEach var="bitem" items="${bList}">
                                     <tr class="in-data" onclick="location.href='/boarddetail?b_num=${bitem.b_num}'">
                                         <td class="subject">${bitem.mnick}</td>
-                                        <td>${bitem.b_title}</td>
+                                        <c:choose>
+                                            <c:when test="${fn:length(bitem.b_title) gt 8}">
+                                                <td>
+                                                    <c:out value="${fn:substring(bitem.b_title,0,8)}"></c:out>...
+                                                </td>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <td>
+                                                    <c:out value="${bitem.b_title}"></c:out>
+                                                </td>
+                                            </c:otherwise>
+                                        </c:choose>
                                         <td>${bitem.b_type}</td>
                                         <td><fmt:formatDate value="${bitem.b_date}"
                                                             pattern="yyyy-MM-dd HH:mm"></fmt:formatDate></td>
@@ -1201,7 +1236,7 @@
                 <table class="ptable" style="margin-top: 5%">
                     <tr>
                         <th class="le">판매자</th>
-                        <th >제목</th>
+                        <th>제목</th>
                         <th>가격</th>
                         <th class="ri">구매일자</th>
                     </tr>
@@ -1222,7 +1257,7 @@
                                     <tr>
                                         <td>${pitem.mnick}</td>
                                         <td>${pitem.a_title}</td>
-                                        <td><fmt:formatNumber value="${pitem.p_price}" pattern="#,###" />  원</td>
+                                        <td><fmt:formatNumber value="${pitem.p_price}" pattern="#,###"/> 원</td>
                                         <td><fmt:formatDate value="${pitem.p_date}"
                                                             pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></td>
                                     </tr>
@@ -1233,7 +1268,7 @@
                                     <tr>
                                         <td>${pitem.mnick}</td>
                                         <td>${pitem.a_title}</td>
-                                        <td><fmt:formatNumber value="${pitem.p_price}" pattern="#,###" />  원</td>
+                                        <td><fmt:formatNumber value="${pitem.p_price}" pattern="#,###"/> 원</td>
                                         <td><fmt:formatDate value="${pitem.p_date}"
                                                             pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></td>
                                     </tr>
@@ -1276,7 +1311,7 @@
                                     <tr>
                                         <td>${psitem.bmnick}</td>
                                         <td>${psitem.a_title}</td>
-                                        <td><fmt:formatNumber value="${psitem.p_price}" pattern="#,###" />  원</td>
+                                        <td><fmt:formatNumber value="${psitem.p_price}" pattern="#,###"/> 원</td>
                                         <td><fmt:formatDate value="${psitem.p_date}"
                                                             pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></td>
                                     </tr>
@@ -1287,7 +1322,7 @@
                                     <tr>
                                         <td>${psitem.bmnick}</td>
                                         <td>${psitem.a_title}</td>
-                                        <td><fmt:formatNumber value="${psitem.p_price}" pattern="#,###" />  원</td>
+                                        <td><fmt:formatNumber value="${psitem.p_price}" pattern="#,###"/> 원</td>
                                         <td><fmt:formatDate value="${psitem.p_date}"
                                                             pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></td>
                                     </tr>
@@ -1344,7 +1379,18 @@
                                     <tr class="in-data"
                                         onclick="showmessage(${sitem.m_num})">
                                         <td>${sitem.rmnick}</td>
-                                        <td>${sitem.m_title}</td>
+                                        <c:choose>
+                                            <c:when test="${fn:length(sitem.m_title) gt 13}">
+                                                <td>
+                                                    <c:out value="${fn:substring(sitem.m_title,0,13)}"></c:out>...
+                                                </td>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <td>
+                                                    <c:out value="${sitem.m_title}"></c:out>
+                                                </td>
+                                            </c:otherwise>
+                                        </c:choose>
                                         <td><fmt:formatDate value="${sitem.m_date}"
                                                             pattern="yyyy-MM-dd HH:mm"></fmt:formatDate></td>
                                     </tr>
@@ -1355,7 +1401,18 @@
                                     <tr class="in-data"
                                         onclick="showmessage(${sitem.m_num})">
                                         <td>${sitem.rmnick}</td>
-                                        <td>${sitem.m_title}</td>
+                                        <c:choose>
+                                            <c:when test="${fn:length(sitem.m_title) gt 13}">
+                                                <td>
+                                                    <c:out value="${fn:substring(sitem.m_title,0,13)}"></c:out>...
+                                                </td>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <td>
+                                                    <c:out value="${sitem.m_title}"></c:out>
+                                                </td>
+                                            </c:otherwise>
+                                        </c:choose>
                                         <td><fmt:formatDate value="${sitem.m_date}"
                                                             pattern="yyyy-MM-dd HH:mm"></fmt:formatDate></td>
                                     </tr>
@@ -1382,8 +1439,9 @@
                 </div>
                 <table class="ptable">
                     <tr class="ptp">
-                        <th class="le" style="width: 10%;"><select id="messagetype" style="background-color: black; color: white; border-style: none; text-align: center;cursor: pointer"
-                                               onchange="readtype()">
+                        <th class="le" style="width: 10%;"><select id="messagetype"
+                                                                   style="background-color: black; color: white; border-style: none; text-align: center;cursor: pointer"
+                                                                   onchange="readtype()">
                             <option value="all" ${test == null || test == 'all' ? 'selected="selected"' : ''}>전체
                             </option>
                             <option value="read" ${test == 'read' ? 'selected="selected"' : ''}>
@@ -1422,9 +1480,25 @@
                                         <c:if test="${ritem.m_isread != 'read'}">
                                             <td>안읽음</td>
                                         </c:if>
-                                        <td  <c:if test="${ritem.m_isread == 'read'}">style="color:gray"</c:if>>${ritem.mnick}</td>
-                                        <td  <c:if test="${ritem.m_isread == 'read'}">style="color:gray"</c:if>>${ritem.m_title}</td>
-                                        <td  <c:if test="${ritem.m_isread == 'read'}">style="color:gray"</c:if>><fmt:formatDate value="${ritem.m_date}"
+                                        <td
+                                                <c:if test="${ritem.m_isread == 'read'}">style="color:gray"</c:if>>${ritem.mnick}</td>
+                                        <td
+                                                <c:if test="${ritem.m_isread == 'read'}">style="color:gray"</c:if>>
+                                            <c:choose>
+                                                <c:when test="${fn:length(ritem.m_title) gt 13}">
+
+                                                    <c:out value="${fn:substring(ritem.m_title,0,13)}"></c:out>...
+
+                                                </c:when>
+                                                <c:otherwise>
+
+                                                    <c:out value="${ritem.m_title}"></c:out>
+
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
+                                        <td <c:if test="${ritem.m_isread == 'read'}">style="color:gray"</c:if>>
+                                            <fmt:formatDate value="${ritem.m_date}"
                                                             pattern="yyyy-MM-dd HH:mm"></fmt:formatDate></td>
                                     </tr>
                                 </c:forEach>
@@ -1433,15 +1507,30 @@
                                 <c:forEach var="ritem" items="${receiveDto}">
                                     <tr class="in-data" onclick="showmessage(${ritem.m_num})">
                                         <c:if test="${ritem.m_isread == 'read'}">
-                                        <td style="color: gray">읽음</td>
+                                            <td style="color: gray">읽음</td>
                                         </c:if>
                                         <c:if test="${ritem.m_isread != 'read'}">
                                             <td>안읽음</td>
                                         </c:if>
-                                        <td  <c:if test="${ritem.m_isread == 'read'}">style="color:gray"</c:if>>${ritem.mnick}</td>
-                                        <td  <c:if test="${ritem.m_isread == 'read'}">style="color:gray"</c:if>>${ritem.m_title}</td>
-                                        <td  <c:if test="${ritem.m_isread == 'read'}">style="color:gray"</c:if>><fmt:formatDate value="${ritem.m_date}"
-                                                                                                                                pattern="yyyy-MM-dd HH:mm"></fmt:formatDate></td>
+                                        <td
+                                                <c:if test="${ritem.m_isread == 'read'}">style="color:gray"</c:if>>${ritem.mnick}</td>
+                                        <td <c:if test="${ritem.m_isread == 'read'}">style="color:gray"</c:if>>
+                                            <c:choose>
+                                                <c:when test="${fn:length(ritem.m_title) gt 13}">
+
+                                                    <c:out value="${fn:substring(ritem.m_title,0,13)}"></c:out>...
+
+                                                </c:when>
+                                                <c:otherwise>
+
+                                                    <c:out value="${ritem.m_title}"></c:out>
+
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
+                                        <td <c:if test="${ritem.m_isread == 'read'}">style="color:gray"</c:if>>
+                                            <fmt:formatDate value="${ritem.m_date}"
+                                                            pattern="yyyy-MM-dd HH:mm"></fmt:formatDate></td>
                                     </tr>
 
                                 </c:forEach>
@@ -1488,13 +1577,13 @@
 </body>
 <script>
     function updateInfo() {
-        let popOption = "width = "+463+", height = "+350+", left = "+((window.screen.width / 2) - (463 / 2))+", top = "+((window.screen.height / 2) - (350 / 2));
+        let popOption = "width = " + 463 + ", height = " + 350 + ", left = " + ((window.screen.width / 2) - (463 / 2)) + ", top = " + ((window.screen.height / 2) - (350 / 2));
         window.open("/popup?page=profile", "login", popOption);
 
     }
 
     function updatePassword() {
-        if($("#pass").css("display") == "none"){
+        if ($("#pass").css("display") == "none") {
             $("#pass").css("display", "block");
         } else {
             $("#pass").css("display", "none");
@@ -1573,24 +1662,48 @@
     function showreceivemessage() {
         location.href = 'mypage?page=receivemessage&type=all&pageNum=1';
     }
-    function showmessage(m_num){
-        let popOption = "width = "+400+", height = "+350+", left = "+((window.screen.width / 2) - (400 / 2))+", top = "+((window.screen.height / 2) - (350 / 2));
+
+    function showmessage(m_num) {
+        let popOption = "width = " + 400 + ", height = " + 350 + ", left = " + ((window.screen.width / 2) - (400 / 2)) + ", top = " + ((window.screen.height / 2) - (350 / 2));
         window.open("/popup?page=showmessage&m_num=" + m_num, "login", popOption);
     }
-    function messagewrite(){
-        let popOption = "width = "+400+", height = "+350+", left = "+((window.screen.width / 2) - (400 / 2))+", top = "+((window.screen.height / 2) - (350 / 2));
-        window.open("/popup?page=sendmessage","Message", popOption);
+
+    function messagewrite() {
+        let popOption = "width = " + 400 + ", height = " + 350 + ", left = " + ((window.screen.width / 2) - (400 / 2)) + ", top = " + ((window.screen.height / 2) - (350 / 2));
+        window.open("/popup?page=sendmessage", "Message", popOption);
     }
-    function readtype(){
+
+    function readtype() {
         let type = $("#messagetype").val();
         location.href = 'mypage?page=receivemessage&type=' + type + '&pageNum=1';
     }
-    function showbuypayment(){
+
+    function showbuypayment() {
         location.href = 'mypage?page=buypayment&pageNum=1';
     }
 
-    function showsalepayment(){
+    function showsalepayment() {
         location.href = 'mypage?page=salepayment&pageNum=1';
     }
+
+    $('#modify7').keyup(function (e) {
+        let content = $(this).val();
+
+        // 글자수 세기
+        if (content.length == 0 || content == '') {
+            $('.textCount').text('0자');
+        } else {
+            $('.textCount').text(content.length + '자');
+        }
+
+        // 글자수 제한
+        if (content.length > 200) {
+            // 200자 부터는 타이핑 되지 않도록
+            $(this).val($(this).val().substring(0, 199));
+            // 200자 넘으면 알림창 뜨도록
+            alert('글자수는 200자까지 입력 가능합니다.');
+        }
+        ;
+    });
 </script>
 </html>

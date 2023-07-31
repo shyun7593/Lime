@@ -195,8 +195,12 @@
                     <input type="text" id="write-title" autocomplete="off" maxlength="50"
                            placeholder="제목" name="b_title" value="${bDto.b_title}" required>
                 </div>
-                <textarea id="write-contents" style="resize: none;" name="b_contents" placeholder="글내용을 작성해주세요."
+                <textarea id="write-contents" style="resize: none;" maxlength="1000" name="b_contents" placeholder="글내용을 작성해주세요."
                 >${bDto.b_contents}</textarea>
+                <div style="text-align: end; width:100%;background: black;color:white">
+                    <p class="textCount" style="display: inline-block;">0자</p>
+                    <p class="textTotal" style="display: inline-block;">/1000자</p>
+                </div>
                 <div id="edit-btn">
                     <button type="button" id="bback-btn" onclick="back_btn()">뒤로가기</button>
                     <input type="submit" id="bwrtie-btn" value="수정">
@@ -215,5 +219,23 @@
     function back_btn(){
         location.href ='/boarddetail?b_num=${bDto.b_num}';
     }
+    $('#write-contents').keyup(function (e) {
+        let content = $(this).val();
+
+        // 글자수 세기
+        if (content.length == 0 || content == '') {
+            $('.textCount').text('0자');
+        } else {
+            $('.textCount').text(content.length + '자');
+        }
+
+        // 글자수 제한
+        if (content.length > 1000) {
+            // 200자 부터는 타이핑 되지 않도록
+            $(this).val($(this).val().substring(0, 999));
+            // 200자 넘으면 알림창 뜨도록
+            alert('글자수는 200자까지 입력 가능합니다.');
+        };
+    });
 </script>
 </html>

@@ -232,7 +232,7 @@
     <p id="profile-sub-msg">프로필을 수정하려면 본인 인증이 필요합니다.</p>
     <p id="profile-guide" style="margin: 0 auto;">회원가입할 때 입력하신 나만의 비밀 답변을 입력해주세요.</p>
     <div id="input-area">
-        <input type="text" id="mysecret" placeholder="나만의 비밀 답변" autocomplete="off" onkeyup="enterconfirm()"><br>
+        <input type="text" id="mysecret" placeholder="나만의 비밀 답변" autofocus autocomplete="off" onkeyup="enterconfirm()"><br>
     </div>
     <div id="btn-area3">
         <button id="confirmbtn" onclick="userConfirm()">확인</button>
@@ -274,10 +274,12 @@
                     required><br></p>
         </div>
         <div style="margin-top: 1%; width: 100%; display: flex; justify-content: center">
-            <textarea name="m_text" placeholder="내용" required style="margin-top: 2%; border: none; width: 340px; resize: none; height: 126px;"></textarea>
+            <textarea id="mtext" name="m_text" maxlength="300" placeholder="내용" required style="margin-top: 2%; border: none; width: 340px; resize: none; height: 126px;"></textarea>
         </div>
         <div style="margin-top: 1%; width: 100%;display: flex;justify-content: space-between">
             <input id="msg-file" type="file" name="file" style="width: 280px">
+            <p class="textCount" style="display: inline-block;font-size: small">0자</p>
+            <p class="textTotal" style="display: inline-block;font-size: small">/300자</p>
         </div>
         <c:if test="${mDto.m_anum != null}">
             <c:if test="${owner == mb.mid}">
@@ -506,6 +508,21 @@
     function showalram() {
         $("#adtext").html("결제후 다운받을 수 있습니다.");
     }
+    $('#mtext').keyup(function (e) {
+        let content = $(this).val();
 
+        // 글자수 세기
+        if (content.length == 0 || content == '') {
+            $('.textCount').text('0자');
+        } else {
+            $('.textCount').text(content.length + '자');
+        }
+
+        // 글자수 제한
+        if (content.length > 300) {
+            $(this).val($(this).val().substring(0, 299));
+            alert('글자수는 200자까지 입력 가능합니다.');
+        };
+    });
 </script>
 </html>

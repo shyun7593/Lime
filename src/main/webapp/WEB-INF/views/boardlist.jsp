@@ -58,9 +58,11 @@
             border-bottom: 1px solid #ddd;
             text-align: center;
         }
+
         .in-data {
             cursor: pointer;
         }
+
         .btable .in-data:hover {
 
             background: #eee;
@@ -78,7 +80,7 @@
         }
 
         .paging > a, font {
-            color : white;
+            color: white;
         }
 
         .paging > ul {
@@ -127,6 +129,7 @@
             margin: 0;
             padding: 0;
         }
+
         #board-btn {
             height: 60px;
             background-color: rgba(0, 0, 0, 0);
@@ -138,6 +141,7 @@
             background-color: rgba(0, 0, 0, 0);
             border: none;
         }
+
         #writeMsg {
             position: absolute;
             text-align: center;
@@ -173,24 +177,25 @@
             let Grade = "${mb.gname}";
             console.log(loginName);
             if (loginName == "") {
-                $(".message-form").css("display","none");
+                $(".message-form").css("display", "none");
                 $(".name").css("display", "none");
                 $(".grade").css("display", "none");
                 $(".logout").css("display", "none");
             } else {
-                if (count == null || count == "" || count == "0"){
-                    $("#messagecount").css("display","none");
-                } else{
-                    $("#messagecount").css("display","block");
-                };
+                if (count == null || count == "" || count == "0") {
+                    $("#messagecount").css("display", "none");
+                } else {
+                    $("#messagecount").css("display", "block");
+                }
+                ;
                 let spantag = $("#mname");
                 spantag.append("<span>" + loginName + " 님</span>")
                 //$(".name").html(loginName + " 님");
                 $(".grade").html("등급 : [" + Grade + "]");
                 $(".register").css("display", "none");
                 $(".login").css("display", "none");
-                if (count>0){
-                    $(".message-count").css("display","block");
+                if (count > 0) {
+                    $(".message-count").css("display", "block");
                 }
             }
         })
@@ -243,7 +248,18 @@
                                 <tr class="in-data" onclick="location.href='/boarddetail?b_num=${bitem.b_num}'">
                                     <td>${bitem.b_num}</td>
                                     <td class="subject">${bitem.mnick}</td>
-                                    <td>${bitem.b_title}</td>
+                                    <c:choose>
+                                        <c:when test="${fn:length(bitem.b_title) gt 8}">
+                                            <td>
+                                                <c:out value="${fn:substring(bitem.b_title,0,8)}"></c:out>...
+                                            </td>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <td>
+                                                <c:out value="${bitem.b_title}"></c:out>
+                                            </td>
+                                        </c:otherwise>
+                                    </c:choose>
                                     <td>${bitem.b_type}</td>
                                     <td><fmt:formatDate value="${bitem.b_date}"
                                                         pattern="yyyy-MM-dd HH:mm"></fmt:formatDate></td>
@@ -255,7 +271,20 @@
                                 <tr class="in-data" onclick="location.href='/boarddetail?b_num=${bitem.b_num}'">
                                     <td>${bitem.b_num}</td>
                                     <td class="subject">${bitem.mnick}</td>
-                                    <td>${bitem.b_title}</td>
+
+                                    <c:choose>
+                                        <c:when test="${fn:length(bitem.b_title) gt 8}">
+                                            <td>
+                                                <c:out value="${fn:substring(bitem.b_title,0,8)}"></c:out>...
+                                            </td>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <td>
+                                                <c:out value="${bitem.b_title}"></c:out>
+                                            </td>
+                                        </c:otherwise>
+                                    </c:choose>
+
                                     <td>${bitem.b_type}</td>
                                     <td><fmt:formatDate value="${bitem.b_date}"
                                                         pattern="yyyy-MM-dd HH:mm"></fmt:formatDate></td>
@@ -276,10 +305,12 @@
             </c:if>
             <div id="btn-area" style="position: fixed; right: 5px; bottom: 10px; width: 10%; height:5%">
                 <p id="writeMsg">글 작성하기</p>
-                <button id="board-btn" onclick="boardwrite('${mb.mnick}')"><img src="images/edit2.png" style="height: 45px; width: 43px; position: absolute; bottom: 72%; right: 77%;cursor: pointer">
+                <button id="board-btn" onclick="boardwrite('${mb.mnick}')"><img src="images/edit2.png"
+                                                                                style="height: 45px; width: 43px; position: absolute; bottom: 72%; right: 77%;cursor: pointer">
                 </button>
                 <p id="boardMsg"> 작품 이동</p>
-                <button id="board-btn2" onclick="goArticle()"><img src="images/people.png" style="height: 61px; width: 49px; position: absolute; bottom: 30%; right: 22%; cursor: pointer">
+                <button id="board-btn2" onclick="goArticle()"><img src="images/people.png"
+                                                                   style="height: 61px; width: 49px; position: absolute; bottom: 30%; right: 22%; cursor: pointer">
                 </button>
             </div>
     </section>
@@ -291,7 +322,7 @@
 <script>
     function boardwrite(login) {
         if (login == null || login == "") {
-            let popOption = "width = "+400+", height = "+350+", left = "+((window.screen.width / 2) - (400 / 2))+", top = "+((window.screen.height / 2) - (350 / 2));
+            let popOption = "width = " + 400 + ", height = " + 350 + ", left = " + ((window.screen.width / 2) - (400 / 2)) + ", top = " + ((window.screen.height / 2) - (350 / 2));
             window.open("/popup?page=login", "login", popOption);
         } else {
             location.href = '/boardwrite';
@@ -305,8 +336,9 @@
     }
 
     function goArticle() {
-        location.href="/artwork?category=all&genre=all&colname=all&keyword=all&pageNum=1";
+        location.href = "/artwork?category=all&genre=all&colname=all&keyword=all&pageNum=1";
     }
+
     function showwrite() {
         if ($("#gowrite").css("visibility") == "hidden") {
             $("#gowrite").css("-webkit-animation-name", "duration");

@@ -491,7 +491,7 @@
                 <c:if test="${!empty aList}">
                     <c:forEach var="aitem" items="${aList}">
                         <div class="artwork-box" onclick="goartworkdetail(${aitem.a_num})" onmouseover="showcate(${aitem.a_num})" onmouseout="showinfo(${aitem.a_num})">
-                            <div id="a_${aitem.a_num}" style="animation-duration: 0.5s;">
+                            <div id="a_${aitem.a_num}" style="animation-duration: 0.2s;">
                                 <c:if test="${aitem.af_imgoriname != 'none.PNG'}">
                                     <div class="artbox-img"
                                          style="background-image: url('/upload/image/${aitem.af_imgsysname}'); background-size: cover;background-position: center"></div>
@@ -505,7 +505,7 @@
                                     <p style="font-size: small;">작성자 : ${aitem.mnick}</p>
                                 </div>
                             </div>
-                            <div id="ac_${aitem.a_num}" style="display: none;background: linear-gradient(45deg, rgba(10, 10, 10, 0.9), rgba(0, 0, 0, 0.6)); height: 100%;animation-duration: 0.5s;border-radius: 5px">
+                            <div id="ac_${aitem.a_num}" style="display: none;background: linear-gradient(45deg, rgba(10, 10, 10, 0.9), rgba(0, 0, 0, 0.6)); height: 100%;animation-duration: 0.2s;border-radius: 5px">
                                 <p style="display: flex;height: 100%; color: white;
     flex-direction: column;
     justify-content: center;

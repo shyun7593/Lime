@@ -51,14 +51,14 @@
             font-size: 4rem;
             font-weight: bolder;
             font-family: "Segoe UI Black";
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         .con-cen {
             position: relative;
             min-width: 400px;
             width: 25%;
-            height: 75%;
+            height: 80%;
             margin: 0 auto;
             text-align: center;
             box-sizing: border-box;
@@ -124,12 +124,11 @@
             resize: none;
             width: 100%;
             height: 17%;
-            margin-bottom: 10px;
             padding-left: 10px;
         }
 
         .neulleo {
-            height: 10%;
+            height: 8%;
             background-color: black;
             font-size: 1.2rem;
             font-family: a타이틀고딕1;
@@ -165,17 +164,21 @@
                        title="ID">
                 <button type="button" id="b1" onclick="idcheck()">V</button>
 
-                <input type="password" class="" name="mpwd" placeholder="  Password" title="Password">
-                <input type="text" class="" name="mname" placeholder="  Name" title="Name">
+                <input type="password" maxlength="15" name="mpwd" placeholder="  Password" title="Password">
+                <input maxlength="10" type="text" class="" name="mname" placeholder="  Name" title="Name">
 
                 <input type="email" class="" name="mkakao" placeholder="  Kakao email" title="email" value="${email}">
 
                 <%--  닉네임 이벤트 함수 처리  --%>
-                <input type="text" class="" id="membernick" name="mnick" placeholder="  Nickname" title="Nickname">
+                <input maxlength="10" type="text" class="" id="membernick" name="mnick" placeholder="  Nickname" title="Nickname">
                 <button type="button" id="b2" onclick="nickcheck()">V</button>
                 <p id="question">나만의 비밀</p>
-                <input type="text" class="" name="msecret" placeholder="  답" title="나만의 비밀">
-                <textarea name="mtext" class="mar-bo" placeholder="  자기소개"></textarea>
+                <input type="text" class="" name="msecret" maxlength="10" placeholder="  답" title="나만의 비밀">
+                <textarea id="mytext" name="mtext" class="mar-bo" placeholder="  자기소개" maxlength="200"></textarea>
+                <div style="float: right;margin-bottom: 10px;">
+                    <p class="textCount" style="display: inline-block">0자</p>
+                    <p class="textTotal" style="display: inline-block">/200자</p>
+                </div>
                 <input type="submit" class="neulleo" value="SIGN IN">
             </div>
         </div>
@@ -279,6 +282,23 @@
             }
         })
     }
+    $('#mytext').keyup(function (e) {
+        let content = $(this).val();
 
+        // 글자수 세기
+        if (content.length == 0 || content == '') {
+            $('.textCount').text('0자');
+        } else {
+            $('.textCount').text(content.length + '자');
+        }
+
+        // 글자수 제한
+        if (content.length > 200) {
+            // 200자 부터는 타이핑 되지 않도록
+            $(this).val($(this).val().substring(0, 199));
+            // 200자 넘으면 알림창 뜨도록
+            alert('글자수는 200자까지 입력 가능합니다.');
+        };
+    });
 </script>
 </html>

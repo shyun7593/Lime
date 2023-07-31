@@ -399,13 +399,13 @@
         }
         #label1, #label3 > p {
             position: relative;
-            top: 83%;
+            top: 84%;
             color: white;
             margin-left: 14%;
         }
         #label2, #label4 > p {
             position: relative;
-            top: 85%;
+            top: 87%;
             color: white;
             margin-left: 14%;
         }
@@ -506,7 +506,7 @@
             <p>기본 정보 입력</p>
             <div id="artinfo1" style="position: relative;">
                 <input style="width: 90%; border: none; border: 1px solid black" id="aw-input1"
-                       type="text" name="a_title" placeholder="제목" required>
+                       type="text" name="a_title" placeholder="제목" required maxlength="15">
                 <input id="aw-input2" type="hidden" name="a_id" value="${mb.mid}">
                 <select id="aw-select1" name="a_category"
                         style="width: 90%; border: none; border: 1px solid black" required>
@@ -524,8 +524,7 @@
                     <option value="POP">POP</option>
                 </select>
                 <input style="width: 90%; border: none; border: 1px solid black"
-                       type="date" name="a_release" id="bal" placeholder="발매일"
-                       onchange="clock()">
+                       type="date" name="a_release" id="bal" placeholder="발매일">
                 <input id="aw-price" type="text"
                        style="width: 90%; border: none; border: 1px solid black" name="a_price"
                        placeholder="가격" required>
@@ -547,15 +546,19 @@
                 </select>
                 <input style="width: 90%; border: 1px solid black" id="aw-balmae"
                        type="text"
-                       name="a_publisher" placeholder="발매사"  required>
+                       name="a_publisher" placeholder="발매사" maxlength="15" required>
                 <input style="width: 90%; border: 1px solid black; margin-bottom: 3%"
-                       id="aw-giheik" type="text" name="a_agency" placeholder="기획사"  required>
+                       id="aw-giheik" type="text" name="a_agency" placeholder="기획사" maxlength="15"  required>
             </div>
         </div>
         <div id="album-info-box">
             <p>음원설명</p>
-            <textarea id="aw-album-info" name="a_contents" style="resize: none; width: 95%"
+            <textarea maxlength="1000" id="aw-album-info" name="a_contents" style="resize: none; width: 95%;height: 85%"
                       placeholder="당신의 앨범을 소개해주세요."></textarea>
+            <div style="text-align: end; width: 95%;margin-top: 1%;">
+                <p class="textCount" style="display: inline-block;">0자</p>
+                <p class="textTotal" style="display: inline-block;">/1000자</p>
+            </div>
         </div>
         <div id="aback-area">
             <button type="button" id="aback-btn" onclick="adback()">< 뒤로가기</button>
@@ -580,13 +583,21 @@
     }
     $(document).on("change","#aw-imgfileInput",function () {
         let imgname =  $("#aw-imgfileInput")[0].files[0].name;
+        if (imgname.length > 50){
+            alert("파일 이름은 50자 미만으로 설정해주세요.");
+            $("#aw-imgfileInput").val();
+            return;
+        }
         if (imgname.length > 24){
             imgname = imgname.substring(0,24) + "...";
         }
         $(".now-photo").html(imgname);
     })
     function readUrl(input) {
-        if (input.files && input.files[0]) {
+        if (input.files[0]) {
+            if  (input.files[0].name.length > 50){
+                return;
+            }
             let reader = new FileReader();
             reader.onload = function (e) {
                 document.getElementById('preview').src = e.target.result;
@@ -599,6 +610,11 @@
 
     $(document).on("change","#aw-musicfileInput",function () {
         let musicname =  $("#aw-musicfileInput")[0].files[0].name;
+        if (musicname.length > 50){
+            alert("파일 이름은 50자 미만으로 설정해주세요.");
+            $("#aw-musicfileInput").val();
+            return;
+        }
         if (musicname.length > 24){
             musicname = musicname.substring(0,24) + "...";
         }
@@ -614,5 +630,23 @@
             return true;
         }
     }
+    $('#aw-album-info').keyup(function (e) {
+        let content = $(this).val();
+
+        // 글자수 세기
+        if (content.length == 0 || content == '') {
+            $('.textCount').text('0자');
+        } else {
+            $('.textCount').text(content.length + '자');
+        }
+
+        // 글자수 제한
+        if (content.length > 1000) {
+            // 200자 부터는 타이핑 되지 않도록
+            $(this).val($(this).val().substring(0, 999));
+            // 200자 넘으면 알림창 뜨도록
+            alert('글자수는 200자까지 입력 가능합니다.');
+        };
+    });
 </script>
 </html>

@@ -527,11 +527,11 @@
       background-color: rgba(0, 0, 0, 0.8);
                           background-size: cover;height: 100%;animation-duration: 0.2s;border-radius: 5px;background-repeat: no-repeat;background-position: center">
                         </c:if>
-                        <div style="display: flex; width: 100%; height: 100%; align-items: center;">
+                        <div style="display: flex; width: 100%; height: 100%; align-items: center;padding: 5px 0px;">
                             <p style="width: 90%;margin: 0 auto;color: white">곡 설명 :<br>
                                 <c:choose>
-                                    <c:when test="${fn:length(aitem.a_contents) gt 310}">
-                                        <c:out value="${fn:substring(aitem.a_contents,0,310)}"></c:out>...
+                                    <c:when test="${fn:length(aitem.a_contents) gt 250}">
+                                        <c:out value="${fn:substring(aitem.a_contents,0,250)}"></c:out>...
                                     </c:when>
                                     <c:otherwise>
                                         <c:out value="${aitem.a_contents}"></c:out>

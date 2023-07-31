@@ -25,6 +25,6 @@
 
 <script>
 function goinstar(){
-    location.href = "https://instagram.com/lime_oofficial?igshid=MmIzYWVlNDQ5Yg==";
+    window.open("https://instagram.com/lime_music_official?igshid=MmIzYWVlNDQ5Yg==","Limeinstar");
 }
 </script>

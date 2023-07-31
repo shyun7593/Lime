@@ -541,6 +541,7 @@
         <p>기본 정보 입력</p>
         <div id="artinfo1" style="position: relative;">
             <div class="info-titles">
+                <p>작성자</p>
                 <p>제목</p>
                 <p>카테고리</p>
                 <p>장르</p>
@@ -548,6 +549,7 @@
                 <p>가격</p>
             </div>
             <div class="info-values" style="display: flex; vertical-align: middle">
+                <p>${aDto.a_id}</p>
                 <p>${aDto.a_title}</p>
                 <p>${aDto.a_category}</p>
                 <p>${aDto.a_genre}</p>
@@ -559,7 +561,7 @@
     <div id="commentinfo">
         <p>아티스트 소개</p>
         <div style="width: 90%; height: 70%;">
-            ${mtext}
+            <textarea disabled style="resize: none;width: 100%;color: white;height: 100%;border: none;background: none;">${mtext}</textarea>
         </div>
     </div>
     <div id="albumdetail">

@@ -371,7 +371,7 @@
                     <input type="text" id="write-title" autocomplete="off" maxlength="50"
                      disabled value="${bDto.b_title}">
                 </div>
-                <textarea id="write-contents" style="resize: none;" placeholder="글내용을 작성해주세요"
+                <textarea id="write-contents" style="resize: none;padding: 10px"
                           disabled>${bDto.b_contents}</textarea>
             </div>
 
@@ -382,7 +382,7 @@
             <div>
             <form id="reply-form">
                 <input type="hidden" name="r_id" value="${mb.mid}">
-                <textarea name="r_contents" rows="3" class="write_reply" id="comment" placeholder="Please write a comment"
+                <textarea maxlength="50" name="r_contents" rows="3" class="write_reply" id="comment" placeholder="Please write a comment. Max length 50."
                           required onkeypress="javascript:if (event.keyCode===13){replyInsert()}"></textarea>
                 <input type="hidden" name="r_bnum" value="${bDto.b_num}">
                 <input id="reply-btn" type="button" value="Write!"  onclick="replyInsert()">
