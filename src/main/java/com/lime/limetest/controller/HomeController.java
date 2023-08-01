@@ -126,9 +126,9 @@ public class HomeController {
     }
 
     @GetMapping("mypage")
-    public String myPage(String page,Integer pageNum, SearchDto sDto, Integer m_num, HttpSession session){
+    public String myPage(String page,Integer pageNum, SearchDto sDto, HttpSession session){
         log.info("HomeController.myPage()");
-        String view = mServ.myPage(page, sDto, pageNum, m_num);
+        String view = mServ.myPage(page, sDto, pageNum);
         if (session.getAttribute("mb")!=null){
             MemberDto mDto = (MemberDto) session.getAttribute("mb");
             int noreadm = mServ.countmessage(mDto.getMid());

@@ -14,7 +14,7 @@
         min-height: 58px;
         line-height: 58px;
         padding: 0px;
-        height: 135px;
+        height: 235px;
         background-size: 100% 100%;
     }
 

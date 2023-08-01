@@ -53,11 +53,10 @@ public class ProfileService {
         session.setAttribute("page", page);
         Integer count = noReadcount(m.getMid());
         session.setAttribute("count",count);
-            MemberDto mDto = mDao.userInfo(m.getMid());
-            log.info("showprofile");
-            mav.addObject("userInfo", mDto);
+        MemberDto mDto = mDao.userInfo(m.getMid());
+        log.info("showprofile");
+        mav.addObject("userInfo", mDto);
         mav.setViewName("profile");
-
         return mav;
     }
 
@@ -73,21 +72,17 @@ public class ProfileService {
         if(sDto.getListCnt() == 0){
             sDto.setListCnt(lcnt);
         }
-
         sDto.setPageNum((num-1) * sDto.getListCnt());
         sDto.setColname("A_ID");
         sDto.setKeyword(m.getMid());
         List<ArtworkDto> aList = aDao.selectArtwork(sDto);
         mav.addObject("aList",aList);
-
-
         sDto.setPageNum(num);
         String pageHtml = getPaging(sDto, page);
         mav.addObject("paging",pageHtml);
         session.setAttribute("pageNum", num);
         session.setAttribute("sDto", sDto);
         mav.setViewName("profile");
-
         return mav;
     }
     public ModelAndView showBoardPage(String page, HttpSession session, SearchDto sDto, String type) {
@@ -224,9 +219,7 @@ public class ProfileService {
                 sDto.getPageNum(),
                 sDto.getListCnt(),
                 pageCnt, listName);
-
         pageHtml = paging.makePaging();
-
         return pageHtml;
     }
 

@@ -158,9 +158,9 @@
                 <p><input type="submit" class="lo-login lo-input" value="LOGIN"></p>
                 <p class="lo-kakao-area">
                     <a class="lo-kakao-login"
-                       href="https://kauth.kakao.com/oauth/authorize?client_id=b692bd8f02d3ba6238585cdd05ba7765&redirect_uri=http://localhost:80/login&response_type=code">
+                       href="https://kauth.kakao.com/oauth/authorize?client_id=b692bd8f02d3ba6238585cdd05ba7765&redirect_uri=http://192.168.0.107/login&response_type=code">
                         <img id="kakaoimg" src="images/speech-bubble.png" style="width: 25px; height: 25px; float: left"></a><a class="lo-kakao-login"
-                href="https://kauth.kakao.com/oauth/authorize?client_id=b692bd8f02d3ba6238585cdd05ba7765&redirect_uri=http://localhost:80/login&response_type=code">&nbsp;&nbsp;KAKAO LOGIN</a></p>
+                href="https://kauth.kakao.com/oauth/authorize?client_id=b692bd8f02d3ba6238585cdd05ba7765&redirect_uri=http://192.168.0.107/login&response_type=code">&nbsp;&nbsp;KAKAO LOGIN</a></p>
         </div>
     </form>
 </section>

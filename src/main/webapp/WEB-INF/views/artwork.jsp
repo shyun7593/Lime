@@ -186,6 +186,7 @@
         }
 
         #sepSub1 {
+            background: rgba(0,0,0,0.8);
             position: sticky;
             top:16%;
             font-family: a타이틀고딕2;
@@ -200,6 +201,7 @@
         }
 
         #sepSub2 {
+            background: rgba(0,0,0,0.8);
             position: sticky;
             top:16%;
             font-family: a타이틀고딕2;
@@ -213,6 +215,7 @@
         }
 
         #sepSub3 {
+            background: rgba(0,0,0,0.8);
             position: sticky;
             top:16%;
             font-family: a타이틀고딕2;
@@ -457,10 +460,10 @@
                 <option class="sep-sub-op"
                         value="all" ${sDto.category == 'all' ? 'selected="selected"' : ''}>전체</option>
                 <option class="sep-sub-op"
-                        value="vocal" ${sDto.category == 'vocal' ? 'selected="selected"' : ''}>보컬</option>
+                        value="보컬" ${sDto.category == '보컬' ? 'selected="selected"' : ''}>보컬</option>
                 <option class="sep-sub-op"
-                        value="composition" ${sDto.category == 'composition' ? 'selected="selected"' : ''}>작곡</option>
-                <option class="sep-sub-op" value="lyricist" ${sDto.category == 'lyricist' ? 'selected="selected"' : ''}>작사</option>
+                        value="작곡" ${sDto.category == '작곡' ? 'selected="selected"' : ''}>작곡</option>
+                <option class="sep-sub-op" value="작사" ${sDto.category == '작사' ? 'selected="selected"' : ''}>작사</option>
             </select></span>
 
             <span id="sepSub2">장르&nbsp;&nbsp;|<select id="sep-sub2" onchange="searchArticle()">
@@ -566,7 +569,6 @@
             $("#sep-search-sub").css("background-color") == "rgba(33,145,210,0.6)"
         }
     }
-
     /* 검색메인-화면테마변경관련 */
     function showSeparate() {
         $(".name").css("color", "white");
@@ -579,7 +581,6 @@
                 e.stopPropagation();
                 return false;
             });
-
         } else if ($("#sep-search").css("display") == "block") {
             $("#sep-search").css("display", "none");
             $(".view:nth-child(1)").css({"background-image": "url(/images/typography.png)"});
@@ -587,18 +588,15 @@
             $(".view").off('scroll mousewheel');
         }
     }
-
     /* 검색서브-display:none/block */
     function goartworkdetail(a_num) {
         console.log(a_num);
         location.href = '/artworkdetail?a_num=' + a_num;
     }
-
     function delkeyword() {
         $("#search").val("");
         $("#glass2").css("visibility", "hidden");
     }
-
     $(document).on("keyup", "#search", function () {
         if ($("#search").val() != "") {
             $("#glass2").css("visibility", "visible");
@@ -609,7 +607,6 @@
     if ("${con}" == "true") {
         $("#glass2").css("visibility", "visible");
     }
-
     function artwrite(login) {
         if (login == null || login == "") {
             let popOption = "width = " + 400 + ", height = " + 350 + ", left = " + ((window.screen.width / 2) - (400 / 2)) + ", top = " + ((window.screen.height / 2) - (350 / 2));
@@ -618,17 +615,14 @@
             location.href = '/artworkwrite';
         }
     }
-
     function goboard() {
         location.href = "/board?type=all&pageNum=1";
     }
-
     function showcate(num) {
         $("#ac_" + num).css("display", "block");
         $("#a_" + num).css("display", "none");
         $("#ac_"+num).css("-webkit-animation-name", "duration");
     }
-
     function showinfo(num) {
         $("#ac_" + num).css("display", "none");
         $("#a_" + num).css("display", "block");

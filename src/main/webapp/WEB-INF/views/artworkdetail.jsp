@@ -487,7 +487,7 @@
                     $("#aupdate-btn").css("visibility", "visible");
                     $("#adelete-btn").css("visibility", "visible");
                     $("#sale-btn").css("display", "none");
-                } else if("${aDto.a_category}" == "lyricist"){
+                } else if("${aDto.a_category}" == "작사"){
                     $("#buttons").css("width","20%");
                     $("#send-message").css("display","block");
                     $("#update-area").css("display","none");
@@ -549,7 +549,7 @@
                 <p>가격</p>
             </div>
             <div class="info-values" style="display: flex; vertical-align: middle">
-                <p>${aDto.a_id}</p>
+                <p>${aDto.mnick}</p>
                 <p>${aDto.a_title}</p>
                 <p>${aDto.a_category}</p>
                 <p>${aDto.a_genre}</p>
@@ -642,6 +642,7 @@
     function adel(a_num) {
         location.href = '/artworkdelete?a_num=' + a_num;
     }
+
     let audio = $(".audio-btn").get(0);
     audio.addEventListener("timeupdate", function (){
         if (audio.currentTime>59){

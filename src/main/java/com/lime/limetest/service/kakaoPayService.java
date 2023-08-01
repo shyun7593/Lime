@@ -57,9 +57,9 @@ public class kakaoPayService {
         params.add("total_amount", "" + price);
         params.add("vat_amount","0");
         params.add("tax_free_amount", "0");
-        params.add("approval_url", "http://localhost/kakaoPaySuccess?a_num="+ a_num +"&m_num="+ m_num +"&price=" + price);
-        params.add("cancel_url", "http://localhost/kakaoPayCancel");
-        params.add("fail_url", "http://localhost/kakaoPaySuccessFail");
+        params.add("approval_url", "http://192.168.0.107/kakaoPaySuccess?a_num="+ a_num +"&m_num="+ m_num +"&price=" + price);
+        params.add("cancel_url", "http://192.168.0.107/kakaoPayCancel");
+        params.add("fail_url", "http://192.168.0.107/kakaoPaySuccessFail");
 
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 
@@ -97,9 +97,9 @@ public class kakaoPayService {
         params.add("total_amount", ""+aDto.getA_price());
         params.add("vat_amount","0");
         params.add("tax_free_amount", "0");
-        params.add("approval_url", "http://localhost/kakaoPaySuccess?a_num=" + a_num);
-        params.add("cancel_url", "http://localhost/kakaoPayCancel");
-        params.add("fail_url", "http://localhost/kakaoPaySuccessFail");
+        params.add("approval_url", "http://192.168.0.107/kakaoPaySuccess?a_num=" + a_num);
+        params.add("cancel_url", "http://192.168.0.107/kakaoPayCancel");
+        params.add("fail_url", "http://192.168.0.107/kakaoPaySuccessFail");
 
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 

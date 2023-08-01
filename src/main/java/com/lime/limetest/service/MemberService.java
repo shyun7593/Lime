@@ -181,7 +181,7 @@ public class MemberService {
         return view;
     }
 
-    public String myPage(String page, SearchDto sDto, Integer pageNum, Integer m_num) {
+    public String myPage(String page, SearchDto sDto, Integer pageNum) {
         log.info("MemberService.myPage()");
         String view = null;
         log.info(page);
@@ -192,13 +192,10 @@ public class MemberService {
         } else if (page.equals("buypayment") || page.equals("salepayment")){
             view = "redirect:/profile?page=" + page + "&pageNum=" + pageNum;
         }
-        else if(page.equals("board")){
+        else {
             view = "redirect:/profile?page=" + page + "&type="+ sDto.getType() +"&pageNum=" + pageNum;
-        }   else{
-            view = "redirect:/profile?page=" + page + "&pageNum=" + pageNum;
         }
         return view;
-
     }
 
     public String Popup(String page, HttpSession session, String a_id, Integer m_num, Integer a_num) {
@@ -290,10 +287,11 @@ public class MemberService {
     public String goartwork(SearchDto sDto, HttpSession session) throws UnsupportedEncodingException {
         log.info("MemberService.goartwork()");
         session.setAttribute("page","");
-        String key = URLEncoder.encode(sDto.getKeyword(), "UTF-8");
-        String view = "redirect:/artwork?category=" + sDto.getCategory() + "&genre="+
+        String category = URLEncoder.encode(sDto.getCategory(), "UTF-8");
+        String keyword = URLEncoder.encode(sDto.getKeyword(), "UTF-8");
+        String view = "redirect:/artwork?category=" + category + "&genre="+
                 sDto.getGenre()+"&colname="+
-                sDto.getColname()+"&keyword="+key+"&pageNum=1";
+                sDto.getColname()+"&keyword="+keyword+"&pageNum=1";
 
         return view;
     }

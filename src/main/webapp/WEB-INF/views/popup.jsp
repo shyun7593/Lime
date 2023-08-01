@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
     <title>Title</title>
@@ -9,6 +10,7 @@
         button {
             cursor: pointer;
         }
+
         .login-alert, .register-alert, .profile-confirm, .Imessage, .result, .showmessage {
             display: none;
         }
@@ -232,7 +234,8 @@
     <p id="profile-sub-msg">프로필을 수정하려면 본인 인증이 필요합니다.</p>
     <p id="profile-guide" style="margin: 0 auto;">회원가입할 때 입력하신 나만의 비밀 답변을 입력해주세요.</p>
     <div id="input-area">
-        <input type="text" id="mysecret" placeholder="나만의 비밀 답변" autofocus autocomplete="off" onkeyup="enterconfirm()"><br>
+        <input type="text" id="mysecret" placeholder="나만의 비밀 답변" autofocus autocomplete="off"
+               onkeyup="enterconfirm()"><br>
     </div>
     <div id="btn-area3">
         <button id="confirmbtn" onclick="userConfirm()">확인</button>
@@ -247,7 +250,8 @@
         메시지 보내기
     </div>
     <form style="width: 90%;
-    margin: 2% auto; background-color: white; min-width: 300px; padding: 3%" action="InquireMessage" method="post" enctype="multipart/form-data"
+    margin: 2% auto; background-color: white; min-width: 300px; padding: 3%" action="InquireMessage" method="post"
+          enctype="multipart/form-data"
           autocomplete="off">
         <input type="hidden" name="m_anum" value="${a_num}">
         <input type="hidden" name="m_mid" value="${mb.mid}">
@@ -274,7 +278,8 @@
                     required><br></p>
         </div>
         <div style="margin-top: 1%; width: 100%; display: flex; justify-content: center">
-            <textarea id="mtext" name="m_text" maxlength="300" placeholder="내용" required style="margin-top: 2%; border: none; width: 340px; resize: none; height: 126px;"></textarea>
+            <textarea id="mtext" name="m_text" maxlength="300" placeholder="내용" required
+                      style="margin-top: 2%; border: none; width: 340px; resize: none; height: 126px;"></textarea>
         </div>
         <div style="margin-top: 1%; width: 100%;display: flex;justify-content: space-between">
             <input id="msg-file" type="file" name="file" style="width: 280px">
@@ -282,13 +287,14 @@
             <p class="textTotal" style="display: inline-block;font-size: small">/300자</p>
         </div>
         <c:if test="${mDto.m_anum != null}">
-            <c:if test="${owner == mb.mid}">
+            <c:if test="${owner != mb.mid}">
 
             </c:if>
-            <c:if test="${onwer != mb.mid}">
+            <c:if test="${owner == mb.mid}">
                 <c:if test="${mDto.m_ispay != '1'}">
                     <input type='checkbox' style="display: inline-block"
-                           onclick='showpay()'><span>결제요청 : <input id="m_pay" style="display: none; width: 100px" type="number" placeholder="가격" name="m_price"></span></input>
+                           onclick='showpay()'><span>결제요청 : <input id="m_pay" style="display: none; width: 100px"
+                                                                   type="number" placeholder="가격" name="m_price"></span></input>
                 </c:if>
                 <c:if test="${mDto.m_ispay == '1'}">
 
@@ -297,12 +303,18 @@
         </c:if>
         <div style="margin-top: 2%; width: 100%; display: flex; justify-content: space-between">
             <c:if test="${m_num == null || m_num == ''}">
-                <button style="cursor: pointer; width: 100px; height: 30px; border-radius: 5px; background-color: black; color: white" type="button" onclick="closepop()">닫기</button>
+                <button style="cursor: pointer; width: 100px; height: 30px; border-radius: 5px; background-color: black; color: white"
+                        type="button" onclick="closepop()">닫기
+                </button>
             </c:if>
             <c:if test="${m_num !=null && m_num != ''}">
-                <button style="cursor: pointer; width: 100px; height: 30px; border-radius: 5px; background-color: black; color: white" type="button" onclick="backMessage(${m_num})">뒤로가기</button>
+                <button style="cursor: pointer; width: 100px; height: 30px; border-radius: 5px; background-color: black; color: white"
+                        type="button" onclick="backMessage(${m_num})">뒤로가기
+                </button>
             </c:if>
-            <input id="iSendBtn" style="cursor: pointer; width: 100px; height: 30px;border-radius: 5px; border: none; background-color: black; color: white" value="전송" type="submit">
+            <input id="iSendBtn"
+                   style="cursor: pointer; width: 100px; height: 30px;border-radius: 5px; border: none; background-color: black; color: white"
+                   value="전송" type="submit">
         </div>
         <c:if test="${mDto.m_anum == null}">
 
@@ -357,50 +369,99 @@
         </c:if>
         <c:if test="${mDto.m_fileoriname != null}">
             <c:if test="${mDto.m_anum == null}">
-                <p style="width: 360px; white-space: nowrap; text-overflow: ellipsis;overflow: hidden;" onclick="downloadfile('${mDto.m_fileoriname}','${mDto.m_filesysname}')">파일
-                    : ${mDto.m_fileoriname}</p>
+                <p style="width: 360px; white-space: nowrap; text-overflow: ellipsis;overflow: hidden;cursor: pointer;"
+                   onclick="downloadfile('${mDto.m_fileoriname}','${mDto.m_filesysname}')">파일
+                    : <c:choose>
+                        <c:when test="${fn:length(mDto.m_fileoriname) gt 15}">
+                            <c:out value="${fn:substring(mDto.m_fileoriname,0,15)}"></c:out>...
+                        </c:when>
+                        <c:otherwise>
+                            <c:out value="${mDto.m_fileoriname}"></c:out>
+                        </c:otherwise>
+                    </c:choose></p>
             </c:if>
             <c:if test="${mDto.m_anum != null}">
-            <c:if test="${mb.mid != mDto.m_mid}">
-                <c:if test="${saler == mDto.m_rmid}">
-                    <p style="width: 360px; white-space: nowrap; text-overflow: ellipsis;overflow: hidden;" onclick="downloadfile('${mDto.m_fileoriname}','${mDto.m_filesysname}')">파일
-                        : ${mDto.m_fileoriname}</p>
-                </c:if>
-                <c:if test="${saler != mDto.m_rmid}">
-                    <c:if test="${mDto.m_ispay == '1'}">
-                        <p style="width: 360px; white-space: nowrap; text-overflow: ellipsis;overflow: hidden;" onclick="downloadfile('${mDto.m_fileoriname}','${mDto.m_filesysname}')">파일
-                            : ${mDto.m_fileoriname}</p>
+                <c:if test="${mb.mid != mDto.m_mid}">
+                    <c:if test="${saler == mDto.m_rmid}">
+                        <p style="cursor:pointer;width: 360px; white-space: nowrap; text-overflow: ellipsis;overflow: hidden;"
+                           onclick="downloadfile('${mDto.m_fileoriname}','${mDto.m_filesysname}')">파일
+                            : <c:choose>
+                                <c:when test="${fn:length(mDto.m_fileoriname) gt 15}">
+                                    <c:out value="${fn:substring(mDto.m_fileoriname,0,15)}"></c:out>...
+                                </c:when>
+                                <c:otherwise>
+                                    <c:out value="${mDto.m_fileoriname}"></c:out>
+                                </c:otherwise>
+                            </c:choose></p>
                     </c:if>
-                    <c:if test="${mDto.m_ispay == '0'}">
-                        <p style="width: 360px; white-space: nowrap; text-overflow: ellipsis;overflow: hidden;float: left;" onclick="showalram()">파일 : ${mDto.m_fileoriname} <span id="adtext" style="font-size: x-small;color: blue;"></span></p>
+                    <c:if test="${saler != mDto.m_rmid}">
+                        <c:if test="${mDto.m_ispay == '1'}">
+                            <p style="cursor:pointer;width: 360px; white-space: nowrap; text-overflow: ellipsis;overflow: hidden;"
+                               onclick="downloadfile('${mDto.m_fileoriname}','${mDto.m_filesysname}')">파일
+                                : <c:choose>
+                                    <c:when test="${fn:length(mDto.m_fileoriname) gt 15}">
+                                        <c:out value="${fn:substring(mDto.m_fileoriname,0,15)}"></c:out>...
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:out value="${mDto.m_fileoriname}"></c:out>
+                                    </c:otherwise>
+                                </c:choose></p>
+                        </c:if>
+                        <c:if test="${mDto.m_ispay == '0'}">
+                            <p style="width: 360px; white-space: nowrap; text-overflow: ellipsis;overflow: hidden;float: left;cursor: pointer"
+                               onclick="showalram()">파일 : <c:choose>
+                                <c:when test="${fn:length(mDto.m_fileoriname) gt 15}">
+                                    <c:out value="${fn:substring(mDto.m_fileoriname,0,15)}"></c:out>...
+                                </c:when>
+                                <c:otherwise>
+                                    <c:out value="${mDto.m_fileoriname}"></c:out>
+                                </c:otherwise>
+                            </c:choose> <span id="adtext"
+                                                                                      style="font-size: x-small;color: blue;"></span>
+                            </p>
+                        </c:if>
                     </c:if>
                 </c:if>
-            </c:if>
-            <c:if test="${mb.mid == mDto.m_mid}">
-                <p style="width: 360px; white-space: nowrap; text-overflow: ellipsis;overflow: hidden;" onclick="downloadfile('${mDto.m_fileoriname}','${mDto.m_filesysname}')">파일
-                    : ${mDto.m_fileoriname}</p>
-            </c:if>
+                <c:if test="${mb.mid == mDto.m_mid}">
+                    <p style="cursor: pointer;width: 360px; white-space: nowrap; text-overflow: ellipsis;overflow: hidden;"
+                       onclick="downloadfile('${mDto.m_fileoriname}','${mDto.m_filesysname}')">파일
+                        : <c:choose>
+                            <c:when test="${fn:length(mDto.m_fileoriname) gt 15}">
+                                <c:out value="${fn:substring(mDto.m_fileoriname,0,15)}"></c:out>...
+                            </c:when>
+                            <c:otherwise>
+                                <c:out value="${mDto.m_fileoriname}"></c:out>
+                            </c:otherwise>
+                        </c:choose></p>
+                </c:if>
             </c:if>
         </c:if>
         <div style="display: flex;justify-content: space-between; margin-top:2%;width: 100%">
-            <button style="width:100px;height: 30px; border-radius: 5px; background-color: black; color: white" type="button" onclick="closepop()">닫기</button>
-        <c:if test="${mb.mid != mDto.m_mid}">
-            <button style="width:100px;height: 30px; border-radius: 5px; background-color: black; color: white" type="button" onclick="sendmessage('${mDto.m_mid}',${mDto.m_num}, ${mDto.m_anum})">답장</button>
-        </c:if>
-        <c:if test="${mDto.m_price != null}">
-            <c:if test="${mDto.m_rmid != mb.mid}">
-
+            <button style="width:100px;height: 30px; border-radius: 5px; background-color: black; color: white"
+                    type="button" onclick="closepop()">닫기
+            </button>
+            <c:if test="${mb.mid != mDto.m_mid}">
+                <button style="width:100px;height: 30px; border-radius: 5px; background-color: black; color: white"
+                        type="button" onclick="sendmessage('${mDto.m_mid}',${mDto.m_num}, ${mDto.m_anum})">답장
+                </button>
             </c:if>
-            <c:if test="${mDto.m_rmid == mb.mid}">
-                <c:if test="${mDto.m_ispay != '1'}">
-                    <button style="height: 30px; border-radius: 5px; background-color: black; color: white" type="button" onclick="buybtn(${mDto.m_price},${mDto.m_anum},${mDto.m_num})">결제</button>
-                    <span style="line-height: 30px"> <fmt:formatNumber value="${mDto.m_price}" pattern="#,###"/>  원</span>
-                </c:if>
-                <c:if test="${mDto.m_ispay == '1'}">
+            <c:if test="${mDto.m_price != null}">
+                <c:if test="${mDto.m_rmid != mb.mid}">
 
                 </c:if>
+                <c:if test="${mDto.m_rmid == mb.mid}">
+                    <c:if test="${mDto.m_ispay != '1'}">
+                        <button style="height: 30px; border-radius: 5px; background-color: black; color: white"
+                                type="button" onclick="buybtn(${mDto.m_price},${mDto.m_anum},${mDto.m_num})">결제
+                        </button>
+                        <span style="line-height: 30px"> <fmt:formatNumber value="${mDto.m_price}"
+                                                                           pattern="#,###"/>  원</span>
+                    </c:if>
+                    <c:if test="${mDto.m_ispay == '1'}">
+
+                    </c:if>
+                </c:if>
             </c:if>
-        </c:if>
 
         </div>
     </div>
@@ -473,7 +534,7 @@
     }
 
     function sendmessage(a_id, m_num, a_num) {
-        if (a_num == null){
+        if (a_num == null) {
             location.href = '/popup?page=sendmessage&a_id=' + a_id + '&m_num=' + m_num;
         } else {
             location.href = '/popup?page=sendmessage&a_id=' + a_id + '&m_num=' + m_num + '&a_num=' + a_num;
@@ -491,12 +552,13 @@
     function showpay() {
         if ($("#m_pay").css("display") == "none") {
             $("#m_pay").css("display", "inline");
-            $("#m_pay").attr("required","true");
-            $("#msg-file").attr("required","true");
+            $("#m_pay").attr("required", "true");
+            $("#msg-file").attr("required", "true");
         } else {
+            $("#msg-file").attr("required", false);
             $("#m_pay").css("display", "none");
-            $("#m_pay").attr("required","false");
-            $("#msg-file").attr("required","false");
+            $("#m_pay").attr("required", false);
+
         }
     }
 
@@ -508,6 +570,7 @@
     function showalram() {
         $("#adtext").html("결제후 다운받을 수 있습니다.");
     }
+
     $('#mtext').keyup(function (e) {
         let content = $(this).val();
 
@@ -521,8 +584,9 @@
         // 글자수 제한
         if (content.length > 300) {
             $(this).val($(this).val().substring(0, 299));
-            alert('글자수는 200자까지 입력 가능합니다.');
-        };
+            alert('글자수는 300자까지 입력 가능합니다.');
+        }
+        ;
     });
 </script>
 </html>

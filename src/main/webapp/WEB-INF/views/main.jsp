@@ -453,9 +453,9 @@
         <div id="sep-search">
             <span id="sep1">카테고리<select id="sep-s1">
                 <option value="all" selected>전체</option>
-                <option value="lyricist">작사</option>
-                <option value="composition">작곡</option>
-                <option value="vocal">보컬</option>
+                <option value="보컬">보컬</option>
+                <option value="작곡">작곡</option>
+                <option value="작사">작사</option>
             </select></span>
             <span id="sep2">장르<select id="sep-s2">
                 <option value="all" selected>전체</option>
@@ -511,10 +511,10 @@
                 <c:if test="${aitem.af_imgoriname != 'none.PNG'}">
                 <div id="ac_${st.count}"
                      style="display: none;background-image: linear-gradient(
-                             rgba(0, 0, 0, 0.8),
-                             rgba(0, 0, 0, 0.8)
+                             rgba(0, 0, 0, 0.6),
+                             rgba(0, 0, 0, 0.7)
                              ), url('/upload/image/${aitem.af_imgsysname}');
-                             background-color: rgba(0, 0, 0, 0.8);
+                             background-color: rgba(0, 0, 0, 0.3);
                              background-size:cover;height: 100%;animation-duration: 0.2s;border-radius: 5px;background-repeat: no-repeat;background-position: center">
                     </c:if>
 
@@ -524,7 +524,7 @@
         rgba(0, 0, 0, 0.8),
         rgba(0, 0, 0, 0.8)
       ), url('/images/Noimage.png');
-      background-color: rgba(0, 0, 0, 0.8);
+      background-color: rgba(0, 0, 0, 0.3);
                           background-size: cover;height: 100%;animation-duration: 0.2s;border-radius: 5px;background-repeat: no-repeat;background-position: center">
                         </c:if>
                         <div style="display: flex; width: 100%; height: 100%; align-items: center;padding: 5px 0px;">
@@ -661,13 +661,13 @@
     }
 
     $("#c1").on("click", function () {
-        location.href = "/goartwork?category=vocal&genre=all&colname=all&keyword=all&pageNum=1";
+        location.href = "/goartwork?category=보컬&genre=all&colname=all&keyword=all&pageNum=1";
     })
     $("#c2").on("click", function () {
-        location.href = "/goartwork?category=composition&genre=all&colname=all&keyword=all&pageNum=1";
+        location.href = "/goartwork?category=작곡&genre=all&colname=all&keyword=all&pageNum=1";
     })
     $("#c3").on("click", function () {
-        location.href = "/goartwork?category=lyricist&genre=all&colname=all&keyword=all&pageNum=1";
+        location.href = "/goartwork?category=작사&genre=all&colname=all&keyword=all&pageNum=1";
     })
 
     function showcate(num) {

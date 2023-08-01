@@ -500,5 +500,12 @@
             }
         })
     }
+
+    $("#comment").keyup(function (e){
+        let content = $(this).val();
+        if (content.length > 50){
+            alert('50자까지 입력 가능합니다.')
+        }
+    })
 </script>
 </html>

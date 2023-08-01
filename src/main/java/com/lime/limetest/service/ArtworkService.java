@@ -148,11 +148,11 @@ public class ArtworkService {
         log.info("ArtworkService.goartwork()");
         mav = new ModelAndView();
         switch (sDto.getCategory()) {
-            case "vocal":
+            case "보컬":
                 break;
-            case "composition":
+            case "작곡":
                 break;
-            case "lyricist":
+            case "작사":
                 break;
             default:
                 sDto.setCategory("all");

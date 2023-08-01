@@ -510,9 +510,9 @@
                 <input id="aw-input2" type="hidden" name="a_id" value="${mb.mid}">
                 <select id="aw-select1" name="a_category"
                         style="width: 90%; border: none; border: 1px solid black" required>
-                    <option value="composition">작곡</option>
-                    <option value="vocal">보컬</option>
-                    <option value="lyricist">작사</option>
+                    <option value="작곡">작곡</option>
+                    <option value="보컬">보컬</option>
+                    <option value="작사">작사</option>
                 </select>
                 <select id="aw-select2" name="a_genre"
                         style="width: 90%; border: none; border: 1px solid black" required>
@@ -642,10 +642,8 @@
 
         // 글자수 제한
         if (content.length > 1000) {
-            // 200자 부터는 타이핑 되지 않도록
             $(this).val($(this).val().substring(0, 999));
-            // 200자 넘으면 알림창 뜨도록
-            alert('글자수는 200자까지 입력 가능합니다.');
+            alert('글자수는 1000자까지 입력 가능합니다.');
         };
     });
 </script>

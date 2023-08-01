@@ -1560,9 +1560,9 @@
     </div>
     <div id="writediv" style="position: fixed; right: 5px; bottom: 6.8%; width: 80px">
         <ul id="gowrite" style="list-style: none">
-            <li><a style="text-decoration: none; cursor: pointer"
+            <li><a style="text-decoration: none; cursor: pointer;color: black;text-decoration: none"
                    href="/goartwork?category=all&genre=all&colname=all&keyword=all&pageNum=1">Artwork</a></li>
-            <li><a style="text-decoration: none; cursor: pointer;margin-top: 7%;"
+            <li><a style="text-decoration: none; cursor: pointer;margin-top: 7%;;color: black;text-decoration: none"
                    href="/board?type=all&pageNum=1">Board</a></li>
         </ul>
         <div style="position: fixed; right: 5px; bottom: 10px;">

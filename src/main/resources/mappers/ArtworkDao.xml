@@ -76,7 +76,7 @@
         SELECT A_NUM FROM ARTWORK WHERE A_DATE = #{aDate}
     </select>
     <select id="getArtwork" resultType="com.lime.limetest.dto.ArtworkDto" parameterType="integer">
-        SELECT * FROM ARTWORK WHERE A_NUM = #{a_num}
+        SELECT * FROM ARTLIST WHERE A_NUM = #{a_num}
     </select>
     <select id="selectFiles" resultType="com.lime.limetest.dto.ArtfileDto" parameterType="integer">
         SELECT * FROM ARTFILE WHERE AF_ANUM = #{a_num}

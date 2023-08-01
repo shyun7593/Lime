@@ -540,10 +540,10 @@
                 <input type="hidden" name="a_num" value="${aDto.a_num}" required>
                 <select id="aw-select1" name="a_category"
                         style="width: 90%; border: none; border: 1px solid black" required>
-                    <option value="lyricist" ${aDto.a_category == 'lyricist' ? 'selected="selected"' : ''}>작사</option>
-                    <option value="composition" ${aDto.a_category == 'composition' ? 'selected="selected"' : ''}>작곡
+                    <option value="작사" ${aDto.a_category == '작사' ? 'selected="selected"' : ''}>작사</option>
+                    <option value="작곡" ${aDto.a_category == '작곡' ? 'selected="selected"' : ''}>작곡
                     </option>
-                    <option value="vocal" ${aDto.a_category == 'vocal' ? 'selected="selected"' : ''}>보컬</option>
+                    <option value="보컬" ${aDto.a_category == '보컬' ? 'selected="selected"' : ''}>보컬</option>
                 </select>
                 <select id="aw-select2" name="a_genre"
                         style="width: 90%; border: none; border: 1px solid black" required>
@@ -686,10 +686,8 @@
 
         // 글자수 제한
         if (content.length > 1000) {
-            // 200자 부터는 타이핑 되지 않도록
             $(this).val($(this).val().substring(0, 999));
-            // 200자 넘으면 알림창 뜨도록
-            alert('글자수는 200자까지 입력 가능합니다.');
+            alert('글자수는 1000자까지 입력 가능합니다.');
         };
     });
 </script>

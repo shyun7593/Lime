@@ -22,8 +22,6 @@ public class KakaoLoginService {
     @Autowired
     private MemberDao mDao;
 
-    private BCryptPasswordEncoder pEncoder = new BCryptPasswordEncoder();
-
     public String getAccessToken(String authorize_code){
         String access_Token = "";
         String refresh_Token = "";
@@ -42,7 +40,7 @@ public class KakaoLoginService {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=b692bd8f02d3ba6238585cdd05ba7765");
-            sb.append("&redirect_uri=http://localhost:80/login");
+            sb.append("&redirect_uri=http://192.168.0.107/login");
             sb.append("&code=" + authorize_code);
             bw.write(sb.toString());
             bw.flush();
@@ -171,12 +169,11 @@ public class KakaoLoginService {
                 result += line;
             }
             System.out.println(result);
+            session.invalidate();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        session.invalidate();
-
         return "redirect:/main";
     }
 }
