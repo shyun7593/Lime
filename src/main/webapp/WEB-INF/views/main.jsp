@@ -521,8 +521,8 @@
                     <c:if test="${aitem.af_imgoriname == 'none.PNG'}">
                     <div id="ac_${st.count}"
                          style="display: none;background-image: linear-gradient(
-        rgba(0, 0, 0, 0.8),
-        rgba(0, 0, 0, 0.8)
+        rgba(0, 0, 0, 0.6),
+        rgba(0, 0, 0, 0.7)
       ), url('/images/Noimage.png');
       background-color: rgba(0, 0, 0, 0.3);
                           background-size: cover;height: 100%;animation-duration: 0.2s;border-radius: 5px;background-repeat: no-repeat;background-position: center">
