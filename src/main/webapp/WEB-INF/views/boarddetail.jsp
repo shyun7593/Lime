@@ -366,7 +366,7 @@
                                 ETC
                             </option>
                         </select>
-                        <p style="color: white">작성자 :&nbsp&nbsp${bDto.mnick} </p></div>
+                        <p style="color: white; cursor: pointer" onclick="userproflie('${bDto.mnick}')">작성자 :&nbsp&nbsp${bDto.mnick} </p></div>
                     <div style="height: 7%;width: 30%;display: flex;justify-content: center;align-items: center;background:black;color: white;"><p>작성일 : <fmt:formatDate value="${bDto.b_date}" pattern="yyyy-MM-dd HH:mm"></fmt:formatDate></p></div>
                     <input type="text" id="write-title" autocomplete="off" maxlength="50"
                      disabled value="${bDto.b_title}">
@@ -391,7 +391,7 @@
             <div id="reply-print">
                 <c:forEach var="ritem" items="${rList}">
                     <div class="on-reply" id="reply${ritem.r_num}">
-                        <p style="float: left;height: 10%">&nbsp;&nbsp&nbsp${ritem.mnick}</p>
+                        <p style="float: left;height: 10%;cursor: pointer" onclick="userproflie('${ritem.mnick}')">&nbsp;&nbsp&nbsp${ritem.mnick}</p>
                         <p style="margin-left: 8%;margin-top:1%;color: darkgray; font-size: small"><fmt:formatDate value="${ritem.r_date}"
                                                                                                      pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate>
                         <p style="margin-top: 1%">&nbsp;&nbsp ${ritem.r_contents}</p>
@@ -450,23 +450,23 @@
             success : function (res){
                 if (res != null && res != ""){
                     let str = "";
-                    let curid = res.r_id;
-                    if (curid == "${mb.mid}")
-                    {
+                    // let curid = res.r_id;
+                    <%--if (curid == "${mb.mid}")--%>
+                    <%--{--%>
                         str += "<div class='on-reply' id=" + "reply" + res.r_num + ">"
-                            + "<p style='background-color: white;float: left;height: 10%'>&nbsp&nbsp&nbsp" + res.mnick + "</p>"
+                            + "<p style='background-color: white;float: left;height: 10%;cursor: pointer' onclick=userproflie('"+ res.mnick +"')>&nbsp&nbsp&nbsp" + res.mnick + "</p>"
                             + "<p style='margin-left: 8%;margin-top:1%;color: darkgray;font-size: small;'>" + res.r_date
                             + "<p style='margin-top: 1%'>&nbsp&nbsp&nbsp" + res.r_contents + "</p>"
                             + "<button class='del-reply' type='button' onclick=delreply(" + res.r_num + ")>삭제</button>"
                         + "</div>";
-                    } else {
-                        str += "<div class='on-reply' id=" + "reply" + res.r_num + ">"
-                            + "<p>" + res.mnick + "</p>"
-                            + "<p>" + res.r_contents + "</p>"
-                            + "<p>" + res.r_date + "</p>"
-                            + "<button style='visibility: hidden' class='del-reply' type='button'onclick=delreply(" + res.r_num + ")>삭제</button>"
-                            + "</div>";
-                    }
+                    // } else {
+                    //     str += "<div class='on-reply' id=" + "reply" + res.r_num + ">"
+                    //         + "<p style='po'>" + res.mnick + "</p>"
+                    //         + "<p>" + res.r_contents + "</p>"
+                    //         + "<p>" + res.r_date + "</p>"
+                    //         + "<button style='visibility: hidden' class='del-reply' type='button'onclick=delreply(" + res.r_num + ")>삭제</button>"
+                    //         + "</div>";
+                    // }
 
                     $("#reply-print").prepend(str);
                     $("#comment").val("");
@@ -507,5 +507,10 @@
             alert('50자까지 입력 가능합니다.')
         }
     })
+    function userproflie(nick){
+        let popOption = "width = "+400+", height = "+350+", left = "+((window.screen.width / 2) - (400 / 2))+", top = "+((window.screen.height / 2) - (350 / 2));
+        window.open("/popup?page=userprofile&nick="+nick, "login", popOption);
+    }
+
 </script>
 </html>

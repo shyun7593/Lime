@@ -198,7 +198,7 @@ public class MemberService {
         return view;
     }
 
-    public String Popup(String page, HttpSession session, String a_id, Integer m_num, Integer a_num) {
+    public String Popup(String page, HttpSession session, String a_id, Integer m_num, Integer a_num, String nick) {
         log.info("MemberService.Popup()");
         MemberDto memDto = (MemberDto) session.getAttribute("mb");
         MessageDto mDto = new MessageDto();
@@ -218,13 +218,17 @@ public class MemberService {
             if (mDto.getM_anum() != null){
                 saler = aDao.getId(mDto.getM_anum());
             }
-        } else{
+        } else if(page.equals("userprofile")){
+            memDto = mDao.getInfo(nick);
+        }
+        else{
             if (m_num != null){
                 mDto = messageDao.selectMessage(m_num);
             }
             owner = aDao.getId(mDto.getM_anum());
             log.info("owner : " + owner);
         }
+        session.setAttribute("memDto",memDto);
         session.setAttribute("saler",saler);
         session.setAttribute("mDto",mDto);
         session.setAttribute("a_num",a_num);

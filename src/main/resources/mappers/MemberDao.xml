@@ -56,4 +56,7 @@
     <select id="selectId" resultType="java.lang.String" parameterType="string">
         SELECT MID FROM MEMBER WHERE MNICK = #{m_rmid}
     </select>
+    <select id="getInfo" resultType="com.lime.limetest.dto.MemberDto" parameterType="String">
+        SELECT * FROM MINFO WHERE MNICK = #{nick}
+    </select>
 </mapper>

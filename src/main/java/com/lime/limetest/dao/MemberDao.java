@@ -1,6 +1,7 @@
 package com.lime.limetest.dao;
 
 import com.lime.limetest.dto.MemberDto;
+import com.lime.limetest.dto.MessageDto;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
@@ -59,6 +60,5 @@ public interface MemberDao {
     // 아이디 찾기
     String selectId(String m_rmid);
 
-    // 아이디가 존재하는지 유무 확인
-    int isMember(String mid);
+    MemberDto getInfo(String nick);
 }

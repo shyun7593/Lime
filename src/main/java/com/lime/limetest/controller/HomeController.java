@@ -138,9 +138,9 @@ public class HomeController {
     }
 
     @GetMapping("popup")
-    public String popup(String page, HttpSession session, String a_id, Integer m_num, Integer a_num){
+    public String popup(String page, HttpSession session, String a_id, Integer m_num, Integer a_num, String nick){
         log.info("HomeController.popup()");
-        String view = mServ.Popup(page, session, a_id, m_num, a_num);
+        String view = mServ.Popup(page, session, a_id, m_num, a_num, nick);
 
         return view;
     }

@@ -33,7 +33,7 @@
             height: 100%;
         }
 
-        .login-alert #login-head, .register-alert #register-head, .profile-confirm #profile-head {
+        .login-alert #login-head, .register-alert #register-head, .profile-confirm #profile-head, .login-head {
             background-color: black;
             width: 100%;
             height: 9%;
@@ -43,7 +43,7 @@
             justify-content: center
         }
 
-        .login-alert #login-logo, .register-alert #register-logo, .profile-confirm #profile-logo {
+        .login-alert #login-logo, .register-alert #register-logo, .profile-confirm #profile-logo, .login-logo {
             text-align: center;
             font-family: "Segoe UI Black";
             font-size: 1.2rem;
@@ -119,7 +119,7 @@
         }
 
 
-        .login-alert, .register-alert, .delboard-alert, .profile-confirm, .delfile-alert {
+        .login-alert, .register-alert, .profile-confirm, .delfile-alert, .user-profile {
             display: none;
         }
 
@@ -197,11 +197,29 @@
                 $(".result").css("display", "block");
             } else if (page == "showmessage") {
                 $(".showmessage").css("display", "block");
+            } else if (page == "userprofile"){
+                $(".user-profile").css("display", "block");
             }
         })
     </script>
 </head>
 <body>
+<div class="user-profile" >
+    <div class="login-head">
+        <p class="login-logo">L&nbsp;&nbsp;I&nbsp;&nbsp;M&nbsp;&nbsp;E</p>
+    </div>
+    <div style="padding: 10px; margin-top: 1%; width: 90%; height: 80%">
+        <p style="width: 70px;float: left">닉네임 </p>
+        <p style="width: 290px; float: left"> : <input style="width: 90%;
+    border: none;
+    border-bottom: 1px solid lightgray;font-family: a타이틀고딕3" type="text" disabled value="${memDto.mnick}"><br></p>
+        <p style="width: 70px;float: left">등급 </p>
+        <p style="width: 290px; float: left"> : <input style="width: 90%;;font-family: a타이틀고딕3;
+    border: none;
+    border-bottom: 1px solid lightgray" type="text" disabled value="${memDto.gname}"><br></p>
+        <textarea disabled style="width: 100%; resize: none; height: 200px;border: none;font-family: a타이틀고딕3;margin-top: 4%">${memDto.mtext}</textarea>
+    </div>
+</div>
 <div class="login-alert">
     <div id="login-head">
         <p id="login-logo">L&nbsp;&nbsp;I&nbsp;&nbsp;M&nbsp;&nbsp;E</p>
