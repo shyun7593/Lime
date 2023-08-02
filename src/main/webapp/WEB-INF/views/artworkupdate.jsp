@@ -584,7 +584,7 @@
         <div id="album-info-box">
             <p>음원설명</p>
             <textarea id="aw-album-info" name="a_contents" style="resize: none; width: 95%; height:85%"
-                      maxlength="1000" placeholder="당신의 앨범을 소개해주세요.">${aDto.a_contents}</textarea>
+                      maxlength="1000" placeholder="당신의 앨범을 소개해주세요." required>${aDto.a_contents}</textarea>
             <div style="text-align: end; width: 95%;margin-top: 1%">
                 <p class="textCount" style="display: inline-block;">0자</p>
                 <p class="textTotal" style="display: inline-block;">/1000자</p>
