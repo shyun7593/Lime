@@ -40,7 +40,7 @@
             float: left;
             font-size: 5rem;
             text-align: center;
-            margin-top: 72.4%;
+            margin-top: 75%;
             margin-left: 5%;
             width: 5%;
             height: 5%;
@@ -63,7 +63,7 @@
             color: white;
             font-size: 5rem;
             text-align: center;
-            margin-top: 79.65%;
+            margin-top: 81.5%;
             margin-left: -5%;
             width: 5%;
             height: 4.95%;

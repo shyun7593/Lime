@@ -1210,11 +1210,19 @@
                                     </div>
                                 </c:if>
                                 <div style="width: 100%; height: 15%; position: relative; background-color: white;">
-                                    <p style="margin-left: 5%;
+                                    <p style="padding : 2%;
     height: 100%;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;">${sitem.af_musicoriname}</p>
+    text-overflow: ellipsis;">
+                                        <c:choose>
+                                            <c:when test="${fn:length(sitem.af_musicoriname) gt 23}">
+                                                <c:out value="${fn:substring(sitem.af_musicoriname,0,23)}"></c:out>...
+                                            </c:when>
+                                            <c:otherwise>
+                                                <c:out value="${sitem.af_musicoriname}"></c:out>
+                                            </c:otherwise>
+                                        </c:choose></p>
                                 </div>
                             </div>
                         </c:forEach>

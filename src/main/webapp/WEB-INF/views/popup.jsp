@@ -208,7 +208,7 @@
     <div class="login-head">
         <p class="login-logo">L&nbsp;&nbsp;I&nbsp;&nbsp;M&nbsp;&nbsp;E</p>
     </div>
-    <div style="padding: 10px; margin-top: 1%; width: 90%; height: 80%">
+    <div style="padding: 10px; margin-top: 1%; width: 90%; height: 80%; margin: 0 auto">
         <p style="width: 70px;float: left">닉네임 </p>
         <p style="width: 290px; float: left"> : <input style="width: 90%;
     border: none;

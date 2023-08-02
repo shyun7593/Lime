@@ -51,7 +51,6 @@
             font-size: 4rem;
             font-weight: bolder;
             font-family: "Segoe UI Black";
-            margin-bottom: 30px;
         }
 
         .con-cen {
@@ -65,6 +64,7 @@
             border: 1px solid black;
             border-radius: 20px;
             background-color: white;
+            margin-top:1%;
         }
 
         .to-left {
@@ -112,7 +112,7 @@
             position: absolute;
             border: 0px;
             right: 6.5%;
-            top: 44.5%;
+            top: 42.9%;
         }
 
         #question {
@@ -140,14 +140,11 @@
 
         .posi {
             font-weight: bolder;
-            position: absolute;
-            top: 21.5%;
             width: 100%;
             text-align: center;
         }
 
     </style>
-
 </head>
 <body>
 <header style="height: 8%">
