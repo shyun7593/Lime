@@ -404,4 +404,15 @@ public class ArtworkService {
 
         return mav;
     }
+
+    public ModelAndView getInfo(HttpSession session) {
+        MemberDto mDto = (MemberDto) session.getAttribute("mb");
+        String text = mDao.selectText(mDto.getMid());
+        mav = new ModelAndView();
+
+        mav.addObject("text",text);
+        mav.setViewName("artworkwrite");
+
+        return mav;
+    }
 }

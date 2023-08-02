@@ -83,9 +83,10 @@ public class ArtworkController {
     }
 
     @GetMapping("artworkwrite")
-    public String ArtworkWrite(){
+    public ModelAndView ArtworkWrite(HttpSession session){
         log.info("ArtworkController.ArtworkWrite()");
+        mav = aServ.getInfo(session);
 
-        return "artworkwrite";
+        return mav;
     }
 }
