@@ -1,0 +1,186 @@
+-- DROP TABLE IF EXISTS GRADE;
+-- DROP TABLE IF EXISTS ARTFILE;
+-- DROP TABLE IF EXISTS PAYMENT;
+-- DROP TABLE IF EXISTS STORE;
+-- DROP TABLE IF EXISTS ARTWORK;
+-- DROP TABLE IF EXISTS REPLY;
+-- DROP TABLE IF EXISTS BOARD;
+-- DROP VIEW IF EXISTS MINFO;
+-- DROP TABLE IF EXISTS MESSAGE;
+-- DROP TABLE IF EXISTS MEMBER;
+
+-- 회원 정보
+CREATE TABLE IF NOT EXISTS MEMBER (
+	mid VARCHAR(30) NOT NULL PRIMARY KEY,
+    mpwd VARCHAR(100) NOT NULL, -- 비번은 암호하하기 위해서
+    mname VARCHAR(10) NOT NULL,
+    mkakao VARCHAR(30), -- 카카오 이메일로 회원인지 확인
+    mnick VARCHAR(30) NOT NULL,
+    mpoint INT DEFAULT 0, -- 등급 구분에 필요
+    mtext VARCHAR(200), -- 자기소개(어필)
+    msecret VARCHAR(50) NOT NULL -- 아이디 또는 비밀번호 찾기에 사용
+);
+
+CREATE TABLE IF NOT EXISTS MESSAGE(
+    m_num INT NOT NULL auto_increment PRIMARY KEY,
+    m_title VARCHAR(50) NOT NULL,
+    m_text VARCHAR(500) NOT NULL,
+    m_mid VARCHAR(30) NOT NULL, -- 보낸 사람
+    m_date DATETIME DEFAULT current_timestamp NOT NULL,
+    m_rmid VARCHAR(30) NOT NULL, -- 받는 사람
+    m_fileoriname VARCHAR(50),
+    m_filesysname VARCHAR(50),
+    m_isread VARCHAR(10) DEFAULT "unread",
+    m_anum integer,
+    m_price integer,
+    m_ispay boolean default false
+);
+
+-- 등급
+CREATE TABLE IF NOT EXISTS GRADE(
+    gcode CHAR(1) NOT NULL PRIMARY KEY,
+    gname VARCHAR(10) NOT NULL,
+    g_lowpoint INT,
+    g_highpoint INT
+);
+
+-- 점수별 등급 (지구인, 초인, 우주인, 안드로메다인)
+INSERT INTO GRADE VALUES('A', '지구인', 0, 30);
+INSERT INTO GRADE VALUES('B', '초인', 31, 100);
+INSERT INTO GRADE VALUES('C', '우주인', 101, 1000);
+INSERT INTO GRADE VALUES('D', '안드로메다인', 1001, 99999999);
+
+commit;
+
+-- 작품 게시글
+CREATE TABLE IF NOT EXISTS ARTWORK (
+	a_num INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    a_title VARCHAR(20) NOT NULL,
+    a_category VARCHAR(20) NOT NULL, -- 대분류(작곡, 작사, 보컬)
+    a_genre VARCHAR(20) NOT NULL, -- 장르(클래식, 재즈, R&B, ...)
+    a_price INT NOT NULL,
+    a_group VARCHAR(20) NOT NULL, -- (그룹, 싱글)
+    a_publisher VARCHAR(50) NOT NULL, -- (발매사)
+    a_agency VARCHAR(50) NOT NULL, -- (기획사)
+    a_release VARCHAR(20) default '미정' NOT NULL, -- (발매일)
+    a_contents VARCHAR(1000) NOT NULL, -- 내용(곡에 대한 설명)
+    a_date DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, -- 작성 일자
+    a_id VARCHAR(30) NOT NULL, -- 작성자 인지 확인
+    a_cnt int DEFAULT 0,
+    a_del boolean NOT NULL DEFAULT FALSE,
+    CONSTRAINT fk_a_id FOREIGN KEY(a_id)
+	REFERENCES MEMBER(mid)
+);
+
+-- 작품 파일 
+CREATE TABLE IF NOT EXISTS ARTFILE (
+	af_num INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    af_imgoriname VARCHAR(50),
+    af_imgsysname VARCHAR(50),
+    af_musicoriname VARCHAR(50),
+    af_musicsysname VARCHAR(50),
+    af_anum INT NOT NULL, -- 작품 글 번호와 연결하여 해당 글의 파일을 매칭
+    CONSTRAINT fk_af_anum FOREIGN KEY(af_anum)
+    REFERENCES ARTWORK(a_num)
+);
+
+-- 게시판
+CREATE TABLE IF NOT EXISTS BOARD (
+	b_num INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    b_id VARCHAR(30) NOT NULL, -- 작성자 인지 확인
+    b_title VARCHAR(50) NOT NULL,
+    b_contents VARCHAR(1000) NOT NULL,
+    b_date DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    b_type VARCHAR(10) NOT NULL,
+    CONSTRAINT fk_b_id FOREIGN KEY(b_id)
+    REFERENCES MEMBER(mid)
+);
+
+-- 게시판 댓글
+CREATE TABLE IF NOT EXISTS REPLY (
+r_num INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	r_id VARCHAR(30) NOT NULL,
+    r_contents VARCHAR(50) NOT NULL,
+    r_bnum INT NOT NULL, -- 게시판 번호와 비교하여 해당 글의 댓글인지 확인
+    r_date DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    CONSTRAINT fk_r_id FOREIGN KEY(r_id)
+    REFERENCES MEMBER(mid),
+    CONSTRAINT fk_r_bnum FOREIGN KEY(r_bnum)
+    REFERENCES BOARD(b_num)
+);
+
+-- 보관함(파일 열람)
+CREATE TABLE IF NOT EXISTS STORE(
+	s_num INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    s_anum INT NOT NULL,
+    s_id VARCHAR(30) NOT NULL, -- 각 사용자가 구매한 파일을 불러옴
+    CONSTRAINT fk_s_id FOREIGN KEY(s_id)
+	REFERENCES MEMBER(mid),
+    constraint fk_s_anum foreign key(s_anum)
+    references artwork(a_num)
+ );
+
+-- 구매내역
+CREATE TABLE IF NOT EXISTS PAYMENT (
+	p_num INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    p_anum INT NOT NULL, -- 결재 시 어떤 글의 정보를 결재 했는지 확인
+    p_bid VARCHAR(30) NOT NULL, -- 구매자 아이디
+    p_pid VARCHAR(30) NOT NULL, -- 판매자 아이디
+    p_date DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    p_price INT NOT NULL,
+    CONSTRAINT fk_p_bid FOREIGN KEY(p_bid)
+    REFERENCES MEMBER(mid),
+    CONSTRAINT fk_p_pid FOREIGN KEY(p_pid)
+    REFERENCES MEMBER(mid),
+    constraint fk_p_anum foreign key(p_anum)
+    references artwork(a_num)
+);
+
+-- 로그인 후 출력할 회원정보 뷰 ( 사용자 point로 등급의 이름을 가져옴 )
+CREATE OR REPLACE VIEW MINFO AS
+SELECT M.MID, M.MNICK, M.MNAME, M.MPOINT,G.GNAME, M.MTEXT
+FROM MEMBER M INNER JOIN GRADE G
+ON M.MPOINT BETWEEN G.G_LOWPOINT AND G.G_HIGHPOINT;
+
+CREATE OR REPLACE VIEW PINFO AS
+SELECT P.P_NUM ,P.P_ANUM, P.P_BID, P.P_PID, P.P_PRICE, P.P_DATE, A.A_TITLE, M.MNICK, MEM2.MNICK as BMNICK
+FROM PAYMENT P INNER JOIN ARTWORK A
+ON  P.P_ANUM = A.A_NUM
+INNER JOIN MEMBER M
+ON P.P_PID = M.MID
+INNER JOIN MEMBER MEM2
+ON  P.P_BID = MEM2.MID; ;
+
+CREATE OR REPLACE VIEW ARTLIST AS
+SELECT DISTINCT A.A_NUM, A.A_TITLE, A.A_CATEGORY, A.A_genre, A.A_PRICE, A.A_group, A.A_publisher, A.A_agency,
+A.A_release, A.A_CONTENTS, A.A_DATE, M.MNICK, AF.AF_IMGSYSNAME, AF.AF_IMGORINAME, A.A_ID, A.A_CNT, A.A_del
+FROM ARTWORK A INNER JOIN MEMBER M  
+ON A.A_ID = M.MID
+INNER JOIN ARTFILE AF ON
+A.A_NUM = AF.AF_ANUM
+WHERE A.A_DEL = false;
+
+CREATE OR REPLACE VIEW BOARDLIST AS
+SELECT B.B_NUM, B.B_ID, B.B_TITLE, B.B_CONTENTS, B.B_DATE, B.B_TYPE, M.MNICK
+FROM BOARD B INNER JOIN MEMBER M
+ON B.B_ID = M.MID;
+
+CREATE OR REPLACE VIEW SINFO AS
+SELECT S.S_NUM, S.S_ANUM, S.S_ID, AF.AF_IMGORINAME, AF.AF_IMGSYSNAME, AF.AF_MUSICORINAME, AF.AF_MUSICSYSNAME
+FROM STORE S INNER JOIN artfile AF
+ON S.S_ANUM = AF.AF_ANUM;
+
+CREATE OR REPLACE VIEW RLIST AS
+SELECT R.R_BNUM, R.R_NUM, R.R_CONTENTS, R.R_DATE, R.R_ID, M.MNICK
+FROM REPLY R INNER JOIN MEMBER M
+ON R.R_ID = M.MID
+ORDER BY R_DATE DESC;
+
+CREATE OR REPLACE VIEW MLIST AS 
+SELECT M.M_NUM, M.M_TITLE, M.M_TEXT, M.M_MID, M.M_ANUM, M.M_RMID, M.M_ISPAY,M.M_PRICE,M.M_DATE,M.M_FILEORINAME, M.M_FILESYSNAME, M.M_ISREAD, MEM.MNICK, MEM2.MNICK as RMNICK
+FROM MESSAGE M INNER JOIN MEMBER MEM
+ON M.M_MID = MEM.MID
+INNER JOIN MEMBER MEM2
+ON  M.M_RMID = MEM2.MID; 
+
+commit;
